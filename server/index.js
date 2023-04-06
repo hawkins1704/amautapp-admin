@@ -15,6 +15,6 @@ const server=app.listen(port,()=>{
     console.log(`Listening at port localhost:${port}`);
 })
 Gun({
-    file:false,
+    file:'db/data',
     web:server,
 });
