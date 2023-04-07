@@ -1,12 +1,12 @@
 import React from "react";
 import { Layout } from "../../components";
 
-const Configuracion = () => {
+const Secciones = () => {
     return (
         <Layout>
-            <div>Configuracion</div>
+            <div>Secciones</div>
         </Layout>
     );
 };
 
-export default Configuracion;
+export default Secciones;

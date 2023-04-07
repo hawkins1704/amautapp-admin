@@ -1,0 +1,1 @@
+export {default as Soporte} from './Soporte'

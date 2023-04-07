@@ -1,12 +1,12 @@
 import React from "react";
 import { Layout } from "../../components";
 
-const Configuracion = () => {
+const Material = () => {
     return (
         <Layout>
-            <div>Configuracion</div>
+            <div>Material</div>
         </Layout>
     );
 };
 
-export default Configuracion;
+export default Material;

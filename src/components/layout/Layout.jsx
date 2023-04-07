@@ -8,6 +8,15 @@ import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
+import EscalatorWarningRoundedIcon from '@mui/icons-material/EscalatorWarningRounded';
+import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
+import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -16,9 +25,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
+
+import styles from './styles.module.css';
 
 const drawerWidth = 240;
 
@@ -152,43 +161,14 @@ const Layout = ({ children }) => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <InboxIcon />
+                                <HomeRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Principal"}
-                                sx={{ opacity: open ? 1 : 0 }}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/notificaciones"}
-                        disablePadding
-                        sx={{ display: "block" }}
-                    >
-                        <ListItemButton
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? "initial" : "center",
-                                px: 2.5,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : "auto",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                                primary={"Notificaciones"}
-                                sx={{ opacity: open ? 1 : 0 }}
-                            />
-                        </ListItemButton>
-                    </ListItem>
-
                     <ListItem
                         component={Link}
                         to={"/material-educativo"}
@@ -209,15 +189,42 @@ const Layout = ({ children }) => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <InboxIcon />
+                                <MenuBookRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
-                                primary={"Material Educativa"}
-                                sx={{ opacity: open ? 1 : 0 }}
+                                primary={"Material Educativo"}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
                     </ListItem>
-
+                    <ListItem
+                        component={Link}
+                        to={"/profesores"}
+                        disablePadding
+                        sx={{ display: "block" }}
+                    >
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? "initial" : "center",
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : "auto",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <EscalatorWarningRoundedIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={"Profesores"}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                            />
+                        </ListItemButton>
+                    </ListItem>
                     <ListItem
                         component={Link}
                         to={"/secciones"}
@@ -238,15 +245,14 @@ const Layout = ({ children }) => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <InboxIcon />
+                                <SchoolRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Secciones y alumnos"}
-                                sx={{ opacity: open ? 1 : 0 }}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
                     </ListItem>
-
                     <ListItem
                         component={Link}
                         to={"/configuracion"}
@@ -267,15 +273,14 @@ const Layout = ({ children }) => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <InboxIcon />
+                                <SettingsRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Configuración"}
-                                sx={{ opacity: open ? 1 : 0 }}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
                     </ListItem>
-
                     <ListItem
                         component={Link}
                         to={"/soporte"}
@@ -296,11 +301,11 @@ const Layout = ({ children }) => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <InboxIcon />
+                                <SupportAgentRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Ayuda y soporte"}
-                                sx={{ opacity: open ? 1 : 0 }}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -309,7 +314,7 @@ const Layout = ({ children }) => {
                 <List>
                     <ListItem
                         component={Link}
-                        to={"/"}
+                        to={"/login"}
                         disablePadding
                         sx={{ display: "block" }}
                     >
@@ -327,11 +332,11 @@ const Layout = ({ children }) => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <InboxIcon />
+                                <ExitToAppRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Cerrar sesión"}
-                                sx={{ opacity: open ? 1 : 0 }}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
                     </ListItem>

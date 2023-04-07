@@ -1,0 +1,1 @@
+export {default as Secciones} from './Secciones'
