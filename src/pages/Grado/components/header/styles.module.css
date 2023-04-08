@@ -1,0 +1,11 @@
+.title{
+    padding-bottom: 16px;
+    text-transform: capitalize;
+}
+.subtitle{
+    padding-bottom: 16px;
+}
+.button{
+    display: flex;
+    justify-content: end;
+}

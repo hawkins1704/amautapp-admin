@@ -11,6 +11,7 @@ import { Profesores } from "./pages/Profesores";
 import { Secciones } from "./pages/Secciones";
 import { Soporte } from "./pages/Soporte";
 import { Material } from "./pages/Material";
+import { Grado } from "./pages/Grado";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
 const gun = Gun({
@@ -22,20 +23,21 @@ const theme = createTheme({
     palette: {
         primary: {
             main: "#ff4400",
-        }
+        },
     },
 });
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/material-educativo" element={<Material />} />
-                <Route path="/profesores" element={<Profesores />} />
-                <Route path="/secciones" element={<Secciones />} />
-                <Route path="/configuracion" element={<Configuracion />} />
-                <Route path="/soporte" element={<Soporte />} />
-                <Route path="/login" element={<Login />} />
+                <Route index path="/" element={<Home />} />
+                <Route path="material-educativo" element={<Material />} />
+                <Route path="material-educativo/:grado" element={<Grado />} />
+                <Route path="profesores" element={<Profesores />} />
+                <Route path="secciones" element={<Secciones />} />
+                <Route path="configuracion" element={<Configuracion />} />
+                <Route path="soporte" element={<Soporte />} />
+                <Route path="login" element={<Login />} />
             </Routes>
         </ThemeProvider>
     );
