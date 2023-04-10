@@ -1,21 +1,23 @@
-import React from "react";
-import { Layout } from "../../components";
-import { useParams } from "react-router-dom";
+import React,{useState} from "react";
+import { Outlet, useParams } from "react-router-dom";
 import { Container, Grid, Typography } from "@mui/material";
 import { Card, Header } from "./components";
 
 import styles from "./styles.module.css";
+import { Layout } from "../../../components";
 
 const Grado = () => {
     const params = useParams();
     const grado = params.grado;
     const title=grado.replace('-',' ').concat('°')
+    const [addIsOpen, setAddIsOpen] = useState(false);
+    console.log("ADD IS OPEN: ",addIsOpen);
     return (
         <Layout>
-            <Header title={title}/>
-            <Container maxWidth={"xl"}>
-                <Container maxWidth={"xl"} sx={{ mb: 6 }}>
-                    <Grid container spacing={6}>
+            <Header title={title} addIsOpen={addIsOpen} setAddIsOpen={setAddIsOpen}/>
+            <Outlet/>
+            <Container maxWidth={"xl"}  sx={{my:6}}>
+                    <Grid container spacing={3}>
                         <Grid item md={4} xs={12}>
                             <Card
                                 title={"Comunicacion Integral"}
@@ -37,7 +39,6 @@ const Grado = () => {
                             <Card ultra={"6°"} title={"Primaria"} />
                         </Grid>
                     </Grid>
-                </Container>
             </Container>
         </Layout>
     );

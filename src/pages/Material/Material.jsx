@@ -7,14 +7,14 @@ const Material = () => {
     return (
         <Layout>
             <Container maxWidth={"xl"}>
-                <Typography variant={"h4"} component={"h1"} className={styles.title}>
+                <Typography variant={"h4"} component={"h1"} >
                     Material Educativo
                 </Typography>
-                <Container maxWidth={"xl"} sx={{mb:6}}>
-                    <Typography variant={"h5"} component={"h2"} className={styles.subtitle}>
+                <Container maxWidth={"xl"} sx={{my:6}}>
+                    <Typography variant={"h5"} component={"h2"} sx={{my:3}}>
                         Primaria
                     </Typography>
-                    <Grid container spacing={6}>
+                    <Grid container spacing={3}>
                         <Grid item md={4} xs={12}>
                             <Card ultra={"1°"} title={"Primaria"} />
                         </Grid>
@@ -35,11 +35,11 @@ const Material = () => {
                         </Grid>
                     </Grid>
                 </Container>
-                <Container maxWidth={"xl"}>
-                    <Typography variant={"h5"} component={"h2"} className={styles.subtitle}>
+                <Container maxWidth={"xl"} sx={{my:6}}>
+                    <Typography variant={"h5"} component={"h2"} sx={{my:3}}>
                         Secundaria
                     </Typography>
-                    <Grid container spacing={6}>
+                    <Grid container spacing={3}>
                         <Grid item md={4} xs={12}>
                             <Card ultra={"1°"} title={"Secundaria"} />
                         </Grid>

@@ -11,7 +11,8 @@ import { Profesores } from "./pages/Profesores";
 import { Secciones } from "./pages/Secciones";
 import { Soporte } from "./pages/Soporte";
 import { Material } from "./pages/Material";
-import { Grado } from "./pages/Grado";
+import { Grado } from "./pages/Grado/main";
+import { AgregarMateria } from "./pages/Grado/agregarMateria";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
 const gun = Gun({
@@ -32,7 +33,9 @@ function App() {
             <Routes>
                 <Route index path="/" element={<Home />} />
                 <Route path="material-educativo" element={<Material />} />
-                <Route path="material-educativo/:grado" element={<Grado />} />
+                <Route path="material-educativo/:grado" element={<Grado />} >
+                    <Route path="add" element={<AgregarMateria/>}/>
+                </Route>
                 <Route path="profesores" element={<Profesores />} />
                 <Route path="secciones" element={<Secciones />} />
                 <Route path="configuracion" element={<Configuracion />} />
