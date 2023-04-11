@@ -1,15 +1,20 @@
 import React from "react";
 import {  Layout } from "../../components";
-import { Container, Grid, Typography } from "@mui/material";
-import styles from './styles.module.css';
+import { Container, Grid, Link, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 import { Card } from "./components";
+import styles from './styles.module.css';
 const Material = () => {
+    const breadcrumbs = [
+        
+        <Typography key="2" color="text.primary">
+            Material Educativo
+        </Typography>,
+    ];
     return (
-        <Layout>
+        <Layout title={'Material Educativo'} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
-                <Typography variant={"h4"} component={"h1"} >
-                    Material Educativo
-                </Typography>
                 <Container maxWidth={"xl"} sx={{my:6}}>
                     <Typography variant={"h5"} component={"h2"} sx={{my:3}}>
                         Primaria

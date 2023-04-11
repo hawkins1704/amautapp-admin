@@ -15,10 +15,10 @@ import { useTheme } from "@emotion/react";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-const Header = ({ title, addIsOpen, setAddIsOpen }) => {
+const Header = ({ title, addIsOpen, setAddIsOpen, breadcrumbs }) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const goToAgregarMateria = () => {
@@ -30,10 +30,11 @@ const Header = ({ title, addIsOpen, setAddIsOpen }) => {
             navigate(-1);
         }
     };
-    const breadcrumbs = [
+
+    let generalBreadcrumbs = [
         <Link
             underline="hover"
-            sx={{ display: 'flex', alignItems: 'center' }}
+            sx={{ display: "flex", alignItems: "center" }}
             key="1"
             color="inherit"
             component={RouterLink}
@@ -42,20 +43,11 @@ const Header = ({ title, addIsOpen, setAddIsOpen }) => {
             <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
             Principal
         </Link>,
-        <Link
-            underline="hover"
-            key="2"
-            color="inherit"
-            aria-current="page"
-            component={RouterLink}
-            to="/material-educativo"
-        >
-            Material Educativo
-        </Link>,
-        <Typography key="3" color="text.primary">
-            {title}
-        </Typography>,
+        breadcrumbs
     ];
+
+    console.log("BC",breadcrumbs);
+    console.log("GENERAL BC",generalBreadcrumbs);
     return (
         <Container maxWidth={"xl"} sx={{ mb: 3 }}>
             <Grid container>
@@ -71,7 +63,7 @@ const Header = ({ title, addIsOpen, setAddIsOpen }) => {
                         separator={<NavigateNextIcon fontSize="small" />}
                         aria-label="breadcrumb"
                     >
-                        {breadcrumbs}
+                        {generalBreadcrumbs}
                     </Breadcrumbs>
                 </Grid>
                 <Grid item xs={12} md={4}>

@@ -28,6 +28,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
 
 import styles from './styles.module.css';
+import { Header } from "../../components/header";
 
 const drawerWidth = 240;
 
@@ -96,7 +97,7 @@ const Drawer = styled(MuiDrawer, {
     }),
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ children,title,breadcrumbs }) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -139,7 +140,6 @@ const Layout = ({ children }) => {
                         )}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
                 <List>
                     <ListItem
                         component={Link}
@@ -165,7 +165,7 @@ const Layout = ({ children }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Principal"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                                sx={{ opacity: open ? 1 : 0 ,color:"black", ".MuiTouchRipple-rippleVisible":{backgroundColor: "#005d83"}}}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -344,6 +344,7 @@ const Layout = ({ children }) => {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
+                <Header title={title} breadcrumbs={breadcrumbs}/>
                 {children}
             </Box>
         </Box>
