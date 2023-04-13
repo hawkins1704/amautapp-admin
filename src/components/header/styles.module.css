@@ -5,11 +5,7 @@
 .subtitle{
     padding-bottom: 16px;
 }
-.buttonContainer{
-    display: flex;
-    justify-content: end;
-    gap: 32px;
-}
+
 .tooltip{
 
 }

@@ -7,13 +7,12 @@ import "@fontsource/roboto/700.css";
 import { Configuracion } from "./pages/Configuracion";
 import { Login } from "./pages/Login";
 import { Profesores } from "./pages/Profesores";
-import { Secciones } from "./pages/Secciones";
+import { CentrosEducativos } from "./pages/CentrosEducativos";
 import { Soporte } from "./pages/Soporte";
 import { Material } from "./pages/Material";
 import { Grado } from "./pages/Grado/main";
 import { AgregarMateria } from "./pages/Grado/agregarMateria";
-import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { Principal } from "./pages/Principal";
 const gun = Gun({
     //revisar como configurar para que se coloque direccion IP del profesor aquí de manera automática
@@ -23,7 +22,7 @@ const gun = Gun({
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#ff4400",
+            main: '#ff4400',
             
         },
         
@@ -39,7 +38,7 @@ function App() {
                     <Route path="add" element={<AgregarMateria/>}/>
                 </Route>
                 <Route path="profesores" element={<Profesores />} />
-                <Route path="secciones" element={<Secciones />} />
+                <Route path="centros-educativos" element={<CentrosEducativos />} />
                 <Route path="configuracion" element={<Configuracion />} />
                 <Route path="soporte" element={<Soporte />} />
                 <Route path="login" element={<Login />} />

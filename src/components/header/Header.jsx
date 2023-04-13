@@ -18,18 +18,11 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-const Header = ({ title, addIsOpen, setAddIsOpen, breadcrumbs }) => {
-    const navigate = useNavigate();
-    const theme = useTheme();
-    const goToAgregarMateria = () => {
-        if (addIsOpen == false) {
-            navigate("add");
-            setAddIsOpen(true);
-        } else {
-            setAddIsOpen(false);
-            navigate(-1);
-        }
-    };
+const OptionalButtonGroup=()=>{
+    return(<div className=""></div>)
+}
+const Header = ({ title, breadcrumbs,ButtonGroup}) => {
+    
 
     let generalBreadcrumbs = [
         <Link
@@ -45,9 +38,8 @@ const Header = ({ title, addIsOpen, setAddIsOpen, breadcrumbs }) => {
         </Link>,
         breadcrumbs
     ];
-
-    console.log("BC",breadcrumbs);
-    console.log("GENERAL BC",generalBreadcrumbs);
+    console.log("BUTTON GROUP",typeof(ButtonGroup));
+    const ComponenteRecibido=ButtonGroup||OptionalButtonGroup;
     return (
         <Container maxWidth={"xl"} sx={{ mb: 3 }}>
             <Grid container>
@@ -67,40 +59,7 @@ const Header = ({ title, addIsOpen, setAddIsOpen, breadcrumbs }) => {
                     </Breadcrumbs>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <div className={styles.buttonContainer}>
-                        <Tooltip
-                            title="Editar Contenido"
-                            className={styles.tooltip}
-                        >
-                            <IconButton
-                                color="primary"
-                                variant="outlined"
-                                sx={{
-                                    border: `2px solid ${theme.palette.primary.main}`,
-                                }}
-                                onClick={goToAgregarMateria}
-                                className={styles.button}
-                            >
-                                <EditIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                            title="Agregar materia"
-                            className={styles.tooltip}
-                        >
-                            <IconButton
-                                color="primary"
-                                variant="outlined"
-                                sx={{
-                                    border: `2px solid ${theme.palette.primary.main}`,
-                                }}
-                                onClick={goToAgregarMateria}
-                                className={styles.button}
-                            >
-                                <AddIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </div>
+                    {<ComponenteRecibido/>}
                 </Grid>
             </Grid>
         </Container>

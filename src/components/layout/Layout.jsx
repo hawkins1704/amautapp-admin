@@ -97,7 +97,7 @@ const Drawer = styled(MuiDrawer, {
     }),
 }));
 
-const Layout = ({ children,title,breadcrumbs }) => {
+const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -199,35 +199,7 @@ const Layout = ({ children,title,breadcrumbs }) => {
                     </ListItem>
                     <ListItem
                         component={Link}
-                        to={"/profesores"}
-                        disablePadding
-                        sx={{ display: "block" }}
-                    >
-                        <ListItemButton
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? "initial" : "center",
-                                px: 2.5,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : "auto",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <EscalatorWarningRoundedIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                                primary={"Profesores"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
-                            />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/secciones"}
+                        to={"/centros-educativos"}
                         disablePadding
                         sx={{ display: "block" }}
                     >
@@ -248,7 +220,7 @@ const Layout = ({ children,title,breadcrumbs }) => {
                                 <SchoolRoundedIcon />
                             </ListItemIcon>
                             <ListItemText
-                                primary={"Secciones y alumnos"}
+                                primary={"Centros Educativos"}
                                 sx={{ opacity: open ? 1 : 0 ,color:"black"}}
                             />
                         </ListItemButton>
@@ -344,7 +316,7 @@ const Layout = ({ children,title,breadcrumbs }) => {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
-                <Header title={title} breadcrumbs={breadcrumbs}/>
+                <Header title={title} breadcrumbs={breadcrumbs} ButtonGroup={HeaderButtonGroup}/>
                 {children}
             </Box>
         </Box>

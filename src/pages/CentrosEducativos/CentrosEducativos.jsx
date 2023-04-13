@@ -2,19 +2,19 @@ import React from "react";
 import { Layout } from "../../components";
 import { Container, Typography } from "@mui/material";
 
-const Secciones = () => {
+const CentrosEducativos = () => {
     const breadcrumbs = [
         <Typography key="2" color="text.primary">
-            Secciones
+            Centros Educativos
         </Typography>,
     ];
     return (
-        <Layout title={"Secciones"} breadcrumbs={breadcrumbs}>
+        <Layout title={"Centros Educativos"} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
-                <div>Secciones</div>
+                <div>Centros Educativos</div>
             </Container>
         </Layout>
     );
 };
 
-export default Secciones;
+export default CentrosEducativos;

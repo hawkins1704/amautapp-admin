@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { Container, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { Card, Header } from "./components";
+import { ButtonGroup, Card } from "./components";
 
 import styles from "./styles.module.css";
 import { Layout } from "../../../components";
-
-
-
 
 const Grado = () => {
     const params = useParams();
@@ -17,7 +14,6 @@ const Grado = () => {
     const [addIsOpen, setAddIsOpen] = useState(false);
 
     const breadcrumbs = [
-        
         <Link
             underline="hover"
             key="2"
@@ -32,10 +28,12 @@ const Grado = () => {
             {title}
         </Typography>,
     ];
-    
     return (
-        <Layout title={title} breadcrumbs={breadcrumbs}>
-         
+        <Layout
+            title={title}
+            breadcrumbs={breadcrumbs}
+            HeaderButtonGroup={()=>(<ButtonGroup addIsOpen={addIsOpen} setAddIsOpen={setAddIsOpen}/>)}
+        >
             <Outlet />
             <Container maxWidth={"xl"} sx={{ my: 6 }}>
                 <Grid container spacing={3}>
@@ -43,19 +41,13 @@ const Grado = () => {
                         <Card title={"Comunicacion Integral"} />
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <Card ultra={"2°"} title={"Primaria"} />
+                        <Card title={"Matemática"} />
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <Card ultra={"3°"} title={"Primaria"} />
+                        <Card title={"Historia"} />
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <Card ultra={"4°"} title={"Primaria"} />
-                    </Grid>
-                    <Grid item md={4} xs={12}>
-                        <Card ultra={"5°"} title={"Primaria"} />
-                    </Grid>
-                    <Grid item md={4} xs={12}>
-                        <Card ultra={"6°"} title={"Primaria"} />
+                        <Card title={"Ciencias"} />
                     </Grid>
                 </Grid>
             </Container>
