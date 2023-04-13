@@ -2,7 +2,7 @@ const express=require('express');
 const Gun=require('gun');
 const app=express();
 const path=require('path');
-const port=5000;
+const port=process.env.PORT||5000;
 //To use styles
 app.use(express.static(path.join(__dirname,"..","build")));
 app.use(express.static("public"));
