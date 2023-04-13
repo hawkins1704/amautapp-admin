@@ -18,7 +18,7 @@ function Test() {
 
             setListaCursos((state)=>[...state,c]);
         })
-
+        
     }, []);
 
 

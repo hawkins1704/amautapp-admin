@@ -1,65 +1,44 @@
-import React from "react";
-import {  Layout } from "../../components";
+import React, { useContext } from "react";
+import { Layout } from "../../components";
 import { Container, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import { Card } from "./components";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
+import { MyContext } from "../../App";
 const Material = () => {
     const breadcrumbs = [
-        
         <Typography key="2" color="text.primary">
             Material Educativo
         </Typography>,
     ];
+    const {grados} = useContext(MyContext);
+    console.log("GRADOS OBTENIDOS EN MATERIAL: ", grados);
     return (
-        <Layout title={'Material Educativo'} breadcrumbs={breadcrumbs}>
+        <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
-                <Container maxWidth={"xl"} sx={{my:6}}>
-                    <Typography variant={"h5"} component={"h2"} sx={{my:3}}>
+                <Container maxWidth={"xl"} sx={{ my: 6 }}>
+                    <Typography variant={"h5"} component={"h2"} sx={{ my: 3 }}>
                         Primaria
                     </Typography>
                     <Grid container spacing={3}>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"1°"} title={"Primaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"2°"} title={"Primaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"3°"} title={"Primaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"4°"} title={"Primaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"5°"} title={"Primaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"6°"} title={"Primaria"} />
-                        </Grid>
+                        {grados.slice(0, 6).map((e) => (
+                            <Grid item md={4} xs={12}>
+                                <Card key={e.key} name={e.name} />
+                            </Grid>
+                        ))}
                     </Grid>
                 </Container>
-                <Container maxWidth={"xl"} sx={{my:6}}>
-                    <Typography variant={"h5"} component={"h2"} sx={{my:3}}>
+                <Container maxWidth={"xl"} sx={{ my: 6 }}>
+                    <Typography variant={"h5"} component={"h2"} sx={{ my: 3 }}>
                         Secundaria
                     </Typography>
                     <Grid container spacing={3}>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"1°"} title={"Secundaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"2°"} title={"Secundaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"3°"} title={"Secundaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"4°"} title={"Secundaria"} />
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                            <Card ultra={"5°"} title={"Secundaria"} />
-                        </Grid>
+                        {grados.slice(6, 12).map((e) => (
+                            <Grid item md={4} xs={12}>
+                                <Card key={e.key} name={e.name} />
+                            </Grid>
+                        ))}
                     </Grid>
                 </Container>
             </Container>

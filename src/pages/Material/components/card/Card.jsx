@@ -3,15 +3,16 @@ import React from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 
-const Card = ({ ultra, title, subtitle }) => {
+const Card = ({ name,subtitle }) => {
+    const contenido=name.split('-');
     return (
         <div className={styles.container}>
-            <Link to={`${title.toLowerCase()}-${ultra.slice(0,1)}`}>
+            <Link to={name}>
                 <Typography variant={"h2"} component={"h3"}>
-                    {ultra}
+                    {contenido[1]}°
                 </Typography>
-                <Typography variant={"h5"} component={"h4"} >
-                    {title}
+                <Typography variant={"h5"} component={"h4"} className={styles.title}>
+                    {contenido[0]}
                 </Typography>
                 <Typography variant={"h6"} component={"h5"}>
                     {subtitle}
