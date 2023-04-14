@@ -13,7 +13,9 @@ const Material = () => {
         </Typography>,
     ];
     const {grados} = useContext(MyContext);
+    const gradosOrdenados=grados.sort((a,b)=>a.key-b.key);
     console.log("GRADOS OBTENIDOS EN MATERIAL: ", grados);
+    console.log("GRADOS ORDENADOS: ", gradosOrdenados);
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
@@ -22,7 +24,7 @@ const Material = () => {
                         Primaria
                     </Typography>
                     <Grid container spacing={3}>
-                        {grados.slice(0, 6).map((e) => (
+                        {gradosOrdenados.slice(0, 6).map((e) => (
                             <Grid item md={4} xs={12}>
                                 <Card key={e.key} name={e.name} />
                             </Grid>
@@ -34,7 +36,7 @@ const Material = () => {
                         Secundaria
                     </Typography>
                     <Grid container spacing={3}>
-                        {grados.slice(6, 12).map((e) => (
+                        {gradosOrdenados.slice(6, 12).map((e) => (
                             <Grid item md={4} xs={12}>
                                 <Card key={e.key} name={e.name} />
                             </Grid>
