@@ -3,11 +3,11 @@ import React from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 
-const Card = ({ name,subtitle }) => {
-    const contenido=name.split('-');
+const Card = ({ nombre,subtitle }) => {
+    const contenido=nombre.split('-');
     return (
         <div className={styles.container}>
-            <Link to={name}>
+            <Link to={nombre}>
                 <Typography variant={"h2"} component={"h3"}>
                     {contenido[1]}°
                 </Typography>

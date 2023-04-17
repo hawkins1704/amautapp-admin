@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Gun from "gun";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -14,12 +13,8 @@ import { Grado } from "./pages/Grado/main";
 import { AgregarMateria } from "./pages/Grado/agregarMateria";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { Principal } from "./pages/Principal";
-import { createContext, useContext, useEffect, useState } from "react";
-const gun = Gun({
-    //revisar como configurar para que se coloque direccion IP del profesor aquí de manera automática
-    peers: [`${window.location.origin}/gun`, "http://192.168.1.111:8080/gun"], // Put the relay node that you want here
-    localStorage: false,
-});
+
+
 const theme = createTheme({
     palette: {
         primary: {
@@ -27,23 +22,8 @@ const theme = createTheme({
         },
     },
 });
-export const MyContext = createContext();
 function App() {
-
-   const [grados, setGrados] = useState([]);
-   const fetchedGrados = gun.get("grados");
-
-    useEffect(() => {
-        var temp=[];
-        fetchedGrados.map().once((data) => {
-            temp.push(data);
-        });
-        setGrados(temp);
-    }, []);
-
-   
     return (
-        <MyContext.Provider value={{grados: grados}}>
             <ThemeProvider theme={theme}>
                 <Routes>
                     <Route index path="/" element={<Principal />} />
@@ -61,7 +41,6 @@ function App() {
                     <Route path="login" element={<Login />} />
                 </Routes>
             </ThemeProvider>
-        </MyContext.Provider>
     );
 }
 

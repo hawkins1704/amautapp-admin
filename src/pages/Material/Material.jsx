@@ -1,21 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Layout } from "../../components";
 import { Container, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import { Card } from "./components";
 import styles from "./styles.module.css";
-import { MyContext } from "../../App";
+import { getAllGradosOnce } from "../../services/grado";
+import { sortArrayASC } from "../../utils";
 const Material = () => {
     const breadcrumbs = [
         <Typography key="2" color="text.primary">
             Material Educativo
         </Typography>,
     ];
-    const {grados} = useContext(MyContext);
-    const gradosOrdenados=grados.sort((a,b)=>a.key-b.key);
-    console.log("GRADOS OBTENIDOS EN MATERIAL: ", grados);
-    console.log("GRADOS ORDENADOS: ", gradosOrdenados);
+    
+    const [grados, setGrados] = useState([]);
+    
+    useEffect(() => {
+        getAllGradosOnce(setGrados);
+    }, []);
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
@@ -24,9 +27,9 @@ const Material = () => {
                         Primaria
                     </Typography>
                     <Grid container spacing={3}>
-                        {gradosOrdenados.slice(0, 6).map((e) => (
+                        {sortArrayASC(grados).slice(0, 6).map((e) => (
                             <Grid item md={4} xs={12}>
-                                <Card key={e.key} name={e.name} />
+                                <Card key={e.key} nombre={e.nombre} />
                             </Grid>
                         ))}
                     </Grid>
@@ -36,9 +39,9 @@ const Material = () => {
                         Secundaria
                     </Typography>
                     <Grid container spacing={3}>
-                        {gradosOrdenados.slice(6, 12).map((e) => (
+                        {sortArrayASC(grados).slice(6, 12).map((e) => (
                             <Grid item md={4} xs={12}>
-                                <Card key={e.key} name={e.name} />
+                                <Card key={e.key} nombre={e.nombre} />
                             </Grid>
                         ))}
                     </Grid>
