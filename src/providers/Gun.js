@@ -5,4 +5,3 @@ export const gun = Gun({
     peers: [`${window.location.origin}/gun`, "http://192.168.1.111:8080/gun","https://amautapp-admin.herokuapp.com/gun"], // Put the relay node that you want here
     localStorage: false,
 });
-console.log();
