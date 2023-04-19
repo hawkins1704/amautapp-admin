@@ -13,7 +13,8 @@ import { Grado } from "./pages/Grado/main";
 import { AgregarMateria } from "./pages/Grado/agregarMateria";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { Principal } from "./pages/Principal";
-
+import { useState } from "react";
+import MyContext from "./providers/Context";
 
 const theme = createTheme({
     palette: {
@@ -23,7 +24,9 @@ const theme = createTheme({
     },
 });
 function App() {
+    const [isSynch, setIsSynch] = useState(false);
     return (
+        <MyContext.Provider value={{isSynch,setIsSynch}}>
             <ThemeProvider theme={theme}>
                 <Routes>
                     <Route index path="/" element={<Principal />} />
@@ -41,6 +44,7 @@ function App() {
                     <Route path="login" element={<Login />} />
                 </Routes>
             </ThemeProvider>
+        </MyContext.Provider>
     );
 }
 

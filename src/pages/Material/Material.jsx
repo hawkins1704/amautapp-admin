@@ -15,7 +15,7 @@ const Material = () => {
     ];
     
     const [grados, setGrados] = useState([]);
-    
+    console.log("material - Los grados que tengo: ",grados);
     useEffect(() => {
         getAllGradosOnce(setGrados);
     }, []);

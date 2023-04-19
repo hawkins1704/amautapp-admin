@@ -10,12 +10,12 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
-import EscalatorWarningRoundedIcon from '@mui/icons-material/EscalatorWarningRounded';
-import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
-import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import EscalatorWarningRoundedIcon from "@mui/icons-material/EscalatorWarningRounded";
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -27,7 +27,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 import { Header } from "../../components/header";
 
 const drawerWidth = 240;
@@ -97,7 +97,7 @@ const Drawer = styled(MuiDrawer, {
     }),
 }));
 
-const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
+const Layout = ({ children, title, breadcrumbs, HeaderButtonGroup }) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -165,7 +165,13 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Principal"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black", ".MuiTouchRipple-rippleVisible":{backgroundColor: "#005d83"}}}
+                                sx={{
+                                    opacity: open ? 1 : 0,
+                                    color: "black",
+                                    ".MuiTouchRipple-rippleVisible": {
+                                        backgroundColor: "#005d83",
+                                    },
+                                }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -193,7 +199,7 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Material Educativo"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                                sx={{ opacity: open ? 1 : 0, color: "black" }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -221,7 +227,7 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Centros Educativos"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                                sx={{ opacity: open ? 1 : 0, color: "black" }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -249,7 +255,7 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Configuración"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                                sx={{ opacity: open ? 1 : 0, color: "black" }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -277,7 +283,7 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Ayuda y soporte"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                                sx={{ opacity: open ? 1 : 0, color: "black" }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -308,7 +314,7 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
                             </ListItemIcon>
                             <ListItemText
                                 primary={"Cerrar sesión"}
-                                sx={{ opacity: open ? 1 : 0 ,color:"black"}}
+                                sx={{ opacity: open ? 1 : 0, color: "black" }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -316,7 +322,11 @@ const Layout = ({ children,title,breadcrumbs,HeaderButtonGroup }) => {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
-                <Header title={title} breadcrumbs={breadcrumbs} ButtonGroup={HeaderButtonGroup}/>
+                <Header
+                    title={title}
+                    breadcrumbs={breadcrumbs}
+                    ButtonGroup={HeaderButtonGroup}
+                />
                 {children}
             </Box>
         </Box>

@@ -1,19 +1,27 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
+import { ButtonGroup } from "./components";
 
-const Card = ({  title, subtitle }) => {
+const Card = ({ gradoId, materia, data}) => {
     return (
         <div className={styles.container}>
-            <Link to={`${title.toLowerCase()}`}>
-                <Typography variant={"h5"} component={"h4"} >
-                    {title}
-                </Typography>
-                <Typography variant={"h6"} component={"h5"}>
-                    {subtitle}
-                </Typography>
-            </Link>
+            <div className={styles.buttonContainer}>
+                <ButtonGroup
+                    gradoId={gradoId}
+                    materiaId={materia.nombre}
+                    data={data}//Necesita form con nuevos datos
+                 
+                />
+            </div>
+            <div className={styles.textContainer}>
+                <Link to={`${materia.nombre.toLowerCase()}`}>
+                    <Typography variant={"h5"} component={"h4"}>
+                        {materia.nombre}
+                    </Typography>
+                </Link>
+            </div>
         </div>
     );
 };

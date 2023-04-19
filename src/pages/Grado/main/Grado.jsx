@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { Container, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -7,6 +7,7 @@ import { ButtonGroup, Card } from "./components";
 import styles from "./styles.module.css";
 import { Layout } from "../../../components";
 import { getAllMateriasSync } from "../../../services/materia";
+import { filterDuplicated } from "../../../utils";
 
 const Grado = () => {
     const params = useParams();
@@ -14,7 +15,6 @@ const Grado = () => {
     const title = gradoId.replace("-", " ").concat("°");
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [materias, setMaterias] = useState([]);
-
     const breadcrumbs = [
         <Link
             underline="hover"
@@ -31,11 +31,10 @@ const Grado = () => {
         </Typography>,
     ];
 
-
     useEffect(() => {
-        getAllMateriasSync(gradoId,setMaterias);
+        getAllMateriasSync(gradoId, setMaterias);
     }, []);
-    console.log("Materias obtenidas: ",materias);
+
     return (
         <Layout
             title={title}
@@ -50,9 +49,12 @@ const Grado = () => {
             <Outlet context={{ gradoId }} />
             <Container maxWidth={"xl"} sx={{ my: 6 }}>
                 <Grid container spacing={3}>
-                    {materias.map((e) => (
+                    {filterDuplicated(materias).map((e) => (
                         <Grid item md={4} xs={12}>
-                            <Card title={e.nombre} />
+                            <Card
+                                gradoId={gradoId}
+                                materia={e}
+                            />
                         </Grid>
                     ))}
                 </Grid>

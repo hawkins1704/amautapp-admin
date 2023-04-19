@@ -18,12 +18,10 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-const OptionalButtonGroup=()=>{
-    return(<div className=""></div>)
-}
-const Header = ({ title, breadcrumbs,ButtonGroup}) => {
-    
-
+const OptionalButtonGroup = () => {
+    return <div className=""></div>;
+};
+const Header = ({ title, breadcrumbs, ButtonGroup }) => {
     let generalBreadcrumbs = [
         <Link
             underline="hover"
@@ -36,10 +34,10 @@ const Header = ({ title, breadcrumbs,ButtonGroup}) => {
             <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
             Principal
         </Link>,
-        breadcrumbs
+        breadcrumbs,
     ];
-    console.log("BUTTON GROUP",typeof(ButtonGroup));
-    const ComponenteRecibido=ButtonGroup||OptionalButtonGroup;
+    const ComponenteRecibido = ButtonGroup || OptionalButtonGroup;
+
     return (
         <Container maxWidth={"xl"} sx={{ mb: 3 }}>
             <Grid container>
@@ -59,7 +57,7 @@ const Header = ({ title, breadcrumbs,ButtonGroup}) => {
                     </Breadcrumbs>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    {<ComponenteRecibido/>}
+                    <ComponenteRecibido />
                 </Grid>
             </Grid>
         </Container>
