@@ -10,11 +10,11 @@ import {
     updateMateria,
 } from "../../../../../../../services/materia";
 import RemoveModal from "../modal/RemoveModal";
-const ButtonGroup = ({ gradoId, materiaId, data, setIsSynch }) => {
+const ButtonGroup = ({ gradoId, materiaId, data }) => {
     const navigate = useNavigate();
     const eliminarMateria = () => {
         removeMateria(gradoId, materiaId);
-        navigate(-2); //temporalmente ya que sino no actualiza los cursos
+        navigate('/material-educativo'); //temporalmente ya que sino no actualiza los cursos
     };
     const editarMateria = () => {
         updateMateria(gradoId, materiaId, data);

@@ -1,10 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ nombre,subtitle }) => {
-    console.log("Material/Card - nombre recibido: ",nombre);
+    
     const contenido=nombre.split('-');
     return (
         <div className={styles.container}>

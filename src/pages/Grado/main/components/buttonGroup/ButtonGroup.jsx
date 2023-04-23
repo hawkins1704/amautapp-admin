@@ -9,7 +9,7 @@ const ButtonGroup = ({addIsOpen, setAddIsOpen}) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const goToAgregarMateria = () => {
-        if (addIsOpen == false) {
+        if (addIsOpen === false) {
             navigate("add");
             setAddIsOpen(true);
         } else {

@@ -8,7 +8,7 @@ import {
     Link,
     Tooltip,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
@@ -22,6 +22,17 @@ const OptionalButtonGroup = () => {
     return <div className=""></div>;
 };
 const Header = ({ title, breadcrumbs, ButtonGroup }) => {
+
+    const [width, setWidth] = useState(window.innerWidth);
+    useEffect(()=>{
+        function handleResize() {
+            setWidth(window.innerWidth);
+          }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+    },[]);
     let generalBreadcrumbs = [
         <Link
             underline="hover"
@@ -52,6 +63,8 @@ const Header = ({ title, breadcrumbs, ButtonGroup }) => {
                     <Breadcrumbs
                         separator={<NavigateNextIcon fontSize="small" />}
                         aria-label="breadcrumb"
+                        maxItems={(width<480)?2:6}
+                        sx={{textTransform:'Capitalize'}}
                     >
                         {generalBreadcrumbs}
                     </Breadcrumbs>

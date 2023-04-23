@@ -4,14 +4,15 @@ import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { ButtonGroup } from "./components";
 
-const Card = ({ gradoId, materia, data}) => {
+const Card = ({ gradoId,materia, data}) => {
     return (
         <div className={styles.container}>
             <div className={styles.buttonContainer}>
                 <ButtonGroup
                     gradoId={gradoId}
                     materiaId={materia.nombre}
-                    data={data}//Necesita form con nuevos datos
+                    data={data}//Necesita form con n
+                    uevos datos
                  
                 />
             </div>

@@ -8,10 +8,11 @@ import styles from "./styles.module.css";
 import { Layout } from "../../../components";
 import { getAllMateriasSync } from "../../../services/materia";
 import { filterDuplicated } from "../../../utils";
+import { geAllMateriasFake } from "../../../services/fakeData";
 
 const Grado = () => {
     const params = useParams();
-    const gradoId = params.grado;
+    const gradoId = params.gradoId;
     const title = gradoId.replace("-", " ").concat("°");
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [materias, setMaterias] = useState([]);
@@ -32,9 +33,11 @@ const Grado = () => {
     ];
 
     useEffect(() => {
-        getAllMateriasSync(gradoId, setMaterias);
-    }, []);
+        // getAllMateriasSync(gradoId, setMaterias);
 
+        //fake data temporal
+        geAllMateriasFake(setMaterias);
+    }, []);
     return (
         <Layout
             title={title}

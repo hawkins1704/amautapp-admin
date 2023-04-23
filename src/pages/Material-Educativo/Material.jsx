@@ -1,23 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Layout } from "../../components";
-import { Container, Grid, Link, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
+import { Container, Grid, Typography } from "@mui/material";
 import { Card } from "./components";
-import styles from "./styles.module.css";
+
 import { getAllGradosOnce } from "../../services/grado";
 import { sortArrayASC } from "../../utils";
+import { getAllGradosFake } from "../../services/fakeData";
 const Material = () => {
     const breadcrumbs = [
         <Typography key="2" color="text.primary">
             Material Educativo
         </Typography>,
     ];
-    
+
     const [grados, setGrados] = useState([]);
-    console.log("material - Los grados que tengo: ",grados);
+
     useEffect(() => {
-        getAllGradosOnce(setGrados);
+        // getAllGradosOnce(setGrados);
+
+        //fake data temporal
+        getAllGradosFake(setGrados);
     }, []);
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
