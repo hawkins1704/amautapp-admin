@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
 const FileInputButton = ({onChange, className}) => {
     const fileInputRef = useRef(null);
@@ -14,7 +15,7 @@ const FileInputButton = ({onChange, className}) => {
   
     return (
       <>
-        <button onClick={handleClick} className={className} >Seleccionar imagen</button>
+        <button onClick={handleClick} className={className} >Seleccionar imagen <ImageSearchIcon sx={{marginLeft:'8px'}}/></button>
         <input
           ref={fileInputRef}
           type="file"

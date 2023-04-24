@@ -34,7 +34,7 @@ function App() {
                         <Route path="add" element={<AgregarMateria />} />
                     </Route>
                     <Route path="material-educativo/:gradoId/:materiaId" element={<Materia />} />
-                    <Route path="material-educativo/:gradoId/:materiaId/editor" element={<Editor />} />
+                    <Route path="material-educativo/:gradoId/:materiaId/agregar" element={<Editor />} />
                     <Route path="profesores" element={<Profesores />} />
                     <Route
                         path="centros-educativos"

@@ -20,21 +20,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(nombre,propietario,semana,fechaCreacion,fechaActualizacion) {
-  return {
-    nombre,
-    propietario,
-    semana,
-    fechaCreacion,
-    fechaActualizacion,
-  };
-}
+// function createData(nombre,propietario,semana,fechaCreacion,fechaActualizacion) {
+//   return {
+//     nombre,
+//     propietario,
+//     semana,
+//     fechaCreacion,
+//     fechaActualizacion,
+//   };
+// }
 
-const rows = [
-  createData('Historia del Perú', 'Admin', 1, 1682277191000, 1682277191000),
-  createData('Guerra con Chile', 'Admin', 2, 1671235200000, 1671235200000),
-  createData('Combate de Angamos', 'Admin', 3, 1671753600000, 1671753600000),
-];
+// const rows = [
+//   createData('Historia del Perú', 'Admin', 1, 1682277191000, 1682277191000),
+//   createData('Guerra con Chile', 'Admin', 2, 1671235200000, 1671235200000),
+//   createData('Combate de Angamos', 'Admin', 3, 1671753600000, 1671753600000),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -216,7 +216,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const ClasesTable=()=> {
+const ClasesTable=({rows})=> {
   const [order, setOrder] = React.useState(DEFAULT_ORDER);
   const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
   const [selected, setSelected] = React.useState([]);
@@ -237,7 +237,7 @@ const ClasesTable=()=> {
     );
 
     setVisibleRows(rowsOnMount);
-  }, []);
+  }, [rows]);
 
   const handleRequestSort = React.useCallback(
     (event, newOrderBy) => {
@@ -332,7 +332,6 @@ const ClasesTable=()=> {
 
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
