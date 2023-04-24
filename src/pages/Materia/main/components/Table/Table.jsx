@@ -16,36 +16,24 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(nombre,propietario,semana,fechaCreacion,fechaActualizacion) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    nombre,
+    propietario,
+    semana,
+    fechaCreacion,
+    fechaActualizacion,
   };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('Historia del Perú', 'Admin', 1, 1682277191000, 1682277191000),
+  createData('Guerra con Chile', 'Admin', 2, 1671235200000, 1671235200000),
+  createData('Combate de Angamos', 'Admin', 3, 1671753600000, 1671753600000),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -82,39 +70,39 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'nombre',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'Nombre',
   },
   {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
+    id: 'propietario',
+    numeric: false,
+    disablePadding: true,
+    label: 'Propietario',
   },
   {
-    id: 'fat',
+    id: 'semana',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'Semana',
   },
   {
-    id: 'carbs',
+    id: 'fechaCreacion',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'Creado',
   },
   {
-    id: 'protein',
+    id: 'fechaActualizacion',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'Actualizado',
   },
 ];
 
 const DEFAULT_ORDER = 'asc';
-const DEFAULT_ORDER_BY = 'calories';
+const DEFAULT_ORDER_BY = 'semana';
 const DEFAULT_ROWS_PER_PAGE = 5;
 
 function EnhancedTableHead(props) {
@@ -203,7 +191,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Lista de clases
         </Typography>
       )}
 
@@ -367,17 +355,17 @@ const ClasesTable=()=> {
             <TableBody>
               {visibleRows
                 ? visibleRows.map((row, index) => {
-                    const isItemSelected = isSelected(row.name);
+                    const isItemSelected = isSelected(row.nombre);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.name)}
+                        onClick={(event) => handleClick(event, row.nombre)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.name}
+                        key={row.nombre}
                         selected={isItemSelected}
                         sx={{ cursor: 'pointer' }}
                       >
@@ -396,12 +384,12 @@ const ClasesTable=()=> {
                           scope="row"
                           padding="none"
                         >
-                          {row.name}
+                          {row.nombre}
                         </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
+                        <TableCell align="left" padding="none">{row.propietario}</TableCell>
+                        <TableCell align="right" padding="normal">{row.semana}</TableCell>
+                        <TableCell align="right" padding="normal">{new Date(row.fechaCreacion).getFullYear()}</TableCell>
+                        <TableCell align="right" padding="normal">{new Date(row.fechaActualizacion).getFullYear()}</TableCell>
                       </TableRow>
                     );
                   })

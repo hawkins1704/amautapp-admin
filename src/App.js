@@ -1,8 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { Route, Routes } from "react-router-dom";
 import { Configuracion } from "./pages/Configuracion";
 import { Login } from "./pages/Login";
 import { Profesores } from "./pages/Profesores";
@@ -13,9 +14,8 @@ import { Grado } from "./pages/Grado/main";
 import { AgregarMateria } from "./pages/Grado/Agregar-Materia";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { Principal } from "./pages/Principal";
-import { useState } from "react";
-import MyContext from "./providers/Context";
 import { Materia } from "./pages/Materia/main";
+import { Editor } from "./pages/Materia/Editor";
 
 const theme = createTheme({
     palette: {
@@ -25,9 +25,7 @@ const theme = createTheme({
     },
 });
 function App() {
-    const [isSynch, setIsSynch] = useState(false);
     return (
-        <MyContext.Provider value={{isSynch,setIsSynch}}>
             <ThemeProvider theme={theme}>
                 <Routes>
                     <Route index path="/" element={<Principal />} />
@@ -36,6 +34,7 @@ function App() {
                         <Route path="add" element={<AgregarMateria />} />
                     </Route>
                     <Route path="material-educativo/:gradoId/:materiaId" element={<Materia />} />
+                    <Route path="material-educativo/:gradoId/:materiaId/editor" element={<Editor />} />
                     <Route path="profesores" element={<Profesores />} />
                     <Route
                         path="centros-educativos"
@@ -46,7 +45,6 @@ function App() {
                     <Route path="login" element={<Login />} />
                 </Routes>
             </ThemeProvider>
-        </MyContext.Provider>
     );
 }
 

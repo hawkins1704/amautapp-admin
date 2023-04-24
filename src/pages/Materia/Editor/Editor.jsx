@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Layout } from "../../../components";
-import { Container, Link, Typography } from "@mui/material";
+import React from 'react'
+import { Layout } from '../../../components';
+import { Container, Link, Typography } from '@mui/material';
 import { Link as RouterLink, useParams } from "react-router-dom";
-import styles from "./styles.module.css";
-import { Table } from "./components";
-const Materia = () => {
+import StarterKit from '@tiptap/starter-kit'
+import { TextEditor } from './components';
+
+const Editor = () => {
     const params = useParams();
-    const materiaId = params.materiaId;
+    const title = 'Editor de texto';
     const gradoId = params.gradoId;
     const gradoTitle = gradoId.replace("-", " ").concat("°");
-    const title = materiaId;
-    const [clases, setClases] = useState([]);
+
     const breadcrumbs = [
         <Link
             underline="hover"
@@ -37,19 +37,14 @@ const Materia = () => {
         </Typography>,
     ];
 
-    useEffect(() => {
-        // getAllClases(materiaId, setClases);
-    }, []);
+   
+  return (
+    <Layout title={title} breadcrumbs={breadcrumbs}>
+        <Container maxWidth={"xl"}>
+        <TextEditor/>
+        </Container>
+    </Layout>
+  )
+}
 
-    return (
-        <Layout title={title} breadcrumbs={breadcrumbs}>
-            <Container maxWidth={"xl"}>
-
-                <Table />
-            </Container>
-            
-        </Layout>
-    );
-};
-
-export default Materia;
+export default Editor;
