@@ -46,7 +46,6 @@ const Materia = () => {
         }
         getInitialData();
     }, []);
-    console.log("CLASES: ",clases[2]);
     return (
         <Layout title={title} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>

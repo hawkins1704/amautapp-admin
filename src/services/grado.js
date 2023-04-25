@@ -1,13 +1,11 @@
 import { gun } from "../providers/Gun";
 const grados = gun.get("grados");
 export const getAllGradosSync = (setGrados) => {
-    console.log("ENTRE A SINCRONIZAR LOS GRADOS");
     grados.map().on((data) => {
         setGrados((prev) => [...prev, data]);
     });
 };
 export const getAllGradosOnce = (setGrados) => {
-    console.log("ENTRE A SINCRONIZAR LOS GRADOS POR PRIMERA VEZ");
     grados.map().once((data) => {
         setGrados((prev) => [...prev, data]);
     });

@@ -15,7 +15,8 @@ import { AgregarMateria } from "./pages/Grado/Agregar-Materia";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { Principal } from "./pages/Principal";
 import { Materia } from "./pages/Materia/main";
-import { Editor } from "./pages/Materia/Editor";
+import { Editor } from "./pages/Clase/Editor";
+import { Clase } from "./pages/Clase/main";
 
 const theme = createTheme({
     palette: {
@@ -34,7 +35,8 @@ function App() {
                         <Route path="add" element={<AgregarMateria />} />
                     </Route>
                     <Route path="material-educativo/:gradoId/:materiaId" element={<Materia />} />
-                    <Route path="material-educativo/:gradoId/:materiaId/agregar" element={<Editor />} />
+                    <Route path="material-educativo/:gradoId/:materiaId/:claseId" element={<Clase />} />
+                    <Route path="material-educativo/:gradoId/:materiaId/generar-clase" element={<Editor />} />
                     <Route path="profesores" element={<Profesores />} />
                     <Route
                         path="centros-educativos"
