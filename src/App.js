@@ -25,6 +25,7 @@ const theme = createTheme({
         },
     },
 });
+console.log("TIPO DE ARRANQUE: ", process.env.NODE_ENV);
 function App() {
     return (
             <ThemeProvider theme={theme}>

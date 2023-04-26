@@ -5,8 +5,11 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles';
-const ButtonGroup = ({handleOpen}) => {
+const ButtonGroup = () => {
+    const navigate = useNavigate();
     const theme = useTheme();
+    const goToAgregarMateria = () => {
+    };
     return (
         <div className={styles.buttonsContainer}>
             <Tooltip title="Editar Contenido" >
@@ -16,7 +19,7 @@ const ButtonGroup = ({handleOpen}) => {
                     sx={{
                         border: `2px solid ${theme.palette.primary.main}`,
                     }}
-                    onClick={handleOpen}
+                    onClick={goToAgregarMateria}
                     className={styles.button}
                 >
                     <EditIcon />
@@ -29,7 +32,7 @@ const ButtonGroup = ({handleOpen}) => {
                     sx={{
                         border: `2px solid ${theme.palette.primary.main}`,
                     }}
-                    onClick={handleOpen}
+                    onClick={goToAgregarMateria}
                     className={styles.button}
                 >
                     <AddIcon />

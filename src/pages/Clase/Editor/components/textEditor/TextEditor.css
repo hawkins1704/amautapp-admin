@@ -11,4 +11,5 @@
 .image{
   width: 300px;
   height: auto;
+  float: none !important;
 }

@@ -78,7 +78,7 @@ const MenuBar = ({ editor, handleFileChange }) => {
                         : `${styles.button}`
                 }
             >
-                h1
+                Título
             </button>
             <button
                 onClick={() =>
@@ -90,7 +90,7 @@ const MenuBar = ({ editor, handleFileChange }) => {
                         : `${styles.button}`
                 }
             >
-                h2
+                Subtítulo 1
             </button>
             <button
                 onClick={() =>
@@ -102,7 +102,7 @@ const MenuBar = ({ editor, handleFileChange }) => {
                         : `${styles.button}`
                 }
             >
-                h3
+                Subtítulo 2
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -180,8 +180,8 @@ const TextEditor = () => {
 
         reader.onload = () => {
             const base64Data = reader.result.replace(/^data:(.*;base64,)?/, "");
-            // console.log("BASE 64 DATA:", base64Data);
-            // console.log("TIPO DE ARCHIVO:", file.type);
+            
+            console.log("TIPO DE ARCHIVO:", file.type);
             const imageNode = {
                 type: "image",
                 attrs: {

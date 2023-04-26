@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
 const FileInputButton = ({onChange, className}) => {
@@ -6,11 +6,15 @@ const FileInputButton = ({onChange, className}) => {
 
     const handleClick = () => {
       fileInputRef.current.click();
+      
     };
   
     const handleFileChange = (event) => {
       const file = event.target.files[0];
+      console.log("VALUE DE INPUT FILE: ",fileInputRef.current.value)
       onChange(file);
+      fileInputRef.current.value="";
+      console.log("VALUE DE INPUT FILE DESPUES: ",fileInputRef.current.value)
     };
   
     return (
@@ -21,6 +25,7 @@ const FileInputButton = ({onChange, className}) => {
           type="file"
           style={{ display: 'none' }}
           onChange={handleFileChange}
+          multiple
         />
       </>
     );

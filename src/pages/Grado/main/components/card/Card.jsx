@@ -16,7 +16,7 @@ const Card = ({ gradoId,materia, data}) => {
                  
                 />
             </div>
-            <div className={styles.textContainer}>
+            <div className={styles.textContainer} style={{backgroundColor:`${materia.color}`}}>
                 <Link to={`${materia.nombre.toLowerCase()}`}>
                     <Typography variant={"h5"} component={"h4"}>
                         {materia.nombre}

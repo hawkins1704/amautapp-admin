@@ -16,10 +16,14 @@ const Material = () => {
     const [grados, setGrados] = useState([]);
 
     useEffect(() => {
-        // getAllGradosOnce(setGrados);
+        if(process.env.NODE_ENV==='production'){
+            getAllGradosOnce(setGrados);
+        }else if(process.env.NODE_ENV==='development'){
+            //fake data temporal
+            getAllGradosFake(setGrados);
+           
+        }
 
-        //fake data temporal
-        getAllGradosFake(setGrados);
     }, []);
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>

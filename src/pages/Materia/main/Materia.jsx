@@ -3,8 +3,9 @@ import { Layout } from "../../../components";
 import { Container, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Table } from "./components";
+import { ButtonGroup, Table } from "./components";
 import { getAllClasesFake } from "../../../services/fakeData";
+import { getAllClasesSync } from "../../../services/clase";
 const Materia = () => {
     const params = useParams();
     const materiaId = params.materiaId;
@@ -39,20 +40,25 @@ const Materia = () => {
     ];
 
     useEffect(() => {
-        // getAllClases(materiaId, setClases);
-        const getInitialData=async()=>{
-            const clases=await getAllClasesFake();
-            setClases(clases);
-        }
+        const getInitialData = async () => {
+            if (process.env.NODE_ENV === "production") {
+                getAllClasesSync(materiaId, setClases);
+            } else if (process.env.NODE_ENV === "development") {
+                const clases = await getAllClasesFake();
+                setClases(clases);
+            }
+        };
         getInitialData();
     }, []);
     return (
-        <Layout title={title} breadcrumbs={breadcrumbs}>
+        <Layout
+            title={title}
+            breadcrumbs={breadcrumbs}
+            HeaderButtonGroup={() => <ButtonGroup />}
+        >
             <Container maxWidth={"xl"}>
-
-                <Table rows={clases}/>
+                <Table rows={clases} />
             </Container>
-            
         </Layout>
     );
 };
