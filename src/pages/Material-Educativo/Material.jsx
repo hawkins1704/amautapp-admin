@@ -16,9 +16,9 @@ const Material = () => {
     const [grados, setGrados] = useState([]);
 
     useEffect(() => {
-        if(process.env.NODE_ENV==='production'){
+        if(process.env.NODE_ENV==='development'){
             getAllGradosOnce(setGrados);
-        }else if(process.env.NODE_ENV==='development'){
+        }else if(process.env.NODE_ENV==='production'){//Temporalmente invertido para poder desplegar en netlify y ver fakeData
             //fake data temporal
             getAllGradosFake(setGrados);
            
