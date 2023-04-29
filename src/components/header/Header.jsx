@@ -58,7 +58,7 @@ const Header = ({ title, breadcrumbs, ButtonGroup }) => {
                         component={"h1"}
                         className={styles.title}
                     >
-                        {title}
+                        {title.toUpperCase()}
                     </Typography>
                     <Breadcrumbs
                         separator={<NavigateNextIcon fontSize="small" />}

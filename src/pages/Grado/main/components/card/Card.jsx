@@ -4,19 +4,22 @@ import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { ButtonGroup } from "./components";
 
-const Card = ({ gradoId,materia, data}) => {
+const Card = ({ gradoId, materia,isOptionsOpen, data }) => {
     return (
         <div className={styles.container}>
             <div className={styles.buttonContainer}>
+                {isOptionsOpen?
                 <ButtonGroup
-                    gradoId={gradoId}
-                    materiaId={materia.nombre}
-                    data={data}//Necesita form con n
-                    uevos datos
-                 
-                />
+                gradoId={gradoId}
+                materiaId={materia.nombre}
+                data={data} //Necesita form con nuevos datos
+                />:null
+            }
             </div>
-            <div className={styles.textContainer} style={{backgroundColor:`${materia.color}`}}>
+            <div
+                className={styles.textContainer}
+                style={{ backgroundColor: `${materia.color}` }}
+            >
                 <Link to={`${materia.nombre.toLowerCase()}`}>
                     <Typography variant={"h5"} component={"h4"}>
                         {materia.nombre}

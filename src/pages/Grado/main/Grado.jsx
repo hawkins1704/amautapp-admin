@@ -16,6 +16,7 @@ const Grado = () => {
     const gradoId = params.gradoId;
     const title = gradoId.replace("-", " ").concat("°");
     const [open, setOpen] = useState(false);
+    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [materias, setMaterias] = useState([]);
     const breadcrumbs = [
         <Link
@@ -47,19 +48,33 @@ const Grado = () => {
         <Layout
             title={title}
             breadcrumbs={breadcrumbs}
-            HeaderButtonGroup={() => <ButtonGroup handleOpen={handleOpen} />}
+            HeaderButtonGroup={() => (
+                <ButtonGroup
+                    handleOpen={handleOpen}
+                    isOptionsOpen={isOptionsOpen}
+                    setIsOptionsOpen={setIsOptionsOpen}
+                />
+            )}
         >
             <Outlet context={{ gradoId }} />
             <Container maxWidth={"xl"} sx={{ my: 6 }}>
                 <Grid container spacing={3}>
                     {filterDuplicated(materias).map((e) => (
                         <Grid item md={4} xs={12}>
-                            <Card gradoId={gradoId} materia={e} />
+                            <Card
+                                gradoId={gradoId}
+                                materia={e}
+                                isOptionsOpen={isOptionsOpen}
+                            />
                         </Grid>
                     ))}
                 </Grid>
             </Container>
-            <AgregarMateria open={open} handleClose={handleClose} gradoId={gradoId}/>
+            <AgregarMateria
+                open={open}
+                handleClose={handleClose}
+                gradoId={gradoId}
+            />
         </Layout>
     );
 };

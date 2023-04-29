@@ -1,18 +1,15 @@
 import {
     Box,
     Button,
-    Container,
     FormControl,
-    Grid,
     Modal,
     TextField,
     Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { createMateria } from "../../../services/materia";
-import { CirclePicker, TwitterPicker } from "react-color";
+import {  TwitterPicker } from "react-color";
 
 const AgregarMateria = ({ open, handleClose, gradoId }) => {
     const [materia, setMateria] = useState({
@@ -47,6 +44,7 @@ const AgregarMateria = ({ open, handleClose, gradoId }) => {
             aria-describedby="modal-modal-description"
         >
             <Box className={styles.modalContainer}>
+                
                 <Typography variant={"h5"} component={"h2"} sx={{ mb: 3 }}>
                     Agregar Materia
                 </Typography>

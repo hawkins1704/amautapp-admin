@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Layout } from "../../../components";
-import { Container, Link, Typography } from "@mui/material";
+import { Box, Button, Container, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import StarterKit from "@tiptap/starter-kit";
 import { TextEditor } from "./components";
-
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 const Editor = () => {
     const params = useParams();
     const title = "Generador de clases";
@@ -12,13 +12,13 @@ const Editor = () => {
     const materiaId = params.materiaId;
     const gradoTitle = gradoId.replace("-", " ").concat("°");
     const [claseData, setClaseData] = useState({
-        titulo:'',
-        propietario:'',
-        semana:'',
-        fechaCreacion:'',
-        fechaActualizacion:'',
-        contenido:'',
-    })
+        titulo: "",
+        propietario: "",
+        semana: "",
+        fechaCreacion: "",
+        fechaActualizacion: "",
+        contenido: "",
+    });
     const breadcrumbs = [
         <Link
             underline="hover"
@@ -54,13 +54,22 @@ const Editor = () => {
             {title}
         </Typography>,
     ];
-
+    const guardarClase=()=>{
+        
+    }
     return (
         <Layout title={title} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
-                <Container>
-
-                </Container>
+                <Box sx={{ margin: "12px 0" }}>
+                    <Button
+                        variant="contained"
+                        disableElevation
+                        startIcon={<SaveOutlinedIcon />}
+                        onClick={guardarClase}
+                    >
+                        Guardar clase
+                    </Button>
+                </Box>
                 <TextEditor />
             </Container>
         </Layout>

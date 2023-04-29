@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "../../../components";
 import { Link as RouterLink, useLocation, useParams } from "react-router-dom";
 import { Container, Link, Typography } from "@mui/material";
-import { getAllClasesFake } from "../../../services/fakeData";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import './Editor.css'
+import './EditorStyles.css'
 const Clase = () => {
     const params = useParams();
     const location=useLocation();

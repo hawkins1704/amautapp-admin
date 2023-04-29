@@ -32,12 +32,10 @@ function App() {
                 <Routes>
                     <Route index path="/" element={<Principal />} />
                     <Route path="material-educativo" element={<Material />} />
-                    <Route path="material-educativo/:gradoId" element={<Grado />}>
-                        <Route path="add" element={<AgregarMateria />} />
-                    </Route>
+                    <Route path="material-educativo/:gradoId" element={<Grado />}/>
                     <Route path="material-educativo/:gradoId/:materiaId" element={<Materia />} />
                     <Route path="material-educativo/:gradoId/:materiaId/:claseId" element={<Clase />} />
-                    <Route path="material-educativo/:gradoId/:materiaId/generar-clase" element={<Editor />} />
+                    <Route path="material-educativo/:gradoId/:materiaId/editor" element={<Editor />} />
                     <Route path="profesores" element={<Profesores />} />
                     <Route
                         path="centros-educativos"

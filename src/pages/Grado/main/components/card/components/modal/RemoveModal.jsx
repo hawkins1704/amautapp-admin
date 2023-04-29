@@ -1,33 +1,30 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
-
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-};
+import styles from "./styles.module.css";
 
 const RemoveModal = ({ open, handleClose, eliminarMateria }) => {
     return (
         <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+            <div className={styles.modalContainer}>
+                <Typography id="modal-modal-title" variant="h4" component="h2">
+                    Oh oh!
+                </Typography>
+                <Typography component="h3">
                     Estás por eliminar una materia, ¿estás seguro?
                 </Typography>
-                <Button variant="contained" onClick={eliminarMateria}>Eliminar</Button>
-                <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
-            </Box>
+                <div className={styles.buttonContainer}>
+                    <Button variant="outlined" onClick={handleClose}>
+                        Cancelar
+                    </Button>
+                    <Button variant="contained" onClick={eliminarMateria}>
+                        Eliminar
+                    </Button>
+                </div>
+            </div>
         </Modal>
     );
 };

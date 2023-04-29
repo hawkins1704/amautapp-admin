@@ -1,8 +1,8 @@
 import { getGrado } from "./grado";
-const materias = getGrado().get("materias");
-export const getAllClasesSync = (materiaId, setClases) => {
-    materias
-    .get(materiaId)
+import { getMateria } from "./materia";
+export const getAllClasesSync = (gradoId,materiaId, setClases) => {
+    const fetchedMateria=getMateria(gradoId,materiaId);
+    fetchedMateria
     .get("clases")
     .map()
     .on((data, key) => {
@@ -11,3 +11,13 @@ export const getAllClasesSync = (materiaId, setClases) => {
         });
     });
 };
+
+export const createClase=(gradoId,materiaId,claseId,data)=>{
+   const fetchedMateria=getMateria(gradoId,materiaId);
+   return fetchedMateria.get("clases").get(claseId).put(data);
+}
+
+export const removeMateria=(gradoId,materiaId,claseId)=>{
+    const fetchedMateria=getMateria(gradoId,materiaId);
+    fetchedMateria.get("clases").get(claseId).put(null);
+}
