@@ -1,9 +1,12 @@
 .container{
-    /* box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25); */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+    
     text-align: right;
     padding:48px 16px 16px 16px;
     border-radius: 10px;
-    
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
     /*Disable React Router Link styles*/
     text-decoration: none;
     color:#000;
