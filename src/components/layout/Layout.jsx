@@ -97,7 +97,13 @@ const Drawer = styled(MuiDrawer, {
     }),
 }));
 
-const Layout = ({ children, title, breadcrumbs, HeaderButtonGroup }) => {
+const Layout = ({
+    children,
+    title,
+    breadcrumbs,
+    HeaderButtonGroup,
+    isPrincipal,
+}) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -320,13 +326,15 @@ const Layout = ({ children, title, breadcrumbs, HeaderButtonGroup }) => {
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1, p: isPrincipal?0:3 }}>
                 <DrawerHeader />
-                <Header
-                    title={title}
-                    breadcrumbs={breadcrumbs}
-                    ButtonGroup={HeaderButtonGroup}
-                />
+                {isPrincipal ? null : (
+                    <Header
+                        title={title}
+                        breadcrumbs={breadcrumbs}
+                        ButtonGroup={HeaderButtonGroup}
+                    />
+                )}
                 {children}
             </Box>
         </Box>

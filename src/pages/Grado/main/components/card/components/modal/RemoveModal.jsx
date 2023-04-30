@@ -17,10 +17,10 @@ const RemoveModal = ({ open, handleClose, eliminarMateria }) => {
                     Estás por eliminar una materia, ¿estás seguro?
                 </Typography>
                 <div className={styles.buttonContainer}>
-                    <Button variant="outlined" onClick={handleClose}>
+                    <Button variant="outlined" onClick={handleClose} disableElevation>
                         Cancelar
                     </Button>
-                    <Button variant="contained" onClick={eliminarMateria}>
+                    <Button variant="contained" onClick={eliminarMateria} disableElevation>
                         Eliminar
                     </Button>
                 </div>

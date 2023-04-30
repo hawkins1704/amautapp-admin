@@ -25,6 +25,8 @@ const theme = createTheme({
         },
     },
 });
+
+console.log("NODE_ENV: ", process.env.REACT_APP_ENVIRONMENT);
 function App() {
     return (
             <ThemeProvider theme={theme}>

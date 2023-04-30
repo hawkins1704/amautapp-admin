@@ -5,7 +5,6 @@ import { Container, Link, Typography } from "@mui/material";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import './EditorStyles.css'
 const Clase = () => {
     const params = useParams();
     const location=useLocation();

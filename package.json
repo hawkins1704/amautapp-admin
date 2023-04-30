@@ -25,8 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start-client": "set NODE_ENV=prodution && react-scripts start",
-    "start-dev": "set NODE_ENV=development && npm run build && ( cd server && npm start ) ",
+    "start-client": "set REACT_APP_ENVIRONMENT=production&&react-scripts start",
+    "start-dev": "set REACT_APP_ENVIRONMENT=development&&npm run build && ( cd server && npm start ) ",
     "start": "cd server && node index.js",
     "build": "react-scripts build",
     "build-deploy": "true",

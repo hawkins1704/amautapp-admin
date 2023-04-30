@@ -37,9 +37,9 @@ const Grado = () => {
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
+        if (process.env.REACT_APP_ENVIRONMENT === "development") {
             getAllMateriasSync(gradoId, setMaterias);
-        } else if (process.env.NODE_ENV === "production") {//Temporalmente invertido para poder desplegar en netlify y ver fakeData
+        } else if (process.env.REACT_APP_ENVIRONMENT === "production") {//Temporalmente invertido para poder desplegar en netlify y ver fakeData
             //fake data temporal
             geAllMateriasFake(setMaterias);
         }
