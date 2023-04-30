@@ -10,7 +10,30 @@
     /*Disable React Router Link styles*/
     text-decoration: none;
     color:#000;
+    position: relative;
+    overflow: hidden;
+
 }
+
+
 .title{
     text-transform: capitalize;
+}
+.image{
+    position: absolute;
+    bottom: -32px;
+    left: -20px;
+    opacity: 0.2;
+    transform: rotate(15deg);
+    transition:all 0.3s ease;
+}
+.image svg{
+    font-size: 150px;
+}
+
+.container:hover .image{
+    opacity: 1;
+    transform: rotate(0);
+    bottom: 0px;
+    left: 0px;
 }

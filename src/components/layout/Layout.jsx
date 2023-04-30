@@ -326,7 +326,7 @@ const Layout = ({
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: isPrincipal?0:3 }}>
+            <Box component="main" sx={{ flexGrow: 1, p: isPrincipal?0:3, background:'#f8f8f8', height:'100vh' }}>
                 <DrawerHeader />
                 {isPrincipal ? null : (
                     <Header

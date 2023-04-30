@@ -24,7 +24,15 @@
     left: -20px;
     opacity: 0.2;
     transform: rotate(15deg);
+    transition:all 0.3s ease;
+
 }
 .image svg{
     font-size: 150px;
+}
+
+.container:hover .image{
+    transform: rotate(0);
+    bottom: 0px;
+    left: 0px;
 }
