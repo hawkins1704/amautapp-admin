@@ -21,10 +21,11 @@ import { Clase } from "./pages/Clase/main";
 const theme = createTheme({
     palette: {
         background:{
-            default:"F8F8F8",
+            default:"#F8F8F8",
         },
         primary: {
-            main: "#1E776B",
+            main: "#FF0505",
+            light:"#FCB000"
         },
         secondary:{
             main:"#F8B44C"

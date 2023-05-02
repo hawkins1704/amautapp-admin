@@ -11,7 +11,6 @@ import Divider from "@mui/material/Divider";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
-import EscalatorWarningRoundedIcon from "@mui/icons-material/EscalatorWarningRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
@@ -29,6 +28,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./styles.module.css";
 import { Header } from "../../components/header";
+import imgLogo from "../../assets/logos/logo-2-blanco.png";
 
 const drawerWidth = 240;
 
@@ -117,7 +117,7 @@ const Layout = ({
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" open={open} >
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -131,14 +131,16 @@ const Layout = ({
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Amautapp Admin
-                    </Typography>
+                    <img
+                        src={imgLogo}
+                        className={styles.logo}
+                        alt="Amautapp logo"
+                    />
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawerClose} sx={{color:theme.palette.primary.main}}>
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
                         ) : (
@@ -326,7 +328,14 @@ const Layout = ({
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: isPrincipal?0:3, background:'#f8f8f8', height:'100vh' }}>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: isPrincipal ? 0 : 3,
+                    height: "100vh",
+                }}
+            >
                 <DrawerHeader />
                 {isPrincipal ? null : (
                     <Header

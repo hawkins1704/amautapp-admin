@@ -19,7 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 const OptionalButtonGroup = () => {
-    return <div className=""></div>;
+    return null;
 };
 const Header = ({ title, breadcrumbs, ButtonGroup }) => {
 

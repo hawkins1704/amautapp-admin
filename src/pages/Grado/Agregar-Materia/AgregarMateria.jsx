@@ -48,8 +48,7 @@ const AgregarMateria = ({ open, handleClose, gradoId }) => {
                 <Typography variant={"h5"} component={"h2"} sx={{ mb: 3 }}>
                     Agregar Materia
                 </Typography>
-                <form onSubmit={handleSubmit}>
-                    <FormControl className={styles.form}>
+                <form onSubmit={handleSubmit} className={styles.form}>
                         <TextField
                             id="nombre"
                             name="nombre"
@@ -70,7 +69,6 @@ const AgregarMateria = ({ open, handleClose, gradoId }) => {
                                 Agregar
                             </Button>
                         </div>
-                    </FormControl>
                 </form>
             </Box>
         </Modal>
