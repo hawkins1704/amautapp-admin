@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Header } from "../../components/header";
 import imgLogo from "../../assets/logos/logo-2-blanco.png";
+import { MyContext } from "../../providers/Context";
 
 const drawerWidth = 240;
 
@@ -114,6 +115,7 @@ const Layout = ({
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const {updateUser}=React.useContext(MyContext);
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -303,6 +305,7 @@ const Layout = ({
                         to={"/login"}
                         disablePadding
                         sx={{ display: "block" }}
+                        onClick={()=>updateUser(null)}
                     >
                         <ListItemButton
                             sx={{
@@ -333,7 +336,7 @@ const Layout = ({
                 sx={{
                     flexGrow: 1,
                     p: isPrincipal ? 0 : 3,
-                    height: "100vh",
+                    minHeight: "100vh",
                 }}
             >
                 <DrawerHeader />

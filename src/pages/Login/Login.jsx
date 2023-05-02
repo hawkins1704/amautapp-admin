@@ -4,6 +4,7 @@ import {
     Container,
     FormControl,
     FormHelperText,
+    Grid,
     Input,
     InputLabel,
     TextField,
@@ -12,16 +13,20 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./styles.module.css";
+import imgLogo from "../../assets/logos/logo-1.png";
+import { MyContext } from "../../providers/Context";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-    const theme = useTheme();
+    const { user, updateUser } = useContext(MyContext);
+    const navigate=useNavigate();
+
     const [formData, setFormData] = useState({
-        user: "",
+        email: "",
         password: "",
         userType: "admin",
     });
-    const handleSubmit = () => {};
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -34,49 +39,75 @@ const Login = () => {
             userType: type,
         });
     };
-    console.log("FORM DATA: ", formData);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        updateUser(formData);
+        navigate('/')
+
+    };
+    console.log("USER:",user);
+    console.log("USUARIO INGRESADO:",formData);
     return (
-        <Box
-            className={styles.mainContainer}
-            sx={{ background: theme.palette.background.default }}
-        >
-            <div className={styles.formContainer}>
-                <Typography variant={"h5"} component={"h1"}>
-                    Iniciar Sesión
-                </Typography>
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <ToggleButtonGroup
-                        color="primary"
-                        value={formData.userType}
-                        exclusive
-                        onChange={userTypeHandleChange}
-                        aria-label="userType"
-                        name="userType"
-                    >
-                        <ToggleButton value="admin">ADMIN</ToggleButton>
-                        <ToggleButton value="docente">DOCENTE</ToggleButton>
-                        <ToggleButton value="alumno">ALUMNO</ToggleButton>
-                    </ToggleButtonGroup>
-                    <TextField
-                        id="user"
-                        name="user"
-                        label="Usuario"
-                        variant="outlined"
-                        onChange={handleChange}
+        <div className={styles.mainContainer}>
+            <div container className={styles.contentContainer}>
+                <div className={styles.imgContainer}>
+                    <img
+                        src={imgLogo}
+                        alt=""
+                        srcset=""
+                        className={styles.image}
                     />
-                    <TextField
-                        id="password"
-                        name="password"
-                        label="Contraseña"
-                        variant="outlined"
-                        onChange={handleChange}
-                    />
-                    <Button variant="contained" type="submit">
+                </div>
+                <div className={styles.formContainer}>
+                    <Typography variant={"h4"} component={"h1"}>
                         Iniciar Sesión
-                    </Button>
-                </form>
+                    </Typography>
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                        <ToggleButtonGroup
+                            color="primary"
+                            value={formData.userType}
+                            exclusive
+                            onChange={userTypeHandleChange}
+                            aria-label="userType"
+                            name="userType"
+                        >
+                            <ToggleButton value="admin">ADMIN</ToggleButton>
+                            <ToggleButton value="docente">DOCENTE</ToggleButton>
+                            <ToggleButton value="alumno">ALUMNO</ToggleButton>
+                        </ToggleButtonGroup>
+                        <TextField
+                            id="email"
+                            name="email"
+                            label="Correo"
+                            variant="outlined"
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            id="password"
+                            name="password"
+                            label="Contraseña"
+                            variant="outlined"
+                            onChange={handleChange}
+                        />
+                        <Button variant="contained" type="submit">
+                            Iniciar Sesión
+                        </Button>
+                    </form>
+                </div>
             </div>
-        </Box>
+            <ul className={styles.circles}>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
     );
 };
 
