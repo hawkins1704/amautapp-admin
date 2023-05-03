@@ -50,18 +50,14 @@ const Login = () => {
     return (
         <div className={styles.mainContainer}>
             <div container className={styles.contentContainer}>
-                <div className={styles.imgContainer}>
-                    <img
+              
+                <div className={styles.formContainer}>
+                <img
                         src={imgLogo}
                         alt=""
                         srcset=""
                         className={styles.image}
                     />
-                </div>
-                <div className={styles.formContainer}>
-                    <Typography variant={"h4"} component={"h1"}>
-                        Iniciar Sesión
-                    </Typography>
                     <form onSubmit={handleSubmit} className={styles.form}>
                         <ToggleButtonGroup
                             color="primary"
@@ -81,6 +77,7 @@ const Login = () => {
                             label="Correo"
                             variant="outlined"
                             onChange={handleChange}
+                            sx={{width:'100%'}}
                         />
                         <TextField
                             id="password"
@@ -88,8 +85,9 @@ const Login = () => {
                             label="Contraseña"
                             variant="outlined"
                             onChange={handleChange}
+                            sx={{width:'100%'}}
                         />
-                        <Button variant="contained" type="submit">
+                        <Button variant="contained" type="submit" sx={{width:'100%'}}>
                             Iniciar Sesión
                         </Button>
                     </form>

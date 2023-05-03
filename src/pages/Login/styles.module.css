@@ -3,29 +3,20 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-    padding: 64px 0;
     background: linear-gradient(90deg, rgba(255,5,5,1) 0%, rgba(248,180,76,1) 100%);
-  
 }
 
 .contentContainer{
     display: flex;
     align-items: center;
-    flex-direction: column;
-    gap: 16px;
-}
-.imageContainer{
-    background-color: rgba(65, 65, 65, 0.2); 
-    backdrop-filter: blur(10px);
-    display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 .formContainer{
     background-color: #ffffff;
-    padding:24px;
+    padding:48px 104px 104px 104px;
     border-radius: 10px; 
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -33,9 +24,9 @@
     justify-content: center;
     align-items: center;
     gap: 24px;
-    padding: 48px;
     z-index: 2;
 }
+
 .image{
     width: 200px;
 }
