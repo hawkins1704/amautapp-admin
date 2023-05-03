@@ -42,7 +42,11 @@
     width: 100%;
 }
 
-
+@media screen and (max-width : 576px){
+    .formContainer{
+        padding: 24px 48px 56px 48px;
+    }
+}
 
 
 .circles{

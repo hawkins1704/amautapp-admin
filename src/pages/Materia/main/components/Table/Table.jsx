@@ -54,10 +54,6 @@ function getComparator(order, orderBy) {
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -132,7 +128,7 @@ function EnhancedTableHead(props) {
                         checked={rowCount > 0 && numSelected === rowCount}
                         onChange={onSelectAllClick}
                         inputProps={{
-                            "aria-label": "select all desserts",
+                            "aria-label": "seleccionar todas las clases",
                         }}
                     />
                 </TableCell>
@@ -197,7 +193,11 @@ function EnhancedTableToolbar(props) {
                     variant="subtitle1"
                     component="div"
                 >
-                    {numSelected} selected
+                    {numSelected === 1 ? (
+                        <>1 seleccionado</>
+                    ) : (
+                        <>{numSelected} seleccionados</>
+                    )}
                 </Typography>
             ) : (
                 <Typography
@@ -216,13 +216,7 @@ function EnhancedTableToolbar(props) {
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
-            ) : (
-                <Tooltip title="Filter list">
-                    <IconButton>
-                        <FilterListIcon />
-                    </IconButton>
-                </Tooltip>
-            )}
+            ) : null}
         </Toolbar>
     );
 }
@@ -239,7 +233,7 @@ const ClasesTable = ({ rows }) => {
     const [visibleRows, setVisibleRows] = useState(null);
     const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
     const [paddingHeight, setPaddingHeight] = useState(0);
-
+    
     useEffect(() => {
         let rowsOnMount = stableSort(
             rows,
@@ -277,7 +271,7 @@ const ClasesTable = ({ rows }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.name);
+            const newSelected = rows.map((n) => n.nombre);
             setSelected(newSelected);
             return;
         }
@@ -287,22 +281,22 @@ const ClasesTable = ({ rows }) => {
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
-
+    
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
+          newSelected = newSelected.concat(selected, name);
         } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
+          newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
+          newSelected = newSelected.concat(selected.slice(0, -1));
         } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            );
+          newSelected = newSelected.concat(
+            selected.slice(0, selectedIndex),
+            selected.slice(selectedIndex + 1),
+          );
         }
-
+    
         setSelected(newSelected);
-    };
+      };
 
     const handleChangePage = useCallback(
         (event, newPage) => {
@@ -411,7 +405,10 @@ const ClasesTable = ({ rows }) => {
                                                   <Button
                                                       component={RouterLink}
                                                       to={`${row.nombre}`}
-                                                      state={{ contenido: row.contenido }} 
+                                                      state={{
+                                                          contenido:
+                                                              row.contenido,
+                                                      }}
                                                   >
                                                       {row.nombre}
                                                   </Button>

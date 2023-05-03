@@ -163,6 +163,7 @@ const Layout = ({
                                 justifyContent: open ? "initial" : "center",
                                 px: 2.5,
                             }}
+                            
                         >
                             <ListItemIcon
                                 sx={{
@@ -178,9 +179,6 @@ const Layout = ({
                                 sx={{
                                     opacity: open ? 1 : 0,
                                     color: "black",
-                                    ".MuiTouchRipple-rippleVisible": {
-                                        backgroundColor: "#005d83",
-                                    },
                                 }}
                             />
                         </ListItemButton>

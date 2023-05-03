@@ -43,7 +43,8 @@ const Materia = () => {
         const getInitialData = async () => {
             if (process.env.REACT_APP_ENVIRONMENT === "development") {
                 getAllClasesSync(materiaId, setClases);
-            } else if (process.env.REACT_APP_ENVIRONMENT === "production") {//Temporalmente invertido para poder desplegar en netlify y ver fakeData
+            } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
+                //Temporalmente invertido para poder desplegar en netlify y ver fakeData
                 const clases = await getAllClasesFake();
                 setClases(clases);
             }
@@ -57,7 +58,7 @@ const Materia = () => {
             HeaderButtonGroup={() => <ButtonGroup />}
         >
             <Container maxWidth={"xl"}>
-                <Table rows={clases} />
+                {clases.length <= 0 ? <div>Cargando</div> : <Table rows={clases} />}
             </Container>
         </Layout>
     );
