@@ -83,6 +83,7 @@ const Login = () => {
                             id="password"
                             name="password"
                             label="Contraseña"
+                            type="password"
                             variant="outlined"
                             onChange={handleChange}
                             sx={{width:'100%'}}

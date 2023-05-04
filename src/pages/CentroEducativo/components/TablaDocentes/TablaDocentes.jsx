@@ -20,7 +20,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
+import { parseDate } from "../../../../utils";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -54,61 +55,58 @@ const headCells = [
     {
         id: "nombre",
         numeric: false,
-        disablePadding: true,
+        disablePadding: false,
         label: "Nombre",
     },
     {
-        id: "propietario",
+        id: "apellido",
         numeric: false,
-        disablePadding: true,
-        label: "Propietario",
+        disablePadding: false,
+        label: "Apellido",
     },
     {
-        id: "semana",
-        numeric: true,
+        id: "email",
+        numeric: false,
         disablePadding: false,
-        label: "Semana",
+        label: "Correo",
     },
     {
-        id: "fechaCreacion",
-        numeric: true,
+        id: "password",
+        numeric: false,
         disablePadding: false,
-        label: "Creado",
+        label: "Contraseña",
     },
     {
-        id: "fechaActualizacion",
+        id: "fechaNacimiento",
         numeric: true,
         disablePadding: false,
-        label: "Actualizado",
+        label: "Fecha de Nacimiento",
     },
 ];
 
 const DEFAULT_ORDER = "asc";
-const DEFAULT_ORDER_BY = "semana";
+const DEFAULT_ORDER_BY = "apellido";
 const DEFAULT_ROWS_PER_PAGE = 5;
 
-
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-      
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+        fontSize: 14,
     },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
     },
     // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
+    "&:last-child td, &:last-child th": {
+        border: 0,
     },
-  }));
+}));
 
 function EnhancedTableHead(props) {
     const {
@@ -122,7 +120,7 @@ function EnhancedTableHead(props) {
     const createSortHandler = (newOrderBy) => (event) => {
         onRequestSort(event, newOrderBy);
     };
-
+   
     return (
         <TableHead>
             <TableRow>
@@ -135,23 +133,21 @@ function EnhancedTableHead(props) {
                         checked={rowCount > 0 && numSelected === rowCount}
                         onChange={onSelectAllClick}
                         inputProps={{
-                            "aria-label": "seleccionar todas las clases",
+                            "aria-label": "seleccionar todos los alumnos",
                         }}
                     />
                 </TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? "right" : "left"}
+                        align={"left"}
                         padding={headCell.disablePadding ? "none" : "normal"}
                         sortDirection={orderBy === headCell.id ? order : false}
-                        
                     >
                         <TableSortLabel
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : "asc"}
                             onClick={createSortHandler(headCell.id)}
-                        
                         >
                             {headCell.label}
                             {orderBy === headCell.id ? (
@@ -234,7 +230,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-const ClasesTable = ({ rows = [] }) => {
+const TablaDocentes = ({ rows = [] }) => {
     const [order, setOrder] = React.useState(DEFAULT_ORDER);
     const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
     const [selected, setSelected] = React.useState([]);
@@ -353,8 +349,7 @@ const ClasesTable = ({ rows = [] }) => {
     );
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-
-
+        console.log(rows);
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
@@ -411,46 +406,37 @@ const ClasesTable = ({ rows = [] }) => {
                                                   component="th"
                                                   id={labelId}
                                                   scope="row"
-                                                  padding="none"
+                                                  padding="normal"
                                               >
-                                                  <Button
-                                                      component={RouterLink}
-                                                      to={`${row.nombre}`}
-                                                      state={{
-                                                          contenido:
-                                                              row.contenido,
-                                                      }}
-                                                  >
-                                                      {row.nombre}
-                                                  </Button>
+                                                  {row.nombre}
                                               </StyledTableCell>
                                               <StyledTableCell
                                                   align="left"
-                                                  padding="none"
-                                              >
-                                                  {row.propietario}
-                                              </StyledTableCell>
-                                              <StyledTableCell
-                                                  align="right"
                                                   padding="normal"
                                               >
-                                                  {row.semana}
+                                                  {row.apellido}
                                               </StyledTableCell>
                                               <StyledTableCell
-                                                  align="right"
+                                                  align="left"
                                                   padding="normal"
                                               >
-                                                  {new Date(
-                                                      row.fechaCreacion
-                                                  ).getFullYear()}
+                                                  {row.email}
                                               </StyledTableCell>
                                               <StyledTableCell
-                                                  align="right"
+                                                  align="left"
                                                   padding="normal"
                                               >
-                                                  {new Date(
-                                                      row.fechaActualizacion
-                                                  ).getFullYear()}
+                                                  {row.password}
+                                              </StyledTableCell>
+                                              <StyledTableCell
+                                                  align="left"
+                                                  padding="normal"
+                                              >
+                                                
+                                                  {
+                                                  parseDate(row.fechaNacimiento)
+                                                  }
+                                                  
                                               </StyledTableCell>
                                           </StyledTableRow>
                                       );
@@ -481,4 +467,4 @@ const ClasesTable = ({ rows = [] }) => {
         </Box>
     );
 };
-export default ClasesTable;
+export default TablaDocentes;

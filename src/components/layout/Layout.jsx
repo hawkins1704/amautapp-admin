@@ -107,6 +107,7 @@ const Layout = ({
 }) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const { user, updateUser } = React.useContext(MyContext);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -115,11 +116,10 @@ const Layout = ({
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const {updateUser}=React.useContext(MyContext);
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open} >
+            <AppBar position="fixed" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -142,7 +142,10 @@ const Layout = ({
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose} sx={{color:theme.palette.primary.main}}>
+                    <IconButton
+                        onClick={handleDrawerClose}
+                        sx={{ color: theme.palette.primary.main }}
+                    >
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
                         ) : (
@@ -163,7 +166,6 @@ const Layout = ({
                                 justifyContent: open ? "initial" : "center",
                                 px: 2.5,
                             }}
-                            
                         >
                             <ListItemIcon
                                 sx={{
@@ -211,34 +213,72 @@ const Layout = ({
                             />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/centros-educativos"}
-                        disablePadding
-                        sx={{ display: "block" }}
-                    >
-                        <ListItemButton
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? "initial" : "center",
-                                px: 2.5,
-                            }}
+                    {user.userType === "admin" ? (
+                        <ListItem
+                            component={Link}
+                            to={"/centros-educativos"}
+                            disablePadding
+                            sx={{ display: "block" }}
                         >
-                            <ListItemIcon
+                            <ListItemButton
                                 sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : "auto",
-                                    justifyContent: "center",
+                                    minHeight: 48,
+                                    justifyContent: open ? "initial" : "center",
+                                    px: 2.5,
                                 }}
                             >
-                                <SchoolRoundedIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                                primary={"Centros Educativos"}
-                                sx={{ opacity: open ? 1 : 0, color: "black" }}
-                            />
-                        </ListItemButton>
-                    </ListItem>
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : "auto",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <SchoolRoundedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={"Centros Educativos"}
+                                    sx={{
+                                        opacity: open ? 1 : 0,
+                                        color: "black",
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ) : user.userType === "docente" ? (
+                        <ListItem
+                            component={Link}
+                            to={"/mi-centro-educativo"}
+                            disablePadding
+                            sx={{ display: "block" }}
+                        >
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? "initial" : "center",
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : "auto",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <SchoolRoundedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={"Mi Centro Educativo"}
+                                    sx={{
+                                        opacity: open ? 1 : 0,
+                                        color: "black",
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ) : null}
+
                     <ListItem
                         component={Link}
                         to={"/configuracion"}
@@ -303,7 +343,7 @@ const Layout = ({
                         to={"/login"}
                         disablePadding
                         sx={{ display: "block" }}
-                        onClick={()=>updateUser(null)}
+                        onClick={() => updateUser(null)}
                     >
                         <ListItemButton
                             sx={{

@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Configuracion } from "./pages/Configuracion";
 import { Login } from "./pages/Login";
-import { Profesores } from "./pages/Profesores";
 import { CentrosEducativos } from "./pages/CentrosEducativos";
 import { Soporte } from "./pages/Soporte";
 import { Material } from "./pages/Material-Educativo";
@@ -15,6 +14,8 @@ import { Clase } from "./pages/Clase/main";
 import "./App.module.css";
 import { MyContext } from "./providers/Context";
 import { useContext } from "react";
+import { MiCentroEducativo } from "./pages/MiCentroEducativo";
+import { CentroEducativo } from "./pages/CentroEducativo";
 const theme = createTheme({
     palette: {
         background: {
@@ -27,18 +28,16 @@ const theme = createTheme({
         secondary: {
             main: "#F8B44C",
         },
-        
     },
     components: {
         // Name of the component ⚛️
         MuiButtonBase: {
-          defaultProps: {
-            // The props to apply
-            disableRipple: true, // No more ripple, on the whole application 💣!
-          },
+            defaultProps: {
+                // The props to apply
+                disableRipple: true, // No more ripple, on the whole application 💣!
+            },
         },
-      },
-    
+    },
 });
 
 const Router = () => {
@@ -66,11 +65,23 @@ const Router = () => {
                         path="material-educativo/:gradoId/:materiaId/editor"
                         element={<Editor />}
                     />
-                    <Route path="profesores" element={<Profesores />} />
-                    <Route
-                        path="centros-educativos"
-                        element={<CentrosEducativos />}
-                    />
+                    {user.userType === "admin" ? (
+                        <>
+                            <Route
+                                path="centros-educativos"
+                                element={<CentrosEducativos />}
+                            />
+                            <Route
+                                path="centros-educativos/:centroEducativoId"
+                                element={<CentroEducativo />}
+                            />
+                        </>
+                    ) : user.userType === "docente" ? (
+                        <Route
+                            path="mi-centro-educativo"
+                            element={<MiCentroEducativo />}
+                        />
+                    ) : null}
                     <Route path="configuracion" element={<Configuracion />} />
                     <Route path="soporte" element={<Soporte />} />
                 </Routes>

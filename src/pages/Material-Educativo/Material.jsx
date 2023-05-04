@@ -27,7 +27,7 @@ const Material = () => {
             getAllGradosFake(setGrados);
         }
     }, []);
-    console.log("MATERIAL EDUCATIVO:  ", process.env.REACT_APP_ENVIRONMENT);
+    // console.log("MATERIAL EDUCATIVO:  ", process.env.REACT_APP_ENVIRONMENT);
 
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>

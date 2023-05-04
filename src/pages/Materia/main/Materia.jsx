@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../../components";
-import { Container, Link, Typography } from "@mui/material";
+import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import styles from "./styles.module.css";
 import { ButtonGroup, Table } from "./components";
@@ -57,9 +57,15 @@ const Materia = () => {
             breadcrumbs={breadcrumbs}
             HeaderButtonGroup={() => <ButtonGroup />}
         >
-            <Container maxWidth={"xl"}>
-                {clases.length <= 0 ? <div>Cargando</div> : <Table rows={clases} />}
-            </Container>
+            {clases.length <= 0 ? (
+                <div>Cargando</div>
+            ) : (
+                <Container maxWidth={"xl"}>
+                    <div className={styles.tableContainer}>
+                        <Table rows={clases} />
+                    </div>
+                </Container>
+            )}
         </Layout>
     );
 };

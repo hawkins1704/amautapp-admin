@@ -1,20 +1,21 @@
 import React from "react";
+import styles from "./styles.module.css";
 import { Layout } from "../../components";
 import { Container, Typography } from "@mui/material";
 
-const Profesores = () => {
+const MiCentroEducativo = () => {
     const breadcrumbs = [
         <Typography key="2" color="text.primary">
-            Profesores
+            Mi Centro Educativo
         </Typography>,
     ];
     return (
-        <Layout title={"Profesores"} breadcrumbs={breadcrumbs}>
+        <Layout title={"Mi centro educativo"} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
-                <div>Profesores</div>
+                <div>MiCentroEducativo</div>
             </Container>
         </Layout>
     );
 };
 
-export default Profesores;
+export default MiCentroEducativo;
