@@ -15,8 +15,7 @@ const Grado = () => {
     const params = useParams();
     const gradoId = params.gradoId;
     const title = gradoId.replace("-", " ").concat("°");
-    const [open, setOpen] = useState(false);
-    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  
     const [materias, setMaterias] = useState([]);
     const breadcrumbs = [
         <Link
@@ -33,9 +32,13 @@ const Grado = () => {
             {title}
         </Typography>,
     ];
+    /*-----for Header Buttons----- */
+    const [open, setOpen] = useState(false);
+    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+     /*--------------------------- */
     useEffect(() => {
         if (process.env.REACT_APP_ENVIRONMENT === "development") {
             getAllMateriasSync(gradoId, setMaterias);

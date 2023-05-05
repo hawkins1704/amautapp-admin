@@ -20,11 +20,11 @@ const Card = ({ gradoId, materia,isOptionsOpen, data }) => {
                 className={styles.textContainer}
                 style={{ backgroundColor: `${materia.color}` }}
             >
-                <Link to={`${materia.nombre.toLowerCase()}`}>
+                <Box component={Link} to={`${materia.nombre.toLowerCase()}`}>
                     <Typography variant={"h5"} component={"h4"}>
                         {materia.nombre}
                     </Typography>
-                </Link>
+                </Box>
             </div>
         </div>
     );

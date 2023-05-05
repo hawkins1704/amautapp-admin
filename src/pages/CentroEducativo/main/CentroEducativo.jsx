@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "../../components";
+import { Layout } from "../../../components";
 import { Container, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { getAllAlumnosFake, getAllDocentesFake } from "../../services/fakeData";
+import {
+    getAllAlumnosFake,
+    getAllDocentesFake,
+} from "../../../services/fakeData";
 import styles from "./styles.module.css";
-import { TablaAlumnos, TablaDocentes } from "./components";
+import { ButtonGroup, TablaAlumnos, TablaDocentes } from "./components";
+import { Agregar } from "../Agregar";
 const CentroEducativo = () => {
     const params = useParams();
     const centroEducativoId = params.centroEducativoId;
@@ -28,6 +32,13 @@ const CentroEducativo = () => {
         </Typography>,
     ];
 
+    /*-----for Header Buttons----- */
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    /*--------------------------- */
+
     useEffect(() => {
         const getInitialData = async () => {
             if (process.env.REACT_APP_ENVIRONMENT === "development") {
@@ -43,9 +54,13 @@ const CentroEducativo = () => {
         };
         getInitialData();
     }, []);
-    console.log("ALUMNOS: ",alumnos);
+    console.log("ALUMNOS: ", alumnos);
     return (
-        <Layout title={centroEducativoId} breadcrumbs={breadcrumbs}>
+        <Layout
+            title={centroEducativoId}
+            breadcrumbs={breadcrumbs}
+            HeaderButtonGroup={() => <ButtonGroup handleOpen={handleOpen} />}
+        >
             <Container maxWidth={"xl"}>
                 {alumnos.length <= 0 ? (
                     <div>Cargando</div>
@@ -62,6 +77,10 @@ const CentroEducativo = () => {
                     </div>
                 )}
             </Container>
+            <Agregar
+                open={open}
+                handleClose={handleClose}
+            />
         </Layout>
     );
 };

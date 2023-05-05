@@ -5,20 +5,21 @@
     border-radius: 10px;
     min-height: 160px;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
-    justify-content: flex-end;
     /*Disable React Router Link styles*/
     text-decoration: none;
-    color:#000;
+    color:#000 !important;
     position: relative;
     overflow: hidden;
 
 }
+.container a{
+    text-decoration: none;
+    color:#000;
 
-
-.title{
-    text-transform: capitalize;
 }
+
 .image{
     position: absolute;
     bottom: -32px;
@@ -36,4 +37,21 @@
     transform: rotate(0);
     bottom: 0px;
     left: 0px;
+}
+
+
+.buttonContainer{
+    z-index: 2;
+}
+
+.textContainer{
+    .textContainer{
+        text-decoration: none;
+        padding:16px 16px 16px 16px;
+        color:#000;
+    }
+    
+}
+.title{
+    text-transform: capitalize;
 }

@@ -21,7 +21,7 @@ import { visuallyHidden } from "@mui/utils";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { parseDate } from "../../../../utils";
+import { parseDate } from "../../../../../utils";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -65,16 +65,16 @@ const headCells = [
         label: "Apellido",
     },
     {
-        id: "email",
-        numeric: false,
+        id: "grado",
+        numeric: true,
         disablePadding: false,
-        label: "Correo",
+        label: "Grado",
     },
     {
-        id: "password",
-        numeric: false,
+        id: "edad",
+        numeric: true,
         disablePadding: false,
-        label: "Contraseña",
+        label: "Edad",
     },
     {
         id: "fechaNacimiento",
@@ -120,7 +120,7 @@ function EnhancedTableHead(props) {
     const createSortHandler = (newOrderBy) => (event) => {
         onRequestSort(event, newOrderBy);
     };
-   
+
     return (
         <TableHead>
             <TableRow>
@@ -211,7 +211,7 @@ function EnhancedTableToolbar(props) {
                     id="tableTitle"
                     component="div"
                 >
-                   Docentes
+                    Alumnos
                 </Typography>
             )}
 
@@ -230,7 +230,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-const TablaDocentes = ({ rows = [] }) => {
+const TablaAlumnos = ({ rows = [] }) => {
     const [order, setOrder] = React.useState(DEFAULT_ORDER);
     const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
     const [selected, setSelected] = React.useState([]);
@@ -349,7 +349,7 @@ const TablaDocentes = ({ rows = [] }) => {
     );
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-        console.log(rows);
+    console.log(rows);
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
@@ -420,23 +420,21 @@ const TablaDocentes = ({ rows = [] }) => {
                                                   align="left"
                                                   padding="normal"
                                               >
-                                                  {row.email}
+                                                  {row.grado}°
                                               </StyledTableCell>
                                               <StyledTableCell
                                                   align="left"
                                                   padding="normal"
                                               >
-                                                  {row.password}
+                                                  {row.edad}
                                               </StyledTableCell>
                                               <StyledTableCell
                                                   align="left"
                                                   padding="normal"
                                               >
-                                                
-                                                  {
-                                                  parseDate(row.fechaNacimiento)
-                                                  }
-                                                  
+                                                  {parseDate(
+                                                      row.fechaNacimiento
+                                                  )}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                       );
@@ -467,4 +465,4 @@ const TablaDocentes = ({ rows = [] }) => {
         </Box>
     );
 };
-export default TablaDocentes;
+export default TablaAlumnos;

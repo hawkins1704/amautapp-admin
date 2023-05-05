@@ -14,7 +14,7 @@
     min-height: 100px;
 }
 .textContainer{
-    
+    text-decoration: none;
     padding:16px 16px 16px 16px;
     color:#fff;
 }

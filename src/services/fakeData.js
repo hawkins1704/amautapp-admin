@@ -48,65 +48,64 @@ export const getAllCentrosEducativosFake = () => {
         resolve([
             {
                 nombre: "San José del Monte",
-                [`director(a)`]: `Maria Isabel`,
-                docentes: [
-                    {
-                        nombre: `Maria Isabel`,
-                        email: `maria@test.com`,
-                        password: `maria123`,
-                        userType: `docente`,
-                    },
-                    {
-                        nombre: `Carla`,
-                        email: `carla@test.com`,
-                        password: `carla123`,
-                        userType: `docente`,
-                    },
-                ],
-                alumnos: [
-                    {
-                        nombre: "Juan",
-                        apellido: "Perez",
-                        fechaNacimiento:"1682277191000",
-                        edad: 6,
-                        grado: 1,
-                    },
-                    {
-                        nombre: "Carlos",
-                        apellido: "Arroyo",
-                        fechaNacimiento:"1682277191000",
-                        edad: 7,
-                        grado: 2,
-                    },
-                    {
-                        nombre: "Daniel",
-                        apellido: "Sanchez",
-                        fechaNacimiento:"1682277191000",
-                        edad: 8,
-                        grado: 3,
-                    },
-                    {
-                        nombre: "Ana",
-                        apellido: "Huaman",
-                        fechaNacimiento:"1682277191000",
-                        edad: 9,
-                        grado: 4,
-                    },
-                    {
-                        nombre: "Pedro",
-                        apellido: "Quispe",
-                        fechaNacimiento:"1682277191000",
-                        edad: 10,
-                        grado: 5,
-                    },
-                    {
-                        nombre: "Gonzalo",
-                        apellido: "Atoche",
-                        fechaNacimiento:"1682277191000",
-                        edad: 11,
-                        grado: 6,
-                    },
-                ],
+                // docentes: [
+                //     {
+                //         nombre: `Maria Isabel`,
+                //         email: `maria@test.com`,
+                //         password: `maria123`,
+                //         userType: `docente`,
+                //     },
+                //     {
+                //         nombre: `Carla`,
+                //         email: `carla@test.com`,
+                //         password: `carla123`,
+                //         userType: `docente`,
+                //     },
+                // ],
+                // alumnos: [
+                //     {
+                //         nombre: "Juan",
+                //         apellido: "Perez",
+                //         fechaNacimiento:"1682277191000",
+                //         edad: 6,
+                //         grado: 1,
+                //     },
+                //     {
+                //         nombre: "Carlos",
+                //         apellido: "Arroyo",
+                //         fechaNacimiento:"1682277191000",
+                //         edad: 7,
+                //         grado: 2,
+                //     },
+                //     {
+                //         nombre: "Daniel",
+                //         apellido: "Sanchez",
+                //         fechaNacimiento:"1682277191000",
+                //         edad: 8,
+                //         grado: 3,
+                //     },
+                //     {
+                //         nombre: "Ana",
+                //         apellido: "Huaman",
+                //         fechaNacimiento:"1682277191000",
+                //         edad: 9,
+                //         grado: 4,
+                //     },
+                //     {
+                //         nombre: "Pedro",
+                //         apellido: "Quispe",
+                //         fechaNacimiento:"1682277191000",
+                //         edad: 10,
+                //         grado: 5,
+                //     },
+                //     {
+                //         nombre: "Gonzalo",
+                //         apellido: "Atoche",
+                //         fechaNacimiento:"1682277191000",
+                //         edad: 11,
+                //         grado: 6,
+                //     },
+                // ],
             },
         ]);
     });
@@ -143,6 +142,7 @@ export const getAllAlumnosFake = (centroEducativoId) => {
                 fechaNacimiento: 1135054800000,
                 edad: 6,
                 grado: 1,
+                userType: `alumno`,
             },
             {
                 nombre: "Carlos",
@@ -150,6 +150,7 @@ export const getAllAlumnosFake = (centroEducativoId) => {
                 fechaNacimiento: 924325200000,
                 edad: 7,
                 grado: 2,
+                userType: `alumno`,
             },
             {
                 nombre: "Daniel",
@@ -157,6 +158,8 @@ export const getAllAlumnosFake = (centroEducativoId) => {
                 fechaNacimiento: 992322000000,
                 edad: 8,
                 grado: 3,
+                userType: `alumno`,
+
             },
             {
                 nombre: "Ana",
@@ -164,6 +167,8 @@ export const getAllAlumnosFake = (centroEducativoId) => {
                 fechaNacimiento: 1269061200000,
                 edad: 9,
                 grado: 4,
+                userType: `alumno`,
+
             },
             {
                 nombre: "Pedro",
@@ -171,6 +176,8 @@ export const getAllAlumnosFake = (centroEducativoId) => {
                 fechaNacimiento: 1135054800000,
                 edad: 10,
                 grado: 5,
+                userType: `alumno`,
+
             },
             {
                 nombre: "Gonzalo",
@@ -178,6 +185,8 @@ export const getAllAlumnosFake = (centroEducativoId) => {
                 fechaNacimiento: 1682277191000,
                 edad: 11,
                 grado: 6,
+                userType: `alumno`,
+
             },
         ]);
     });

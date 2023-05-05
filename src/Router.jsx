@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Configuracion } from "./pages/Configuracion";
 import { Login } from "./pages/Login";
-import { CentrosEducativos } from "./pages/CentrosEducativos";
+import { CentrosEducativos } from "./pages/CentrosEducativos/main";
 import { Soporte } from "./pages/Soporte";
 import { Material } from "./pages/Material-Educativo";
 import { Grado } from "./pages/Grado/main";
@@ -15,7 +15,7 @@ import "./App.module.css";
 import { MyContext } from "./providers/Context";
 import { useContext } from "react";
 import { MiCentroEducativo } from "./pages/MiCentroEducativo";
-import { CentroEducativo } from "./pages/CentroEducativo";
+import { CentroEducativo } from "./pages/CentroEducativo/main";
 const theme = createTheme({
     palette: {
         background: {

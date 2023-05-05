@@ -4,7 +4,7 @@ import { Container, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { getAllAlumnosFake, getAllDocentesFake } from "../../services/fakeData";
 import styles from "./styles.module.css";
-import { TablaAlumnos, TablaDocentes } from "../CentroEducativo/components";
+import { TablaAlumnos, TablaDocentes } from "./components";
 
 const MiCentroEducativo = () => {
     const params = useParams();

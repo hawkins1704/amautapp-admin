@@ -74,7 +74,7 @@ const Login = () => {
                         <TextField
                             id="email"
                             name="email"
-                            label="Correo"
+                            label="Usuario"
                             variant="outlined"
                             onChange={handleChange}
                             sx={{width:'100%'}}

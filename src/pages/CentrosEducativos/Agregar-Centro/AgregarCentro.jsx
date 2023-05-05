@@ -1,41 +1,32 @@
 import {
     Box,
     Button,
-    FormControl,
     Modal,
     TextField,
     Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { createMateria } from "../../../services/materia";
-import {  TwitterPicker } from "react-color";
+import { createCentroEducativo } from "../../../services/centroEducativo";
 
-const AgregarMateria = ({ open, handleClose, gradoId }) => {
-    const [materia, setMateria] = useState({
+const AgregarCentro = ({ open, handleClose }) => {
+    const [centroEducativo, setCentroEducativo] = useState({
         nombre: "",
-        color: "",
     });
     const handleChange = (e) => {
-        setMateria({
-            ...materia,
+        setCentroEducativo({
+            ...centroEducativo,
             [e.target.name]: e.target.value,
-        });
-    };
-    const handleChangeColor = (color) => {
-        setMateria({
-            ...materia,
-            color: color.hex,
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createMateria(gradoId, materia.nombre, materia);
+        createCentroEducativo(centroEducativo.nombre,centroEducativo)
         handleClose();
     };
 
-    // console.log("MATERIA: ", materia);
+    // console.log("Centro Educativo: ", centroEducativo);
 
     return (
         <Modal
@@ -47,7 +38,7 @@ const AgregarMateria = ({ open, handleClose, gradoId }) => {
             <Box className={styles.modalContainer}>
                 
                 <Typography variant={"h5"} component={"h2"} sx={{ mb: 3 }}>
-                    Agregar materia
+                    Agregar centro educativo
                 </Typography>
                 <form onSubmit={handleSubmit} className={styles.form}>
                         <TextField
@@ -56,11 +47,6 @@ const AgregarMateria = ({ open, handleClose, gradoId }) => {
                             label="Nombre"
                             variant="outlined"
                             onChange={handleChange}
-                        />
-                        <TwitterPicker
-                            onChange={handleChangeColor}
-                            width="100%"
-                            color={materia.color}
                         />
                         <div className={styles.buttonContainer}>
                             <Button variant="text" onClick={handleClose}>
@@ -76,4 +62,4 @@ const AgregarMateria = ({ open, handleClose, gradoId }) => {
     );
 };
 
-export default AgregarMateria;
+export default AgregarCentro;
