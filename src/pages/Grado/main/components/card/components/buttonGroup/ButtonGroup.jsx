@@ -14,7 +14,7 @@ const ButtonGroup = ({ gradoId, materiaId, data }) => {
     const navigate = useNavigate();
     const eliminarMateria = () => {
         removeMateria(gradoId, materiaId);
-        navigate('/material-educativo'); //temporalmente ya que sino no actualiza los cursos
+        navigate('/sincronizador'); //temporalmente ya que sino no actualiza los cursos
     };
     const editarMateria = () => {
         updateMateria(gradoId, materiaId, data);

@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { gun } from "../providers/Gun";
 import { getGrado } from "./grado";
@@ -9,16 +8,7 @@ export const getAllMateriasSync = (gradoId, setMaterias) => {
         .get("materias")
         .map()
         .on((data, key) => {
-            // if (data === null) {
-            //     console.log(`El valor en la posición ${key} está eliminado`);
-            // } else {
-            //     console.log(`El valor en la posición ${key} es:`, data);
-            // }
             setMaterias((prev) => {
-                // const realUpdatedState=[...prev, data];
-                // const supposedUpdatedState=[...prev,data].filter((val) => val !== null);
-                // console.log("REAL UPDATED STATE: ",realUpdatedState);
-                // console.log("SUPPOSED UPDATED STATE: ",supposedUpdatedState);
                 return [...prev, data].filter((val) => val !== null);
             });
         });
@@ -29,7 +19,7 @@ export const getAllMateriasOnce = (gradoId, setMaterias) => {
         .get("materias")
         .map()
         .once((data) => {
-            setMaterias((prev) => [...prev, data]);
+            setMaterias((prev) => [...prev, data]).filter((val) => val !== null);
         });
 };
 export const getMateria = (gradoId, materiaId) => {
@@ -49,5 +39,4 @@ export const updateMateria = (gradoId, materiaId, data) => {
 export const removeMateria = (gradoId, materiaId) => {
     const fetchedGrado = getGrado(gradoId);
     fetchedGrado.get("materias").get(materiaId).put(null);
- 
 };

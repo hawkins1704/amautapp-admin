@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ButtonGroup } from "./components";
 
 const Card = ({ nombre, color, icon, isOptionsOpen, data }) => {
-    console.log("Tipo de variable color: ", typeof color);
+    // console.log("Tipo de variable color: ", typeof color);
 
     return (
         <div className={styles.container}>

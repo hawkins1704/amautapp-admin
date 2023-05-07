@@ -79,7 +79,7 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
 
         if (userType === "alumno") {
             const edad = new Date().getFullYear() - value.$d.getFullYear();
-            console.log("EDAD: ", edad);
+            // console.log("EDAD: ", edad);
             setAlumno({
                 ...alumno,
                 fechaNacimiento: fechaMilisegundos,
@@ -120,12 +120,12 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
 
     const handleSubmitDocente = (e) => {
         e.preventDefault();
-        createDocente(centroEducativoId, docente.nombre, alumno);
+        createDocente(centroEducativoId, docente.nombre, docente);
         handleClose();
     };
 
     console.log("DOCENTE: ", docente);
-
+    console.log("C.E EN AGREGAR: ", centroEducativoId);
     return (
         <Modal
             open={open}

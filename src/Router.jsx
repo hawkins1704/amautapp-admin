@@ -16,6 +16,7 @@ import { MyContext } from "./providers/Context";
 import { useContext } from "react";
 import { MiCentroEducativo } from "./pages/MiCentroEducativo";
 import { CentroEducativo } from "./pages/CentroEducativo/main";
+import { Sincronizador } from "./pages/Sincronizador";
 const theme = createTheme({
     palette: {
         background: {
@@ -48,6 +49,7 @@ const Router = () => {
             {user ? (
                 <Routes>
                     <Route index path="/" element={<Principal />} />
+                    <Route path="sincronizador" element={<Sincronizador/>}/>
                     <Route path="material-educativo" element={<Material />} />
                     <Route
                         path="material-educativo/:gradoId"

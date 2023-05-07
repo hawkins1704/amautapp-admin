@@ -11,7 +11,7 @@ const ButtonGroup = ({ centroEducativoId, data }) => {
     const navigate = useNavigate();
     const eliminarCentroEducativo = () => {
         removeCentroEducativo(centroEducativoId);
-        navigate('/material-educativo'); //temporalmente ya que sino no actualiza los cursos
+        navigate('/sincronizador'); //temporalmente ya que sino no actualiza los cursos
     };
     const editarCentroEducativo = () => {
         updateCentroEducativo(centroEducativoId, data);
@@ -23,7 +23,7 @@ const ButtonGroup = ({ centroEducativoId, data }) => {
     /*--------- */
     return (
         <div className={styles.buttonsContainer}>
-            <Tooltip title="Editar Materia">
+            <Tooltip title="Editar centro educativo">
                 <IconButton
                     variant="outlined"
                     onClick={editarCentroEducativo}
@@ -32,7 +32,7 @@ const ButtonGroup = ({ centroEducativoId, data }) => {
                     <EditIcon />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Borrar materia">
+            <Tooltip title="Borrar centro educativo">
                 <IconButton
                     variant="outlined"
                     onClick={handleOpen}
@@ -44,7 +44,7 @@ const ButtonGroup = ({ centroEducativoId, data }) => {
             <RemoveModal
             open={open}
             handleClose={handleClose}
-            eliminarMateria={eliminarCentroEducativo}
+            eliminarCentroEducativo={eliminarCentroEducativo}
             />
         </div>
     );

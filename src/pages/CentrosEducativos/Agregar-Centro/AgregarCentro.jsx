@@ -22,6 +22,7 @@ const AgregarCentro = ({ open, handleClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("CENTRO EDUCATIVO: ", centroEducativo);
         createCentroEducativo(centroEducativo.nombre,centroEducativo)
         handleClose();
     };

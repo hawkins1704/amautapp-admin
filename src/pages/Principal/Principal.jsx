@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout } from "../../components";
 import { Container, Grid } from "@mui/material";
 import styles from "./styles.module.css";
@@ -10,6 +10,13 @@ import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
 
 
 const Principal = () => {
+    useEffect(() => {
+        const createData = () => {
+           
+        };
+        createData();
+    }, []);
+
     return (
         <Layout title={"Principal"} breadcrumbs={[]} isPrincipal>
             <div className={styles.banner}></div>
@@ -20,32 +27,32 @@ const Principal = () => {
                             nombre={"Material educativo"}
                             color={"#0F6D5F"}
                             to={"material-educativo"}
-                            icon={<MenuBookRoundedIcon/>}
-                            />
+                            icon={<MenuBookRoundedIcon />}
+                        />
                     </Grid>
                     <Grid item md xs={12}>
                         <Card
                             nombre={"Centros educativos"}
                             color={"#CE5353"}
                             to={"centros-educativos"}
-                            icon={<SchoolRoundedIcon/>}
-                            />
+                            icon={<SchoolRoundedIcon />}
+                        />
                     </Grid>
                     <Grid item md xs={12}>
                         <Card
                             nombre={"Configuración"}
                             color={"#E59C2E"}
                             to={"configuracion"}
-                            icon={<SettingsRoundedIcon/>}
-                            />
+                            icon={<SettingsRoundedIcon />}
+                        />
                     </Grid>
                     <Grid item md xs={12}>
                         <Card
                             nombre={"Ayuda y soporte"}
                             color={"#2A8DD5"}
                             to={"soporte"}
-                            icon={<SupportAgentRoundedIcon/>}
-                            />
+                            icon={<SupportAgentRoundedIcon />}
+                        />
                     </Grid>
                 </Grid>
             </Container>

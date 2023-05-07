@@ -2,7 +2,7 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
 import styles from "./styles.module.css";
 
-const RemoveModal = ({ open, handleClose, eliminarMateria }) => {
+const RemoveModal = ({ open, handleClose, eliminarCentroEducativo }) => {
     return (
         <Modal
             open={open}
@@ -20,7 +20,7 @@ const RemoveModal = ({ open, handleClose, eliminarMateria }) => {
                     <Button variant="outlined" onClick={handleClose} disableElevation>
                         Cancelar
                     </Button>
-                    <Button variant="contained" onClick={eliminarMateria} disableElevation>
+                    <Button variant="contained" onClick={eliminarCentroEducativo} disableElevation>
                         Eliminar
                     </Button>
                 </div>

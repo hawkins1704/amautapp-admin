@@ -6,6 +6,8 @@ import { Card, ButtonGroup } from "./components";
 import { getAllCentrosEducativosFake } from "../../../services/fakeData";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import { AgregarCentro } from "../Agregar-Centro";
+import { getAllCentrosEducativosSync } from "../../../services/centroEducativo";
+import { filterDuplicated } from "../../../utils";
 
 const CentrosEducativos = () => {
     const breadcrumbs = [
@@ -25,7 +27,7 @@ const CentrosEducativos = () => {
     useEffect(() => {
         const getInitialData = async () => {
             if (process.env.REACT_APP_ENVIRONMENT === "development") {
-                // getAllCentrosEducativosSync(setCentrosEducativos);
+                getAllCentrosEducativosSync(setCentrosEducativos);
             } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
                 //Temporalmente invertido para poder desplegar en netlify y ver fakeData
                 const centros = await getAllCentrosEducativosFake();
@@ -34,7 +36,7 @@ const CentrosEducativos = () => {
         };
         getInitialData();
     }, []);
-    console.log("CENTROS EDUCATIVOS: ", centrosEducativos);
+    // console.log("CENTROS EDUCATIVOS: ", centrosEducativos);
     return (
         <Layout
             title={"Centros Educativos"}
@@ -50,7 +52,7 @@ const CentrosEducativos = () => {
             <Container maxWidth={"xl"}>
                 <Container maxWidth={"xl"} sx={{ my: 6 }}>
                     <Grid container spacing={3}>
-                        {centrosEducativos.map((e) => (
+                        {filterDuplicated(centrosEducativos).map((e) => (
                             <Grid item md={4} xs={12}>
                                 <Card
                                     key={e.key}

@@ -9,6 +9,7 @@ import {
 import styles from "./styles.module.css";
 import { ButtonGroup, TablaAlumnos, TablaDocentes } from "./components";
 import { Agregar } from "../Agregar";
+import { getAllAlumnosSync, getAllDocentesSync } from "../../../services/usuario";
 const CentroEducativo = () => {
     const params = useParams();
     const centroEducativoId = params.centroEducativoId;
@@ -42,8 +43,8 @@ const CentroEducativo = () => {
     useEffect(() => {
         const getInitialData = async () => {
             if (process.env.REACT_APP_ENVIRONMENT === "development") {
-                //getAllDocentesSync(centroEducativoId, setDocentes);
-                //getAllAlumnosSync(centroEducativoId, setAlumnos);
+                getAllDocentesSync(centroEducativoId, setDocentes);
+                getAllAlumnosSync(centroEducativoId, setAlumnos);
             } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
                 //Temporalmente invertido para poder desplegar en netlify y ver fakeData
                 const alumnos = await getAllAlumnosFake(centroEducativoId);
@@ -54,7 +55,6 @@ const CentroEducativo = () => {
         };
         getInitialData();
     }, []);
-    console.log("ALUMNOS: ", alumnos);
     return (
         <Layout
             title={centroEducativoId}
@@ -62,24 +62,19 @@ const CentroEducativo = () => {
             HeaderButtonGroup={() => <ButtonGroup handleOpen={handleOpen} />}
         >
             <Container maxWidth={"xl"}>
-                {alumnos.length <= 0 ? (
-                    <div>Cargando</div>
-                ) : (
+               
                     <div className={styles.tableContainer}>
-                        <TablaDocentes rows={docentes} />
+                        <TablaDocentes rows={docentes.length <= 0 ?[]:docentes} />
                     </div>
-                )}
-                {docentes.length <= 0 ? (
-                    <div>Cargando</div>
-                ) : (
+              
                     <div className={styles.tableContainer}>
-                        <TablaAlumnos rows={alumnos} />
+                        <TablaAlumnos rows={alumnos.length <= 0 ?[]:alumnos} />
                     </div>
-                )}
             </Container>
             <Agregar
                 open={open}
                 handleClose={handleClose}
+                centroEducativoId={centroEducativoId}
             />
         </Layout>
     );
