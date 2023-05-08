@@ -1,3 +1,4 @@
+import { filterDuplicated } from "../utils";
 import { getGrado } from "./grado";
 import { getMateria } from "./materia";
 export const getAllClasesSync = (gradoId,materiaId, setClases) => {
@@ -7,7 +8,7 @@ export const getAllClasesSync = (gradoId,materiaId, setClases) => {
     .map()
     .on((data, key) => {
         setClases((prev) => {
-            return [...prev, data].filter((val) => val !== null);
+            return filterDuplicated( [...prev, data].filter((val) => val !== null));
         });
     });
 };

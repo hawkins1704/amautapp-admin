@@ -242,7 +242,7 @@ const ClasesTable = ({ rows = [] }) => {
     const [visibleRows, setVisibleRows] = React.useState(null);
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
     const [paddingHeight, setPaddingHeight] = React.useState(0);
-
+    console.log("DATA EN TABLA DE MATERIA.JSX: ",rows);
     React.useEffect(() => {
         let rowsOnMount = stableSort(
             rows,

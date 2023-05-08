@@ -42,7 +42,7 @@ const Materia = () => {
     useEffect(() => {
         const getInitialData = async () => {
             if (process.env.REACT_APP_ENVIRONMENT === "development") {
-                getAllClasesSync(materiaId, setClases);
+                getAllClasesSync(gradoId, materiaId, setClases);
             } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
                 //Temporalmente invertido para poder desplegar en netlify y ver fakeData
                 const clases = await getAllClasesFake();
@@ -57,15 +57,11 @@ const Materia = () => {
             breadcrumbs={breadcrumbs}
             HeaderButtonGroup={() => <ButtonGroup />}
         >
-            {clases.length <= 0 ? (
-                <div>Cargando</div>
-            ) : (
-                <Container maxWidth={"xl"}>
-                    <div className={styles.tableContainer}>
-                        <Table rows={clases} />
-                    </div>
-                </Container>
-            )}
+            <Container maxWidth={"xl"}>
+                <div className={styles.tableContainer}>
+                    <Table rows={clases.length <= 0 ? [] : clases} />
+                </div>
+            </Container>
         </Layout>
     );
 };

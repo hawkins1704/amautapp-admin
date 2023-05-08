@@ -1,3 +1,4 @@
+import { filterDuplicated } from "../utils";
 import { getCentroEducativo } from "./centroEducativo";
 
 export const getAllDocentesSync = (centroEducativoId, setDocentes) => {
@@ -6,9 +7,9 @@ export const getAllDocentesSync = (centroEducativoId, setDocentes) => {
         .get("docentes")
         .map()
         .on((data, key) => {
-            console.log(`DOCENTE EN COLEGIO ${centroEducativoId}: `, data);
+
             setDocentes((prev) => {
-                return [...prev, data].filter((val) => val !== null);
+                return filterDuplicated( [...prev, data].filter((val) => val !== null));
             });
         });
 };
@@ -19,9 +20,8 @@ export const getAllAlumnosSync = (centroEducativoId, setAlumnos) => {
         .get("alumnos")
         .map()
         .on((data, key) => {
-            console.log(`ALUMNO EN COLEGIO ${centroEducativoId}: `, data);
             setAlumnos((prev) => {
-                return [...prev, data].filter((val) => val !== null);
+                return filterDuplicated( [...prev, data].filter((val) => val !== null));
             });
         });
 };

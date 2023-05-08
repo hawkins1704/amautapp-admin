@@ -7,7 +7,7 @@ import { getAllCentrosEducativosFake } from "../../../services/fakeData";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import { AgregarCentro } from "../Agregar-Centro";
 import { getAllCentrosEducativosSync } from "../../../services/centroEducativo";
-import { filterDuplicated } from "../../../utils";
+
 
 const CentrosEducativos = () => {
     const breadcrumbs = [
@@ -52,7 +52,7 @@ const CentrosEducativos = () => {
             <Container maxWidth={"xl"}>
                 <Container maxWidth={"xl"} sx={{ my: 6 }}>
                     <Grid container spacing={3}>
-                        {filterDuplicated(centrosEducativos).map((e) => (
+                        {centrosEducativos.map((e) => (
                             <Grid item md={4} xs={12}>
                                 <Card
                                     key={e.key}

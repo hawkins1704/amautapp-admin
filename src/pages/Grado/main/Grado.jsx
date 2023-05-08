@@ -7,7 +7,6 @@ import { ButtonGroup, Card } from "./components";
 import styles from "./styles.module.css";
 import { Layout } from "../../../components";
 import { getAllMateriasSync } from "../../../services/materia";
-import { filterDuplicated } from "../../../utils";
 import { geAllMateriasFake } from "../../../services/fakeData";
 import AgregarMateria from "../Agregar-Materia/AgregarMateria";
 
@@ -62,7 +61,7 @@ const Grado = () => {
             <Outlet context={{ gradoId }} />
             <Container maxWidth={"xl"} sx={{ my: 6 }}>
                 <Grid container spacing={3}>
-                    {filterDuplicated(materias).map((e) => (
+                    {materias.map((e) => (
                         <Grid item md={4} xs={12}>
                             <Card
                                 gradoId={gradoId}

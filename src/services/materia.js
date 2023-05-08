@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { gun } from "../providers/Gun";
 import { getGrado } from "./grado";
+import { filterDuplicated } from "../utils";
 
 export const getAllMateriasSync = (gradoId, setMaterias) => {
     const fetchedGrado = getGrado(gradoId);
@@ -9,7 +10,7 @@ export const getAllMateriasSync = (gradoId, setMaterias) => {
         .map()
         .on((data, key) => {
             setMaterias((prev) => {
-                return [...prev, data].filter((val) => val !== null);
+                return filterDuplicated( [...prev, data].filter((val) => val !== null));
             });
         });
 };

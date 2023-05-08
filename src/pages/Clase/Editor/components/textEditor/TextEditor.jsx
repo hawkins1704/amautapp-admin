@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
@@ -174,7 +174,7 @@ const MenuBar = ({ editor, handleFileChange }) => {
     );
 };
 
-const TextEditor = () => {
+const TextEditor = ({handleChangeEditor}) => {
     const handleFileChange = (file) => {
         const reader = new FileReader();
 
@@ -216,9 +216,13 @@ const TextEditor = () => {
             }),
         ],
         content: "<p>Ingresa el contenido aqui!</p>",
+        
     });
     if(editor!==null){
-        // console.log("Content: ",editor.getHTML());
+
+        editor.on("update",()=>{
+            handleChangeEditor(editor.getHTML());
+        })
     }
     return (
         <div>

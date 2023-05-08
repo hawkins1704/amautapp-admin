@@ -1,11 +1,12 @@
 import { gun } from "../providers/Gun";
+import { filterDuplicated } from "../utils";
 
 
 const centros = gun.get("centros-educativos");
 export const getAllCentrosEducativosSync=(setCentrosEducativos)=>{
     centros.map().on((data)=>{
         setCentrosEducativos((prev)=>{
-         return [...prev,data].filter((val) => val !== null);
+         return filterDuplicated( [...prev,data].filter((val) => val !== null));
         });
     })
 }
