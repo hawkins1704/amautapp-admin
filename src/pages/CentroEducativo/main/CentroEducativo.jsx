@@ -42,16 +42,8 @@ const CentroEducativo = () => {
 
     useEffect(() => {
         const getInitialData = async () => {
-            if (process.env.REACT_APP_ENVIRONMENT === "development") {
                 getAllDocentesSync(centroEducativoId, setDocentes);
                 getAllAlumnosSync(centroEducativoId, setAlumnos);
-            } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
-                //Temporalmente invertido para poder desplegar en netlify y ver fakeData
-                const alumnos = await getAllAlumnosFake(centroEducativoId);
-                const docentes = await getAllDocentesFake(centroEducativoId);
-                setAlumnos(alumnos);
-                setDocentes(docentes);
-            }
         };
         getInitialData();
     }, []);

@@ -43,7 +43,6 @@ const theme = createTheme({
 
 const Router = () => {
     const { user, updateUser } = useContext(MyContext);
-    console.log("USUARIO EN ROUTER: ", user);
     return (
         <ThemeProvider theme={theme}>
             {user ? (

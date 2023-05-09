@@ -50,7 +50,6 @@ const Login = () => {
     return (
         <div className={styles.mainContainer}>
             <div container className={styles.contentContainer}>
-              
                 <div className={styles.formContainer}>
                 <img
                         src={imgLogo}

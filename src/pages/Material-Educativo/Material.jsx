@@ -18,16 +18,9 @@ const Material = () => {
     const [grados, setGrados] = useState([]);
 
     useEffect(() => {
-        if (process.env.REACT_APP_ENVIRONMENT === "development") {
-            getAllGradosOnce(setGrados);
-        } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
-            //Temporalmente invertido para poder desplegar en netlify y ver fakeData
-            //fake data temporal
-            console.log("MATERIAL EDUCATIVO PRODUCTION");
-            getAllGradosFake(setGrados);
-        }
+        getAllGradosOnce(setGrados);
     }, []);
-    // console.log("MATERIAL EDUCATIVO:  ", process.env.REACT_APP_ENVIRONMENT);
+  
 
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>

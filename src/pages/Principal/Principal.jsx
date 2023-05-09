@@ -11,8 +11,8 @@ import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
 
 const Principal = () => {
     useEffect(() => {
+        console.log("HOLA, ENTRE A PRINCIPAL");
         const createData = () => {
-           
         };
         createData();
     }, []);

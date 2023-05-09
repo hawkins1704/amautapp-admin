@@ -41,13 +41,7 @@ const Materia = () => {
 
     useEffect(() => {
         const getInitialData = async () => {
-            if (process.env.REACT_APP_ENVIRONMENT === "development") {
                 getAllClasesSync(gradoId, materiaId, setClases);
-            } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
-                //Temporalmente invertido para poder desplegar en netlify y ver fakeData
-                const clases = await getAllClasesFake();
-                setClases(clases);
-            }
         };
         getInitialData();
     }, []);

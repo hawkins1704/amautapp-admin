@@ -26,13 +26,7 @@ const CentrosEducativos = () => {
     /*--------------------------- */
     useEffect(() => {
         const getInitialData = async () => {
-            if (process.env.REACT_APP_ENVIRONMENT === "development") {
                 getAllCentrosEducativosSync(setCentrosEducativos);
-            } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
-                //Temporalmente invertido para poder desplegar en netlify y ver fakeData
-                const centros = await getAllCentrosEducativosFake();
-                setCentrosEducativos(centros);
-            }
         };
         getInitialData();
     }, []);
