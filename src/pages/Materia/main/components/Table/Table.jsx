@@ -20,7 +20,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -52,10 +52,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: "nombre",
+        id: "titulo",
         numeric: false,
         disablePadding: true,
-        label: "Nombre",
+        label: "Título",
     },
     {
         id: "propietario",
@@ -87,28 +87,25 @@ const DEFAULT_ORDER = "asc";
 const DEFAULT_ORDER_BY = "semana";
 const DEFAULT_ROWS_PER_PAGE = 5;
 
-
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-      
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+        fontSize: 14,
     },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
     },
     // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
+    "&:last-child td, &:last-child th": {
+        border: 0,
     },
-  }));
+}));
 
 function EnhancedTableHead(props) {
     const {
@@ -145,13 +142,11 @@ function EnhancedTableHead(props) {
                         align={headCell.numeric ? "right" : "left"}
                         padding={headCell.disablePadding ? "none" : "normal"}
                         sortDirection={orderBy === headCell.id ? order : false}
-                        
                     >
                         <TableSortLabel
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : "asc"}
                             onClick={createSortHandler(headCell.id)}
-                        
                         >
                             {headCell.label}
                             {orderBy === headCell.id ? (
@@ -242,7 +237,7 @@ const ClasesTable = ({ rows = [] }) => {
     const [visibleRows, setVisibleRows] = React.useState(null);
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
     const [paddingHeight, setPaddingHeight] = React.useState(0);
-    console.log("DATA EN TABLA DE MATERIA.JSX: ",rows);
+    console.log("DATA EN TABLA DE MATERIA.JSX: ", rows);
     React.useEffect(() => {
         let rowsOnMount = stableSort(
             rows,
@@ -280,7 +275,7 @@ const ClasesTable = ({ rows = [] }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre);
+            const newSelected = rows.map((n) => n.titulo);
             setSelected(newSelected);
             return;
         }
@@ -354,7 +349,6 @@ const ClasesTable = ({ rows = [] }) => {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
@@ -377,7 +371,7 @@ const ClasesTable = ({ rows = [] }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre
+                                          row.titulo
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -387,7 +381,7 @@ const ClasesTable = ({ rows = [] }) => {
                                               role="checkbox"
                                               aria-checked={isItemSelected}
                                               tabIndex={-1}
-                                              key={row.nombre}
+                                              key={row.titulo}
                                               selected={isItemSelected}
                                               sx={{ cursor: "pointer" }}
                                           >
@@ -396,7 +390,7 @@ const ClasesTable = ({ rows = [] }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre
+                                                              row.titulo
                                                           )
                                                       }
                                                       color="primary"
@@ -415,13 +409,13 @@ const ClasesTable = ({ rows = [] }) => {
                                               >
                                                   <Button
                                                       component={RouterLink}
-                                                      to={`${row.nombre}`}
+                                                      to={`${row.titulo}`}
                                                       state={{
-                                                          contenido:
-                                                              row.contenido,
+                                                          claseId: row.titulo,
+                                                          contenido:row.contenido,
                                                       }}
                                                   >
-                                                      {row.nombre}
+                                                      {row.titulo}
                                                   </Button>
                                               </StyledTableCell>
                                               <StyledTableCell

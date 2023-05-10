@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ nombre, subtitle, color, icon }) => {
-    console.log("Tipo de variable color: ", typeof color);
+   
     const contenido = nombre.split("-");
     return (
         <Box className={styles.container} component={Link} to={nombre}>

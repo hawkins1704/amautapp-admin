@@ -45,6 +45,7 @@ const Materia = () => {
         };
         getInitialData();
     }, []);
+    console.log("CLASES RECIBIDAS: ", clases);
     return (
         <Layout
             title={title}

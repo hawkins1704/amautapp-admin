@@ -41,6 +41,7 @@ const Grado = () => {
     useEffect(() => {
             getAllMateriasSync(gradoId, setMaterias);
     }, []);
+    console.log("MATERIAS RECIBIDAS: ", materias);
     return (
         <Layout
             title={title}

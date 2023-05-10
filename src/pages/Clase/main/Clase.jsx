@@ -5,6 +5,7 @@ import { Container, Link, Typography } from "@mui/material";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
+import { createClase } from "../../../services/clase";
 const Clase = () => {
     const params = useParams();
     const location=useLocation();
@@ -62,7 +63,6 @@ const Clase = () => {
             {title}
         </Typography>,
     ];
-    console.log();
     return (
         <Layout title={title} breadcrumbs={breadcrumbs}>
             <Container maxWidth="xl">

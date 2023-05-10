@@ -8,7 +8,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { Link as RouterLink, useParams } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import StarterKit from "@tiptap/starter-kit";
 import { TextEditor } from "./components";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
@@ -30,6 +30,7 @@ const Editor = () => {
         fechaActualizacion: new Date().getTime(),
         contenido: "",
     });
+    const navigate=useNavigate();
     const breadcrumbs = [
         <Link
             underline="hover"
@@ -66,7 +67,8 @@ const Editor = () => {
         </Typography>,
     ];
     const guardarClase = () => {
-        createClase(claseData);
+        createClase(gradoId,materiaId,claseData.titulo,claseData);
+        navigate(-1);
     };
     const handleChangeEditor = (contenido) => {
         setClaseData({

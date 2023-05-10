@@ -213,7 +213,7 @@ const Layout = ({
                             />
                         </ListItemButton>
                     </ListItem>
-                    {/* {user.userType === "admin" ? (
+                    {user.userType === "admin" ? (
                         <ListItem
                             component={Link}
                             to={"/centros-educativos"}
@@ -277,7 +277,7 @@ const Layout = ({
                                 />
                             </ListItemButton>
                         </ListItem>
-                    ) : null} */}
+                    ) : null}
 
                     <ListItem
                         component={Link}

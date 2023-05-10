@@ -29,6 +29,9 @@ export const getMateria = (gradoId, materiaId) => {
     return fetchedGrado.get("materias").get(materiaId);
 };
 export const createMateria = (gradoId, materiaId, data) => {
+    console.log("service materia - gradoId: ",gradoId);
+    console.log("service materia - materiaId: ",materiaId);
+    console.log("service materia - data: ",data);
     const fetchedGrado = getGrado(gradoId);
     return fetchedGrado.get("materias").get(materiaId).put(data);
 };

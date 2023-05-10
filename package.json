@@ -32,7 +32,7 @@
     },
     "scripts": {
       
-        "start-dev": "npm run build && ( cd server && npm start ) ",
+        "start-dev": "npm run build && ( cd server && npm run start-dev ) ",
         "start": "cd server && node index.js",
         "build": "react-scripts build",
         "build-deploy": "true",

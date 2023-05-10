@@ -21,6 +21,7 @@ const Material = () => {
         getAllGradosOnce(setGrados);
     }, []);
   
+        console.log("GRADOS RECIBIDOS: ",grados);
 
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
