@@ -8,18 +8,25 @@ import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
 
-
 const Principal = () => {
     useEffect(() => {
-        console.log("HOLA, ENTRE A PRINCIPAL");
-        const createData = () => {
-        };
+        const createData = () => {};
         createData();
     }, []);
 
     return (
         <Layout title={"Principal"} breadcrumbs={[]} isPrincipal>
-            <div className={styles.banner}></div>
+            <div
+                className={styles.banner}
+                style={{
+                    background: 'url("/media/img/Banner.png")',
+                    width: "100%",
+                    height: "30vh",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center center",
+                }}
+            ></div>
             <Container maxWidth={"xl"} sx={{ py: 3 }}>
                 <Grid container spacing={3}>
                     <Grid item md xs={12}>

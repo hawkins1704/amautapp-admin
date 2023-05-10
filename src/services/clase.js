@@ -3,7 +3,7 @@ import { getGrado } from "./grado";
 import { getMateria } from "./materia";
 import { gun } from "../providers/Gun";
 export const getAllClasesSync = (gradoId, materiaId, setClases) => {
-    const fetchedMateria = getMateria(gradoId, capitalize(materiaId));
+    const fetchedMateria = getMateria(gradoId, materiaId);
     fetchedMateria
         .get("clases")
         .map()
@@ -17,11 +17,8 @@ export const getAllClasesSync = (gradoId, materiaId, setClases) => {
 };
 
 export const createClase = (gradoId, materiaId, claseId, data) => {
-    console.log("service clase - gradoId: ",gradoId);
-    console.log("service clase - materiaId: ",capitalize(materiaId));
-    console.log("service clase - claseId: ",claseId);
-    console.log("service clase - data: ",data);
-    const fetchedMateria=getMateria(gradoId,capitalize(materiaId));
+    console.log("clase service: ",materiaId);
+    const fetchedMateria=getMateria(gradoId,materiaId);
     return fetchedMateria.get("clases").get(claseId).put(data);
 };
 

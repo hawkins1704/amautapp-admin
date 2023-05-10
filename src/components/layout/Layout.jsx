@@ -6,7 +6,6 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -28,7 +27,6 @@ import { Link } from "react-router-dom";
 
 import styles from "./styles.module.css";
 import { Header } from "../../components/header";
-import imgLogo from "../../assets/logos/logo-2-blanco.png";
 import { MyContext } from "../../providers/Context";
 
 const drawerWidth = 240;
@@ -134,7 +132,7 @@ const Layout = ({
                         <MenuIcon />
                     </IconButton>
                     <img
-                        src={imgLogo}
+                        src='/media/logo/logo-2-blanco.png'
                         className={styles.logo}
                         alt="Amautapp logo"
                     />

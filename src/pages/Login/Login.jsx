@@ -1,21 +1,11 @@
 import {
-    Box,
     Button,
-    Container,
-    FormControl,
-    FormHelperText,
-    Grid,
-    Input,
-    InputLabel,
     TextField,
     ToggleButton,
     ToggleButtonGroup,
-    Typography,
-    useTheme,
 } from "@mui/material";
 import React, { useContext, useState } from "react";
 import styles from "./styles.module.css";
-import imgLogo from "../../assets/logos/logo-1.png";
 import { MyContext } from "../../providers/Context";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
@@ -52,7 +42,7 @@ const Login = () => {
             <div container className={styles.contentContainer}>
                 <div className={styles.formContainer}>
                 <img
-                        src={imgLogo}
+                        src='/media/logo/logo-1.png'
                         alt=""
                         srcset=""
                         className={styles.image}
