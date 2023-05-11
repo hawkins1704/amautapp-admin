@@ -25,7 +25,6 @@ app.on("resize", function (e, x, y) {
   mainWindow.setSize(x, y);
 });
 
-console.log("NODE ENV: ", process.env.REACT_APP_ENVIRONMENT);
 
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") {

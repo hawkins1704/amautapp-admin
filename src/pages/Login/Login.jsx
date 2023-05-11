@@ -8,9 +8,10 @@ import React, { useContext, useState } from "react";
 import styles from "./styles.module.css";
 import { MyContext } from "../../providers/Context";
 import { useNavigate } from "react-router-dom";
+import { AlertModal } from "./components/modal";
 const Login = () => {
     const { user, updateUser } = useContext(MyContext);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -31,18 +32,57 @@ const Login = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateUser(formData);
-        navigate('/')
-
+        switch (formData.userType) {
+            case "admin":
+                if (
+                    formData.email !== "admin" ||
+                    formData.password !== "#Admin2023"
+                ) {
+                    handleOpen();
+                } else {
+                    updateUser(formData);
+                    navigate("/");
+                }
+                break;
+            case "docente":
+                if (
+                    formData.email !== "docente" ||
+                    formData.password !== "docente"
+                ) {
+                    handleOpen();
+                }else {
+                    updateUser(formData);
+                    navigate("/");
+                }
+                break;
+            case "alumno":
+                if (
+                    formData.email !== "alumno" ||
+                    formData.password !== "alumno"
+                ) {
+                    handleOpen();
+                } else {
+                    updateUser(formData);
+                    navigate("/");
+                }
+                break;
+            default:
+                break;
+        }
     };
-    console.log("USER:",user);
-    console.log("USUARIO INGRESADO:",formData);
+    // console.log("USER:",user);
+    // console.log("USUARIO INGRESADO:",formData);
+    /*Modal--------------- */
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    /*-------------------- */
     return (
         <div className={styles.mainContainer}>
             <div container className={styles.contentContainer}>
                 <div className={styles.formContainer}>
-                <img
-                        src='/media/logo/logo-1.png'
+                    <img
+                        src="/media/logo/logo-1.png"
                         alt=""
                         srcset=""
                         className={styles.image}
@@ -66,7 +106,7 @@ const Login = () => {
                             label="Usuario"
                             variant="outlined"
                             onChange={handleChange}
-                            sx={{width:'100%'}}
+                            sx={{ width: "100%" }}
                         />
                         <TextField
                             id="password"
@@ -75,9 +115,13 @@ const Login = () => {
                             type="password"
                             variant="outlined"
                             onChange={handleChange}
-                            sx={{width:'100%'}}
+                            sx={{ width: "100%" }}
                         />
-                        <Button variant="contained" type="submit" sx={{width:'100%'}}>
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            sx={{ width: "100%" }}
+                        >
                             Iniciar Sesión
                         </Button>
                     </form>
@@ -95,6 +139,10 @@ const Login = () => {
                 <li></li>
                 <li></li>
             </ul>
+            <AlertModal
+            open={open}
+            handleClose={handleClose}
+            />
         </div>
     );
 };

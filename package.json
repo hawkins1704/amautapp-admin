@@ -33,7 +33,7 @@
     "scripts": {
       
         "start-dev": "npm run build && ( cd server && npm run start-dev ) ",
-        "start": "cd server && node index.js",
+        "start": "cd server && npm run start",
         "build": "react-scripts build",
         "build-deploy": "true",
         "test": "react-scripts test",

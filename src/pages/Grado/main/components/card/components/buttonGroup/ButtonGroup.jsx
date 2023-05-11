@@ -9,7 +9,7 @@ import {
     removeMateria,
     updateMateria,
 } from "../../../../../../../services/materia";
-import RemoveModal from "../modal/RemoveModal";
+import { RemoveModal } from "../modal";
 const ButtonGroup = ({ gradoId, materiaId, data }) => {
     const navigate = useNavigate();
     const eliminarMateria = () => {
