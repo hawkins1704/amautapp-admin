@@ -18,6 +18,6 @@ const server=app.listen(port,()=>{
     console.log(`Listening at port localhost:${port}`);
 })
 Gun({
-    file:'db/data',
+    file:path.join(__dirname, 'db/data'),
     web:server,
 });
