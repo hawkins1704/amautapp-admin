@@ -12,5 +12,5 @@
         "dest": "index.js"
       }
     ],
-    "buildCommand":"cd .. && npm run build"
+    "installCommand":"cd .. && npm install"
   }
