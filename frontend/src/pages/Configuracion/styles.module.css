@@ -11,8 +11,7 @@
 }
 .imagen{
     width: 500px;
-    
-    background-image: url('../../../public/media/img/config.png');
+  
     background-size: cover;
     background-position: center;
 }

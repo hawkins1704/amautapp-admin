@@ -21,7 +21,7 @@ const gun =Gun({
     file:path.join(__dirname, 'db/data'),
     web:server,
 });
-var cont=0;
-gun.on('in', (msg) => {
-    console.log('Conexión entrante:', ++cont);
-  });
+// var cont=0;
+// gun.on('in', (msg) => {
+//     console.log('Conexión entrante:', ++cont);
+//   });
