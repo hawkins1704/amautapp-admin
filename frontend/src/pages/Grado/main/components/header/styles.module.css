@@ -1,0 +1,19 @@
+.title{
+    padding-bottom: 16px;
+    text-transform: capitalize;
+}
+.subtitle{
+    padding-bottom: 16px;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: end;
+    gap: 32px;
+}
+.tooltip{
+
+}
+.iconButton{
+
+}
+

@@ -1,0 +1,1 @@
+export {default as Agregar} from './Agregar'
