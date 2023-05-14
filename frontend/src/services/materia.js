@@ -26,20 +26,21 @@ export const getAllMateriasOnce = (gradoId, setMaterias) => {
 export const getMateria = (gradoId, materiaId) => {
     //Si está creada la obtiene, si no la crea
     const fetchedGrado = getGrado(gradoId);
-    return fetchedGrado.get("materias").get(materiaId);
+    return fetchedGrado.get("materias").get(materiaId.toLowerCase());
 };
 export const createMateria = (gradoId, materiaId, data) => {
-    console.log("materia service - materiaId: ",materiaId);
-    console.log("materia service - materiaId (toLowerCase): ",materiaId.toLowerCase());
+    // console.log("materia service - create materia - materiaId: ",materiaId);
+    // console.log("materia service - materiaId (toLowerCase): ",materiaId.toLowerCase());
     const fetchedGrado = getGrado(gradoId);
     return fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(data);
 };
 
 export const updateMateria = (gradoId, materiaId, data) => {
     const fetchedGrado = getGrado(gradoId);
-    return fetchedGrado.get("materias").get(materiaId).put(data);
+    return fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(data);
 };
 export const removeMateria = (gradoId, materiaId) => {
+
     const fetchedGrado = getGrado(gradoId);
-    fetchedGrado.get("materias").get(materiaId).put(null);
+    fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(null);
 };

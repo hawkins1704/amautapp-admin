@@ -2,6 +2,7 @@ import { gun } from "../providers/Gun";
 const grados = gun.get("grados");
 export const getAllGradosSync = (setGrados) => {
     grados.map().on((data) => {
+        console.log("GRADOS OBTENIDOS: ",grados);
         setGrados((prev) => [...prev, data]);
     });
 };

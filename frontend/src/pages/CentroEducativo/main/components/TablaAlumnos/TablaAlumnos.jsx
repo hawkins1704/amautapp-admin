@@ -18,8 +18,6 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
-import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { parseDate } from "../../../../../utils";
 
@@ -216,7 +214,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Delete" >
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>
@@ -276,7 +274,8 @@ const TablaAlumnos = ({ rows = [] }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre);
+            const newSelected = rows.map((n) => n.nombre+n.apellido);
+            
             setSelected(newSelected);
             return;
         }
@@ -349,7 +348,7 @@ const TablaAlumnos = ({ rows = [] }) => {
     );
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    console.log(rows);
+    console.log("tablaAlumnos->selected: ",selected);
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
@@ -372,7 +371,7 @@ const TablaAlumnos = ({ rows = [] }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre
+                                          row.nombre+row.apellido
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -391,7 +390,7 @@ const TablaAlumnos = ({ rows = [] }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre
+                                                              row.nombre+row.apellido
                                                           )
                                                       }
                                                       color="primary"

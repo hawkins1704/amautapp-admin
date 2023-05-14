@@ -107,7 +107,7 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
     };
     const handleSubmitAlumno = (e) => {
         e.preventDefault();
-        createAlumno(centroEducativoId, alumno.nombre, alumno);
+        createAlumno(centroEducativoId, alumno.nombre,alumno.apellido, alumno);
         handleClose();
     };
 
@@ -120,12 +120,11 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
 
     const handleSubmitDocente = (e) => {
         e.preventDefault();
-        createDocente(centroEducativoId, docente.nombre, docente);
+        createDocente(centroEducativoId, docente.nombre,docente.apellido, docente);
         handleClose();
     };
 
-    console.log("DOCENTE: ", docente);
-    console.log("C.E EN AGREGAR: ", centroEducativoId);
+   
     return (
         <Modal
             open={open}

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, redirect } from "react-router-dom";
 import { Configuracion } from "./pages/Configuracion";
 import { Login } from "./pages/Login";
 import { CentrosEducativos } from "./pages/CentrosEducativos/main";
@@ -13,7 +13,7 @@ import { Editor } from "./pages/Clase/Editor";
 import { Clase } from "./pages/Clase/main";
 import "./App.module.css";
 import { MyContext } from "./providers/Context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MiCentroEducativo } from "./pages/MiCentroEducativo";
 import { CentroEducativo } from "./pages/CentroEducativo/main";
 import { Sincronizador } from "./pages/Sincronizador";
@@ -43,6 +43,7 @@ const theme = createTheme({
 
 const Router = () => {
     const { user, updateUser } = useContext(MyContext);
+    const [shouldRedirect, setShouldRedirect] = useState(false);
     return (
         <ThemeProvider theme={theme}>
             {user ? (

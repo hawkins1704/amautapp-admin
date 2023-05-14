@@ -4,14 +4,15 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Router from "./Router";
 import { MyProvider } from "./providers/Context";
-
+import { BrowserRouter } from "react-router-dom";
 
 // console.log("NODE_ENV: ", process.env.REACT_APP_ENVIRONMENT);
 function App() {
-    
     return (
         <MyProvider>
-           <Router/>
+            <BrowserRouter>
+                <Router />
+            </BrowserRouter>
         </MyProvider>
     );
 }

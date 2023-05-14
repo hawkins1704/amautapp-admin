@@ -13,7 +13,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL("http://localhost:5000");
+  mainWindow.loadURL("http://localhost:5001");
   mainWindow.on("closed", function () {
     mainWindow = null;
   });

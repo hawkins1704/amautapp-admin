@@ -57,7 +57,8 @@ const Material = () => {
                                     <Card
                                         key={e.key}
                                         nombre={e.nombre}
-                                        color="#CF5353"
+                                        color="#E59C2E"
+                                        icon={<MenuBookRoundedIcon />}
                                     />
                                 </Grid>
                             ))}
