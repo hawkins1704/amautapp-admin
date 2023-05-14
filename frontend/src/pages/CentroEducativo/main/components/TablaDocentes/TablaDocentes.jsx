@@ -69,7 +69,7 @@ const headCells = [
         id: "email",
         numeric: false,
         disablePadding: false,
-        label: "Correo",
+        label: "Usuario",
     },
     {
         id: "password",
@@ -277,7 +277,7 @@ const TablaDocentes = ({ rows = [] }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre);
+            const newSelected = rows.map((n) => n.nombre+n.apellido);
             setSelected(newSelected);
             return;
         }
@@ -373,7 +373,7 @@ const TablaDocentes = ({ rows = [] }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre
+                                          row.nombre+row.apellido
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -392,7 +392,7 @@ const TablaDocentes = ({ rows = [] }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre
+                                                              row.nombre+row.apellido
                                                           )
                                                       }
                                                       color="primary"

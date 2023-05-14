@@ -26,16 +26,16 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
         fechaNacimiento: 0,
         edad: 0,
         grado: 0,
-        email: "alumno",
-        password: "alumno",
+        email: "",
+        password: "",
         userType: "alumno",
     });
     const [docente, setDocente] = useState({
         nombre: "",
         apellido: "",
         fechaNacimiento: 0,
-        email: "docente",
-        password: "docente",
+        email: "",
+        password: "",
         userType: "docente",
     });
 
@@ -107,7 +107,7 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
     };
     const handleSubmitAlumno = (e) => {
         e.preventDefault();
-        createAlumno(centroEducativoId, alumno.nombre,alumno.apellido, alumno);
+        createAlumno(centroEducativoId, alumno.nombre,alumno.apellido, {...alumno,email:alumno.nombre,password:alumno.nombre+"123"});
         handleClose();
     };
 
@@ -120,11 +120,10 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
 
     const handleSubmitDocente = (e) => {
         e.preventDefault();
-        createDocente(centroEducativoId, docente.nombre,docente.apellido, docente);
+        createDocente(centroEducativoId, docente.nombre,docente.apellido, {...docente,email:docente.nombre,password:docente.nombre+"123"});
         handleClose();
     };
 
-   
     return (
         <Modal
             open={open}
