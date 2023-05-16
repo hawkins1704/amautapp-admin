@@ -56,11 +56,11 @@ const CentroEducativo = () => {
             <Container maxWidth={"xl"}>
                
                     <div className={styles.tableContainer}>
-                        <TablaDocentes rows={docentes.length <= 0 ?[]:docentes} />
+                        <TablaDocentes rows={docentes.length <= 0 ?[]:docentes} centroEducativoId={centroEducativoId}/>
                     </div>
               
                     <div className={styles.tableContainer}>
-                        <TablaAlumnos rows={alumnos.length <= 0 ?[]:alumnos} />
+                        <TablaAlumnos rows={alumnos.length <= 0 ?[]:alumnos} centroEducativoId={centroEducativoId}/>
                     </div>
             </Container>
             <Agregar

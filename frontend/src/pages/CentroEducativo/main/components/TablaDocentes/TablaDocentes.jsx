@@ -18,11 +18,11 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { parseDate } from "../../../../../utils";
-
+import { removeDocente } from "../../../../../services/usuario";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -121,7 +121,7 @@ function EnhancedTableHead(props) {
     const createSortHandler = (newOrderBy) => (event) => {
         onRequestSort(event, newOrderBy);
     };
-   
+
     return (
         <TableHead>
             <TableRow>
@@ -176,7 +176,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-    const { numSelected } = props;
+    const { numSelected, eliminarDocente } = props;
 
     return (
         <Toolbar
@@ -212,12 +212,12 @@ function EnhancedTableToolbar(props) {
                     id="tableTitle"
                     component="div"
                 >
-                   Docentes
+                    Docentes
                 </Typography>
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Eliminar docentes" onClick={eliminarDocente}>
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>
@@ -229,9 +229,10 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
+    eliminarDocente: PropTypes.func.isRequired,
 };
 
-const TablaDocentes = ({ rows = [] }) => {
+const TablaDocentes = ({ rows = [], centroEducativoId }) => {
     const [order, setOrder] = React.useState(DEFAULT_ORDER);
     const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
     const [selected, setSelected] = React.useState([]);
@@ -239,7 +240,7 @@ const TablaDocentes = ({ rows = [] }) => {
     const [visibleRows, setVisibleRows] = React.useState(null);
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
     const [paddingHeight, setPaddingHeight] = React.useState(0);
-
+    const navigate = useNavigate();
     React.useEffect(() => {
         let rowsOnMount = stableSort(
             rows,
@@ -253,6 +254,14 @@ const TablaDocentes = ({ rows = [] }) => {
 
         setVisibleRows(rowsOnMount);
     }, [rows]);
+
+    const eliminarDocente = () => {
+        const eliminados = selected.map((e) => {
+            removeDocente(centroEducativoId, e);
+        });
+
+        navigate("/sincronizador");
+    };
 
     const handleRequestSort = React.useCallback(
         (event, newOrderBy) => {
@@ -277,7 +286,7 @@ const TablaDocentes = ({ rows = [] }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre+n.apellido);
+            const newSelected = rows.map((n) => n.nombre + n.apellido);
             setSelected(newSelected);
             return;
         }
@@ -350,11 +359,14 @@ const TablaDocentes = ({ rows = [] }) => {
     );
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-        console.log(rows);
+    console.log("tablaDocentes->selected: ", selected);
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} />
+                <EnhancedTableToolbar
+                    numSelected={selected.length}
+                    eliminarDocente={eliminarDocente}
+                />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 200 }}
@@ -373,7 +385,7 @@ const TablaDocentes = ({ rows = [] }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre+row.apellido
+                                          row.nombre + row.apellido
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -392,7 +404,8 @@ const TablaDocentes = ({ rows = [] }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre+row.apellido
+                                                              row.nombre +
+                                                                  row.apellido
                                                           )
                                                       }
                                                       color="primary"
@@ -433,11 +446,9 @@ const TablaDocentes = ({ rows = [] }) => {
                                                   align="left"
                                                   padding="normal"
                                               >
-                                                
-                                                  {
-                                                  parseDate(row.fechaNacimiento)
-                                                  }
-                                                  
+                                                  {parseDate(
+                                                      row.fechaNacimiento
+                                                  )}
                                               </StyledTableCell>
                                           </StyledTableRow>
                                       );

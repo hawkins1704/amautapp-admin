@@ -20,6 +20,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
 import { parseDate } from "../../../../../utils";
+import { removeAlumno } from "../../../../../services/usuario";
+import { useNavigate } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -173,7 +175,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-    const { numSelected } = props;
+    const { numSelected, eliminarAlumno } = props;
 
     return (
         <Toolbar
@@ -214,7 +216,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete" >
+                <Tooltip title="Eliminar alumnos" onClick={eliminarAlumno}>
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>
@@ -226,9 +228,10 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
+    eliminarAlumno: PropTypes.func.isRequired,
 };
 
-const TablaAlumnos = ({ rows = [] }) => {
+const TablaAlumnos = ({ rows = [], centroEducativoId }) => {
     const [order, setOrder] = React.useState(DEFAULT_ORDER);
     const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
     const [selected, setSelected] = React.useState([]);
@@ -236,7 +239,7 @@ const TablaAlumnos = ({ rows = [] }) => {
     const [visibleRows, setVisibleRows] = React.useState(null);
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
     const [paddingHeight, setPaddingHeight] = React.useState(0);
-
+    const navigate = useNavigate();
     React.useEffect(() => {
         let rowsOnMount = stableSort(
             rows,
@@ -250,6 +253,14 @@ const TablaAlumnos = ({ rows = [] }) => {
 
         setVisibleRows(rowsOnMount);
     }, [rows]);
+
+    const eliminarAlumno = () => {
+        const eliminados = selected.map((e) => {
+            removeAlumno(centroEducativoId, e);
+        });
+
+        navigate("/sincronizador");
+    };
 
     const handleRequestSort = React.useCallback(
         (event, newOrderBy) => {
@@ -274,8 +285,8 @@ const TablaAlumnos = ({ rows = [] }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre+n.apellido);
-            
+            const newSelected = rows.map((n) => n.nombre + n.apellido);
+
             setSelected(newSelected);
             return;
         }
@@ -348,11 +359,14 @@ const TablaAlumnos = ({ rows = [] }) => {
     );
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    console.log("tablaAlumnos->selected: ",selected);
+    // console.log("tablaAlumnos->selected: ", selected);
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} />
+                <EnhancedTableToolbar
+                    numSelected={selected.length}
+                    eliminarAlumno={eliminarAlumno}
+                />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 200 }}
@@ -371,7 +385,7 @@ const TablaAlumnos = ({ rows = [] }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre+row.apellido
+                                          row.nombre + row.apellido
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -390,7 +404,8 @@ const TablaAlumnos = ({ rows = [] }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre+row.apellido
+                                                              row.nombre +
+                                                                  row.apellido
                                                           )
                                                       }
                                                       color="primary"

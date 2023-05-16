@@ -51,22 +51,14 @@ export const createDocente = (
     return fetchedCentroEducativo.get("docentes").get(docenteId).put(data);
 };
 
-export const removeAlumno = (
-    centroEducativoId,
-    nombreAlumno,
-    apellidoAlumno
-) => {
+export const removeAlumno = (centroEducativoId, alumnoId) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
-    const alumnoId = nombreAlumno + apellidoAlumno;
     return fetchedCentroEducativo.get("alumnos").get(alumnoId).put(null);
 };
 
-export const removeDocente = (
-    centroEducativoId,
-    nombreDocente,
-    apellidoDocente
-) => {
+export const removeDocente = (centroEducativoId, docenteId) => {
+    console.log("CENTRO EDUCATIVO ID RECIBIDO EN SERVICE: ", centroEducativoId);
+    console.log("DOCENTE ID RECIBIDO EN SERVICE: ", docenteId);
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
-    const docenteId = nombreDocente + apellidoDocente;
-    return fetchedCentroEducativo.get("docente").get(docenteId).put(null);
+    return fetchedCentroEducativo.get("docentes").get(docenteId).put(null);
 };
