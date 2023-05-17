@@ -20,16 +20,32 @@ const Material = () => {
     useEffect(() => {
         getAllGradosOnce(setGrados);
     }, []);
-  
-        console.log("GRADOS RECIBIDOS: ",grados);
+
+    console.log("GRADOS RECIBIDOS: ", grados);
 
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
             <Container maxWidth={"xl"}>
                 <Container maxWidth={"xl"} sx={{ my: 6 }}>
                     <Typography variant={"h5"} component={"h2"} sx={{ my: 3 }}>
+                        Inicial
+                    </Typography>
+
+                    <Grid container spacing={3}>
+                        <Grid item md={4} xs={12}>
+                            <Card
+                                nombreInicial={"inicial"}
+                                color="#E59C2E"
+                                icon={<MenuBookRoundedIcon />}
+                            />
+                        </Grid>
+                    </Grid>
+                </Container>
+                <Container maxWidth={"xl"} sx={{ my: 6 }}>
+                    <Typography variant={"h5"} component={"h2"} sx={{ my: 3 }}>
                         Primaria
                     </Typography>
+
                     <Grid container spacing={3}>
                         {sortArrayASC(grados)
                             .slice(0, 6)

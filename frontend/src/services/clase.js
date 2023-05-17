@@ -22,7 +22,7 @@ export const createClase = (gradoId, materiaId, claseId, data) => {
     return fetchedMateria.get("clases").get(claseId).put(data);
 };
 
-export const removeMateria = (gradoId, materiaId, claseId) => {
+export const removeClase = (gradoId, materiaId, claseId) => {
     const fetchedMateria = getMateria(gradoId, materiaId);
     fetchedMateria.get("clases").get(claseId).put(null);
 };

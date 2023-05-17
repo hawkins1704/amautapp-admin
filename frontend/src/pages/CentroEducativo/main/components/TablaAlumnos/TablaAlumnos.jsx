@@ -216,7 +216,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Eliminar alumnos" onClick={eliminarAlumno}>
+                <Tooltip title="Eliminar alumnos seleccionados" onClick={eliminarAlumno}>
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>

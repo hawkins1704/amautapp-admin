@@ -41,7 +41,7 @@ const Materia = () => {
 
     useEffect(() => {
         const getInitialData = async () => {
-                getAllClasesSync(gradoId, materiaId, setClases);
+            getAllClasesSync(gradoId, materiaId, setClases);
         };
         getInitialData();
     }, []);
@@ -54,7 +54,11 @@ const Materia = () => {
         >
             <Container maxWidth={"xl"}>
                 <div className={styles.tableContainer}>
-                    <Table rows={clases.length <= 0 ? [] : clases} />
+                    <Table
+                        rows={clases.length <= 0 ? [] : clases}
+                        gradoId={gradoId}
+                        materiaId={materiaId}
+                    />
                 </div>
             </Container>
         </Layout>

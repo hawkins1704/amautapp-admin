@@ -18,9 +18,10 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { removeClase } from "../../../../../services/clase";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -174,7 +175,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-    const { numSelected } = props;
+    const { numSelected , eliminarClase} = props;
 
     return (
         <Toolbar
@@ -215,7 +216,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Eliminar clases seleccionadas" onClick={eliminarClase}>
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>
@@ -227,17 +228,20 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
+    eliminarClase:PropTypes.func.isRequired,
 };
 
-const ClasesTable = ({ rows = [] }) => {
+const ClasesTable = ({ rows = [], gradoId, materiaId }) => {
     const [order, setOrder] = React.useState(DEFAULT_ORDER);
     const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [visibleRows, setVisibleRows] = React.useState(null);
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
-    const [paddingHeight, setPaddingHeight] = React.useState(0);
-    console.log("DATA EN TABLA DE MATERIA.JSX: ", rows);
+    const [paddingHeight, setPaddingHeight] = React.useState(0);    
+    const navigate = useNavigate();
+
+    // console.log("DATA EN TABLA DE MATERIA.JSX: ", rows);
     React.useEffect(() => {
         let rowsOnMount = stableSort(
             rows,
@@ -251,6 +255,14 @@ const ClasesTable = ({ rows = [] }) => {
 
         setVisibleRows(rowsOnMount);
     }, [rows]);
+
+    const eliminarClase = () => {
+        const eliminados = selected.map((e) => {
+            removeClase(gradoId, materiaId, e);
+        });
+
+        navigate("/sincronizador");
+    };
 
     const handleRequestSort = React.useCallback(
         (event, newOrderBy) => {
@@ -352,7 +364,7 @@ const ClasesTable = ({ rows = [] }) => {
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} />
+                <EnhancedTableToolbar numSelected={selected.length} eliminarClase={eliminarClase} />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 200 }}
