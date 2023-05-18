@@ -286,7 +286,7 @@ const TablaDocentes = ({ rows = [], centroEducativoId }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre + n.apellido);
+            const newSelected = rows.map((n) => n.email);
             setSelected(newSelected);
             return;
         }
@@ -385,7 +385,7 @@ const TablaDocentes = ({ rows = [], centroEducativoId }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre + row.apellido
+                                          row.email
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -404,8 +404,7 @@ const TablaDocentes = ({ rows = [], centroEducativoId }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre +
-                                                                  row.apellido
+                                                              row.email
                                                           )
                                                       }
                                                       color="primary"

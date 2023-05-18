@@ -1,5 +1,10 @@
+import { gun } from "../providers/Gun";
 import { filterDuplicated } from "../utils";
-import { getCentroEducativo } from "./centroEducativo";
+
+import {
+    getAllCentrosEducativosOnce,
+    getCentroEducativo,
+} from "./centroEducativo";
 
 export const getAllDocentesSync = (centroEducativoId, setDocentes) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
@@ -29,25 +34,14 @@ export const getAllAlumnosSync = (centroEducativoId, setAlumnos) => {
         });
 };
 
-export const createAlumno = (
-    centroEducativoId,
-    nombreAlumno,
-    apellidoAlumno,
-    data
-) => {
+export const createAlumno = (centroEducativoId, alumnoId, data) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
-    const alumnoId = nombreAlumno + apellidoAlumno;
     return fetchedCentroEducativo.get("alumnos").get(alumnoId).put(data);
 };
 
-export const createDocente = (
-    centroEducativoId,
-    nombreDocente,
-    apellidoDocente,
-    data
-) => {
+export const createDocente = (centroEducativoId, docenteId, data) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
-    const docenteId = nombreDocente + apellidoDocente;
+
     return fetchedCentroEducativo.get("docentes").get(docenteId).put(data);
 };
 
@@ -57,8 +51,60 @@ export const removeAlumno = (centroEducativoId, alumnoId) => {
 };
 
 export const removeDocente = (centroEducativoId, docenteId) => {
-    console.log("CENTRO EDUCATIVO ID RECIBIDO EN SERVICE: ", centroEducativoId);
-    console.log("DOCENTE ID RECIBIDO EN SERVICE: ", docenteId);
+    // console.log("CENTRO EDUCATIVO ID RECIBIDO EN SERVICE: ", centroEducativoId);
+    // console.log("DOCENTE ID RECIBIDO EN SERVICE: ", docenteId);
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
     return fetchedCentroEducativo.get("docentes").get(docenteId).put(null);
+};
+
+export const logIn = (userType, email, password) => {
+   console.log("ENTRE A LOGIN");
+   
+    switch (userType) {
+        // eslint-disable-next-line no-lone-blocks
+        case "alumno":
+            // eslint-disable-next-line no-lone-blocks
+            {
+                return new Promise((resolve, reject) => {
+                    const query = gun
+                        .get("centros-educativos")
+                        .map()
+                        .get("alumnos")
+                        .map()
+                        .once((data, key) => {
+                            console.log("Alumno: ", data);
+                            if (data.email === email && data.password === password) {
+                                
+                                resolve(data);
+                            }
+                        });
+                    query.off();
+                });
+            }
+            break;
+            case "docente":
+                // eslint-disable-next-line no-lone-blocks
+                {
+                return new Promise((resolve, reject) => {
+                    const query = gun
+                        .get("centros-educativos")
+                        .map()
+                        .get("docentes")
+                        .map()
+                        .once((data, key) => {
+                            console.log("Docente: ", data);
+                            if (data.email === email && data.password === password) {
+                                
+                                resolve(data);
+                            }
+                        });
+                    query.off();
+                });
+            }
+            break;
+
+        default:
+            break;
+    }
+    // const fetchedUser=get(email)
 };

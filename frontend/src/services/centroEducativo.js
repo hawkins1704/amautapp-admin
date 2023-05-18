@@ -10,6 +10,13 @@ export const getAllCentrosEducativosSync=(setCentrosEducativos)=>{
         });
     })
 }
+export const getAllCentrosEducativosOnce=(setCentrosEducativos)=>{
+    centros.map().once((data)=>{
+        setCentrosEducativos((prev)=>{
+         return filterDuplicated( [...prev,data].filter((val) => val !== null));
+        });
+    })
+}
 export const getCentroEducativo = (centroEducativoId) => {
     
     return centros.get(centroEducativoId);

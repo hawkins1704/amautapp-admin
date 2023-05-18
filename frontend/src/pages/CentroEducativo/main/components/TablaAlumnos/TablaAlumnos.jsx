@@ -65,6 +65,18 @@ const headCells = [
         label: "Apellido",
     },
     {
+        id: "email",
+        numeric: false,
+        disablePadding: false,
+        label: "Usuario",
+    },
+    {
+        id: "password",
+        numeric: false,
+        disablePadding: false,
+        label: "Contraseña",
+    },
+    {
         id: "grado",
         numeric: true,
         disablePadding: false,
@@ -285,7 +297,7 @@ const TablaAlumnos = ({ rows = [], centroEducativoId }) => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre + n.apellido);
+            const newSelected = rows.map((n) => n.email);
 
             setSelected(newSelected);
             return;
@@ -385,7 +397,7 @@ const TablaAlumnos = ({ rows = [], centroEducativoId }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre + row.apellido
+                                          row.email
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -404,8 +416,7 @@ const TablaAlumnos = ({ rows = [], centroEducativoId }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre +
-                                                                  row.apellido
+                                                              row.email
                                                           )
                                                       }
                                                       color="primary"
@@ -429,6 +440,18 @@ const TablaAlumnos = ({ rows = [], centroEducativoId }) => {
                                                   padding="normal"
                                               >
                                                   {row.apellido}
+                                              </StyledTableCell>
+                                              <StyledTableCell
+                                                  align="left"
+                                                  padding="normal"
+                                              >
+                                                  {row.email}
+                                              </StyledTableCell>
+                                              <StyledTableCell
+                                                  align="left"
+                                                  padding="normal"
+                                              >
+                                                  {row.password}
                                               </StyledTableCell>
                                               <StyledTableCell
                                                   align="left"

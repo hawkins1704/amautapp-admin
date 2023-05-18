@@ -15,7 +15,7 @@ app.get("*", (req, res) => {
   });
 
 const server=app.listen(port,()=>{
-    console.log(`Listening at port localhost:${port}`);
+    console.log(`Listening at port http://localhost:${port}`);
 })
 const gun =Gun({
     file:path.join(__dirname, 'db/data'),

@@ -107,7 +107,20 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
     };
     const handleSubmitAlumno = (e) => {
         e.preventDefault();
-        createAlumno(centroEducativoId, alumno.nombre,alumno.apellido, {...alumno,email:alumno.nombre,password:alumno.nombre+"123"});
+        createAlumno(
+            centroEducativoId,
+            alumno.nombre.toLowerCase() +
+                alumno.apellido.toLowerCase() +
+                "-a@test.com",
+            {
+                ...alumno,
+                email:
+                    alumno.nombre.toLowerCase() +
+                    alumno.apellido.toLowerCase() +
+                    "-a@test.com",
+                password: alumno.nombre.toLowerCase() + "123",
+            }
+        );
         handleClose();
     };
 
@@ -120,7 +133,20 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
 
     const handleSubmitDocente = (e) => {
         e.preventDefault();
-        createDocente(centroEducativoId, docente.nombre,docente.apellido, {...docente,email:docente.nombre,password:docente.nombre+"123"});
+        createDocente(
+            centroEducativoId,
+            docente.nombre.toLowerCase() +
+                docente.apellido.toLowerCase() +
+                "-d@test.com",
+            {
+                ...docente,
+                email:
+                    docente.nombre.toLowerCase() +
+                    docente.apellido.toLowerCase() +
+                    "-d@test.com",
+                password: docente.nombre.toLowerCase() + "123",
+            }
+        );
         handleClose();
     };
 

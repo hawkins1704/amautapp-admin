@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Layout } from "../../components";
 import { Container, Grid } from "@mui/material";
 import styles from "./styles.module.css";
@@ -7,13 +7,15 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
+import { MyContext } from "../../providers/Context";
 
 const Principal = () => {
+    const { user } = useContext(MyContext);
     useEffect(() => {
         const createData = () => {};
         createData();
     }, []);
-
+    console.log("USUARIO: ",user);
     return (
         <Layout title={"Principal"} breadcrumbs={[]} isPrincipal>
             <div
@@ -37,14 +39,25 @@ const Principal = () => {
                             icon={<MenuBookRoundedIcon />}
                         />
                     </Grid>
-                    <Grid item md xs={12}>
-                        <Card
-                            nombre={"Centros educativos"}
-                            color={"#CE5353"}
-                            to={"centros-educativos"}
-                            icon={<SchoolRoundedIcon />}
-                        />
-                    </Grid>
+                    {user.userType === "admin" ? (
+                        <Grid item md xs={12}>
+                            <Card
+                                nombre={"Centros educativos"}
+                                color={"#CE5353"}
+                                to={"centros-educativos"}
+                                icon={<SchoolRoundedIcon />}
+                            />
+                        </Grid>
+                    ) : user.userType === "docente" ? (
+                        <Grid item md xs={12}>
+                            <Card
+                                nombre={"Mi centro educativo"}
+                                color={"#CE5353"}
+                                to={"mi-centro-educativo"}
+                                icon={<SchoolRoundedIcon />}
+                            />
+                        </Grid>
+                    ) : null}
                     <Grid item md xs={12}>
                         <Card
                             nombre={"Configuración"}

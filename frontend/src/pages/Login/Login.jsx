@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 import { MyContext } from "../../providers/Context";
 import { useNavigate } from "react-router-dom";
 import { AlertModal } from "./components/modal";
+import { logIn } from "../../services/usuario";
 const Login = () => {
     const { user, updateUser } = useContext(MyContext);
     const navigate = useNavigate();
@@ -30,8 +31,9 @@ const Login = () => {
             userType: type,
         });
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
+        var result;
         switch (formData.userType) {
             case "admin":
                 if (
@@ -45,25 +47,27 @@ const Login = () => {
                 }
                 break;
             case "docente":
+                result= await logIn("docente", formData.email, formData.password);
                 if (
-                    formData.email !== "docente" ||
-                    formData.password !== "docente"
+                   result!==null
                 ) {
-                    handleOpen();
-                }else {
-                    updateUser(formData);
+                    console.log("LOGIN EXITOSO");
+                    updateUser(result);
                     navigate("/");
+                } else {
+                    handleOpen();
                 }
                 break;
             case "alumno":
+                result= await logIn("alumno", formData.email, formData.password);
                 if (
-                    formData.email !== "alumno" ||
-                    formData.password !== "alumno"
+                   result!==null
                 ) {
-                    handleOpen();
-                } else {
-                    updateUser(formData);
+                    console.log("LOGIN EXITOSO");
+                    updateUser(result);
                     navigate("/");
+                } else {
+                    handleOpen();
                 }
                 break;
             default:
@@ -139,10 +143,7 @@ const Login = () => {
                 <li></li>
                 <li></li>
             </ul>
-            <AlertModal
-            open={open}
-            handleClose={handleClose}
-            />
+            <AlertModal open={open} handleClose={handleClose} />
         </div>
     );
 };
