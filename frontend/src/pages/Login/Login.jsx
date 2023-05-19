@@ -48,6 +48,7 @@ const Login = () => {
                 break;
             case "docente":
                 result= await logIn("docente", formData.email, formData.password);
+                console.log("Resultado de login de docente: ",result);
                 if (
                    result!==null
                 ) {

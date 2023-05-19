@@ -56,49 +56,56 @@ export const removeDocente = (centroEducativoId, docenteId) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
     return fetchedCentroEducativo.get("docentes").get(docenteId).put(null);
 };
-
+let query = null;
 export const logIn = (userType, email, password) => {
-   console.log("ENTRE A LOGIN");
-   
+    console.log("1. QUERY:", query);
+    if (query) {
+        gun.get("centros-educativos").off();
+    }
     switch (userType) {
         // eslint-disable-next-line no-lone-blocks
         case "alumno":
             // eslint-disable-next-line no-lone-blocks
             {
                 return new Promise((resolve, reject) => {
-                    const query = gun
+                    query = gun
                         .get("centros-educativos")
                         .map()
                         .get("alumnos")
                         .map()
                         .once((data, key) => {
-                            console.log("Alumno: ", data);
-                            if (data.email === email && data.password === password) {
-                                
+                            if (
+                                data.email === email &&
+                                data.password === password
+                            ) {
                                 resolve(data);
+                            }else{
+                                resolve(null);
                             }
                         });
-                    query.off();
                 });
             }
             break;
-            case "docente":
-                // eslint-disable-next-line no-lone-blocks
-                {
+        case "docente":
+            // eslint-disable-next-line no-lone-blocks
+            {
                 return new Promise((resolve, reject) => {
-                    const query = gun
+                    query = gun
                         .get("centros-educativos")
                         .map()
                         .get("docentes")
                         .map()
                         .once((data, key) => {
                             console.log("Docente: ", data);
-                            if (data.email === email && data.password === password) {
-                                
+                            if (
+                                data.email === email &&
+                                data.password === password
+                            ) {
                                 resolve(data);
+                            }else{
+                                resolve(null);
                             }
                         });
-                    query.off();
                 });
             }
             break;
