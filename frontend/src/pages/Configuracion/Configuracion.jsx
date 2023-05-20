@@ -1,103 +1,141 @@
-import React, { useContext, useEffect, useState }  from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Layout } from "../../components";
 import styles from "./styles.module.css";
 import { MyContext } from "../../providers/Context";
 
 import {
-    
     Button,
     MenuItem,
- 
     TextField,
     ToggleButton,
     ToggleButtonGroup,
     Typography,
-    Container
-}from "@mui/material";
+    Container,
+    Grid,
+} from "@mui/material";
 const Configuracion = () => {
     const { user, updateUser } = useContext(MyContext);
-    
-    const [email, setEmail] = useState(user.email);
-    const [nombre, setNombre] = useState(user.email);
-    const [ edad , setEdad] = useState(10);
 
-    
-     const handleChangeEmail = (event, newValue) => {
-        setEmail(newValue);
-     }
-     const handleChangeNombre = (event, newValue) => {
-        setNombre(newValue);
-     }
-     const handleChangeEdad = (event, newValue) => {
-        setEdad(newValue);
-     }
-       const breadcrumbs = [
+    const [userForm, setUserForm] = useState(user);
+
+    const breadcrumbs = [
         <Typography key="2" color="text.primary">
             Configuración
         </Typography>,
     ];
     useEffect(() => {
         console.log(user.email);
-    } , [])
+    }, []);
+    const handleChange = (e) => {
+        setUserForm({
+            ...userForm,
+            [e.target.name]: e.target.value,
+        });
+    };
     return (
         <Layout title={"Configuración"} breadcrumbs={breadcrumbs}>
-
             <Container maxWidth={"xl"}>
-               
-                
-                <div className={styles.container}>
-                <div className={styles.imagen}>
-                </div>
-                <form onSubmit={() => {}} className={styles.form}>
-                     
-                     <TextField
-                         id="email"
-                         name="email"
-                         label="Email"
-                         variant="outlined"
-                         value={
-                             email
-                         }
-                         onChange={handleChangeEmail} > </TextField>
-                    
-                     <TextField
-                         id="nombre"
-                         name="nombre"
-                         label="Nombre"
-                         variant="outlined"
-                         value={nombre}
-                         onChange={handleChangeNombre}
-                     />
-                 
-                     <TextField
-                         id="edad"
-                         name="edad"
-                         label="Edad"
-                         variant="outlined"
-                         type="number"
-                         InputProps={{
-                             inputProps: {
-                                 max: 100,
-                                 min: 0,
-                             },
-                         }}
-                         onChange={ handleChangeEdad}
-                         value={edad}
-                     />
-                    
-                        
-                 
-                     <div className={styles.buttonContainer}>
-                         <Button variant="contained" type="submit">
-                             Guardar Cambios
-                         </Button>
-                     </div>
-                 </form>
-                </div>
-              
-                {/* Formulario para agregar información del alumno tendrá al iniciar data falsa y el docente tendr� al iniciar data falsa? */}
-                
-
+                <Grid container spacing={6}>
+                    <Grid item sm={12} md={6}>
+                        <div className={styles.messageContainer}>
+                            <p>
+                                Hola! Aquí podrás ver tu información y podrás
+                                editarla si así lo deseas. Recuerda que si eres
+                                alumno no olvides en avisarle primero a tu
+                                profesor que realizarás un cambio para que esté
+                                al tanto
+                            </p>
+                            <img
+                                src="/media/img/Configuracion/message.png"
+                                alt="imagen de configuracion"
+                            />
+                        </div>
+                    </Grid>
+                    <Grid item sm={12} md={6}>
+                        <Grid container spacing={4}>
+                            <Grid item sm={12}>
+                                <Grid container className={styles.idContainer}>
+                                    <Grid item sm={12} md={4}>
+                                        <div className={styles.imgContainer}>
+                                            <img
+                                                src="/media/img/Configuracion/teacherProfile.png"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </Grid>
+                                    <Grid item sm={12} md={8}>
+                                        <div className={styles.dataContainer}>
+                                            <div className="">
+                                                <p>NOMBRE: {userForm.nombre}</p>
+                                                <p>
+                                                    APELLIDO:{" "}
+                                                    {userForm.apellido}
+                                                </p>
+                                                <p>USUARIO: {userForm.email}</p>
+                                                <p>
+                                                    CONTRASEÑA:{" "}
+                                                    {userForm.password}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item sm={12}>
+                                <form
+                                    onSubmit={() => {}}
+                                    className={styles.form}
+                                >
+                                    <div className="">
+                                        <TextField
+                                            id="nombre"
+                                            name="nombre"
+                                            label="Nombre"
+                                            variant="outlined"
+                                            value={userForm.nombre}
+                                            onChange={handleChange}
+                                        />
+                                        <TextField
+                                            id="apellido"
+                                            name="apellido"
+                                            label="Apellido"
+                                            variant="outlined"
+                                            value={userForm.apellido}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="">
+                                        <TextField
+                                            id="email"
+                                            name="email"
+                                            label="Usuario"
+                                            variant="outlined"
+                                            value={userForm.email}
+                                            onChange={handleChange}
+                                        />
+                                        <TextField
+                                            id="password"
+                                            name="password"
+                                            label="Contraseña"
+                                            variant="outlined"
+                                            value={userForm.password}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className={styles.buttonContainer}>
+                                        <Button
+                                            variant="contained"
+                                            type="submit"
+                                        >
+                                            Guardar Cambios
+                                        </Button>
+                                    </div>
+                                </form>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Container>
         </Layout>
     );
