@@ -61,6 +61,7 @@ export const logIn = (userType, email, password) => {
     console.log("1. QUERY:", query);
     if (query) {
         gun.get("centros-educativos").off();
+        
     }
     switch (userType) {
         // eslint-disable-next-line no-lone-blocks
