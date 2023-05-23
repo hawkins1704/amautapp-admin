@@ -15,6 +15,7 @@
     overflow: hidden;
 
 }
+
 .containerInicial{
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     
@@ -30,8 +31,11 @@
     color:#000;
     position: relative;
     overflow: hidden;
+    position: relative;
 }
-
+.containerInicial:hover{
+    background-color: #eef7f4;
+}
 
 .title{
     text-transform: capitalize;
@@ -47,10 +51,50 @@
 .image svg{
     font-size: 150px;
 }
-
 .container:hover .image{
     opacity: 1;
     transform: rotate(0);
     bottom: 0px;
     left: 0px;
+}
+
+.containerInicial .imageInicial:nth-child(1){
+    top:10px;
+    right:-30px;
+    transform: rotate(90deg);
+}
+.containerInicial .imageInicial:nth-child(2){
+    z-index: 1;
+    bottom:-10px;
+    left:140px;
+}
+.containerInicial .imageInicial:nth-child(3){
+    top:40px;
+    left:-40px;
+}
+.containerInicial .imageInicial{
+    position: absolute;
+    opacity: 0.2;
+    transition:all 0.3s ease;
+    width: 100px;
+}
+
+.containerInicial:hover .imageInicial{
+    opacity: 1;
+}
+.containerInicial:hover .imageInicial:nth-child(1){
+    top:-30px;
+    right:60px;
+    transform: scale(2);
+}
+.containerInicial:hover .imageInicial:nth-child(2){
+    
+    bottom:10px;
+    left: 70px;
+    transform:rotate(-11deg) scale(2.1);
+}
+.containerInicial:hover .imageInicial:nth-child(3){
+    top:50px;
+    left: 50px;
+    transform:rotate(-20deg) scale(1.5);
 }

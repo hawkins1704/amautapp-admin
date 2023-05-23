@@ -54,7 +54,7 @@ const Material = () => {
                                     <Card
                                         key={e.key}
                                         nombre={e.nombre}
-                                        color="#E59C2E"
+                                        color="#c4ebec"
                                         icon={<MenuBookRoundedIcon />}
                                     />
                                 </Grid>
@@ -73,7 +73,7 @@ const Material = () => {
                                     <Card
                                         key={e.key}
                                         nombre={e.nombre}
-                                        color="#E59C2E"
+                                        color="#c4e1ec"
                                         icon={<MenuBookRoundedIcon />}
                                     />
                                 </Grid>

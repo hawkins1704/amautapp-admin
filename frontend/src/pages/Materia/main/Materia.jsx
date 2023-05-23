@@ -54,11 +54,14 @@ const Materia = () => {
         >
             <Container maxWidth={"xl"}>
                 <div className={styles.tableContainer}>
-                    <Table
-                        rows={clases.length <= 0 ? [] : clases}
-                        gradoId={gradoId}
-                        materiaId={materiaId}
-                    />
+                    {clases.length > 0 ? (
+                        <Table
+                            rows={clases}
+                            gradoId={gradoId}
+                            materiaId={materiaId}
+                        />
+                    ) : <div>No existen datos en la tabla</div>//Temporal
+                }
                 </div>
             </Container>
         </Layout>
