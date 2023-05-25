@@ -29,6 +29,7 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
         email: "",
         password: "",
         userType: "alumno",
+        centroEducativoId:centroEducativoId,
     });
     const [docente, setDocente] = useState({
         nombre: "",
@@ -37,6 +38,7 @@ const Agregar = ({ open, handleClose, centroEducativoId }) => {
         email: "",
         password: "",
         userType: "docente",
+        centroEducativoId:centroEducativoId,
     });
 
     const grados = [

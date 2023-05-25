@@ -84,8 +84,7 @@ const headCells = [
     },
 ];
 
-const DEFAULT_ORDER = "asc";
-const DEFAULT_ORDER_BY = "semana";
+
 const DEFAULT_ROWS_PER_PAGE = 5;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -235,6 +234,8 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const ClasesTable = ({ rows, gradoId, materiaId }) => {
+    console.log("CLASES RECIBIDAS EN TABLE: ", rows);
+    const [localData, setLocalData] = React.useState(rows);
     const [order, setOrder] = React.useState("asc");
     const [orderBy, setOrderBy] = React.useState("semana");
     const [selected, setSelected] = React.useState([]);
@@ -244,9 +245,12 @@ const ClasesTable = ({ rows, gradoId, materiaId }) => {
     const [dense, setDense] = React.useState(false);
     const navigate = useNavigate();
 
-    console.log("DATA EN TABLA DE MATERIA.JSX: ", rows);
-
-
+    // console.log("DATA EN TABLA DE MATERIA.JSX: ", rows);
+    React.useEffect(() => {
+        console.log("ESTOY RENDERIZANDO NUEVAMENTE");
+        setLocalData(rows);
+      }, [rows]);
+    console.log("LOCAL DATA: ",localData);
     const eliminarClase = () => {
         const eliminados = selected.map((e) => {
             removeClase(gradoId, materiaId, e);
@@ -260,11 +264,11 @@ const ClasesTable = ({ rows, gradoId, materiaId }) => {
         setOrderBy(property);
     };
 
-    console.log("ORDER: ", order);
-    console.log("ORDER BY: ", orderBy);
+    // console.log("ORDER: ", order);
+    // console.log("ORDER BY: ", orderBy);
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.titulo);
+            const newSelected = localData.map((n) => n.titulo);
             setSelected(newSelected);
             return;
         }
@@ -305,7 +309,7 @@ const ClasesTable = ({ rows, gradoId, materiaId }) => {
 
     const visibleRows = React.useMemo(
         () =>
-            stableSort(rows, getComparator(order, orderBy)).slice(
+            stableSort(localData, getComparator(order, orderBy)).slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage
             ),
@@ -331,7 +335,7 @@ const ClasesTable = ({ rows, gradoId, materiaId }) => {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={localData.length}
                         />
                         <TableBody>
                             {visibleRows
@@ -432,7 +436,7 @@ const ClasesTable = ({ rows, gradoId, materiaId }) => {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={localData.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

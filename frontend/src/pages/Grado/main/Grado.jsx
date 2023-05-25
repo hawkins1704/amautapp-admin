@@ -54,7 +54,7 @@ const Grado = () => {
                 />
             )}
         >
-            <Outlet context={{ gradoId }} />
+            {/* <Outlet context={{ gradoId }} /> */}
             <Container maxWidth={"xl"} sx={{ my: 6 }}>
                 <Grid container spacing={3}>
                     {materias.map((e) => (

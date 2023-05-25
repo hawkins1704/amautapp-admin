@@ -85,8 +85,7 @@ const headCells = [
     },
 ];
 
-const DEFAULT_ORDER = "asc";
-const DEFAULT_ORDER_BY = "apellido";
+
 const DEFAULT_ROWS_PER_PAGE = 5;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -217,7 +216,10 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Eliminar docentes seleccionados" onClick={eliminarDocente}>
+                <Tooltip
+                    title="Eliminar docentes seleccionados"
+                    onClick={eliminarDocente}
+                >
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>
@@ -233,27 +235,15 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const TablaDocentes = ({ rows = [], centroEducativoId }) => {
-    const [order, setOrder] = React.useState(DEFAULT_ORDER);
-    const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
+    const [order, setOrder] = React.useState("asc");
+    const [orderBy, setOrderBy] = React.useState("apellido");
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [visibleRows, setVisibleRows] = React.useState(null);
+
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
     const [paddingHeight, setPaddingHeight] = React.useState(0);
+    const [dense, setDense] = React.useState(false);
     const navigate = useNavigate();
-    React.useEffect(() => {
-        let rowsOnMount = stableSort(
-            rows,
-            getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY)
-        );
-
-        rowsOnMount = rowsOnMount.slice(
-            0 * DEFAULT_ROWS_PER_PAGE,
-            0 * DEFAULT_ROWS_PER_PAGE + DEFAULT_ROWS_PER_PAGE
-        );
-
-        setVisibleRows(rowsOnMount);
-    }, [rows]);
 
     const eliminarDocente = () => {
         const eliminados = selected.map((e) => {
@@ -263,26 +253,11 @@ const TablaDocentes = ({ rows = [], centroEducativoId }) => {
         navigate("/sincronizador");
     };
 
-    const handleRequestSort = React.useCallback(
-        (event, newOrderBy) => {
-            const isAsc = orderBy === newOrderBy && order === "asc";
-            const toggledOrder = isAsc ? "desc" : "asc";
-            setOrder(toggledOrder);
-            setOrderBy(newOrderBy);
-
-            const sortedRows = stableSort(
-                rows,
-                getComparator(toggledOrder, newOrderBy)
-            );
-            const updatedRows = sortedRows.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-            );
-
-            setVisibleRows(updatedRows);
-        },
-        [order, orderBy, page, rowsPerPage]
-    );
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === "asc";
+        setOrder(isAsc ? "desc" : "asc");
+        setOrderBy(property);
+    };
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
@@ -313,53 +288,28 @@ const TablaDocentes = ({ rows = [], centroEducativoId }) => {
         setSelected(newSelected);
     };
 
-    const handleChangePage = React.useCallback(
-        (event, newPage) => {
-            setPage(newPage);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-            const sortedRows = stableSort(rows, getComparator(order, orderBy));
-            const updatedRows = sortedRows.slice(
-                newPage * rowsPerPage,
-                newPage * rowsPerPage + rowsPerPage
-            );
-
-            setVisibleRows(updatedRows);
-
-            // Avoid a layout jump when reaching the last page with empty rows.
-            const numEmptyRows =
-                newPage > 0
-                    ? Math.max(0, (1 + newPage) * rowsPerPage - rows.length)
-                    : 0;
-
-            const newPaddingHeight = 53 * numEmptyRows;
-            setPaddingHeight(newPaddingHeight);
-        },
-        [order, orderBy, rowsPerPage]
-    );
-
-    const handleChangeRowsPerPage = React.useCallback(
-        (event) => {
-            const updatedRowsPerPage = parseInt(event.target.value, 10);
-            setRowsPerPage(updatedRowsPerPage);
-
-            setPage(0);
-
-            const sortedRows = stableSort(rows, getComparator(order, orderBy));
-            const updatedRows = sortedRows.slice(
-                0 * updatedRowsPerPage,
-                0 * updatedRowsPerPage + updatedRowsPerPage
-            );
-
-            setVisibleRows(updatedRows);
-
-            // There is no layout jump to handle on the first page.
-            setPaddingHeight(0);
-        },
-        [order, orderBy]
-    );
-
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    console.log("tablaDocentes->selected: ", selected);
+
+    const emptyRows =
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+    const visibleRows = React.useMemo(
+        () =>
+            stableSort(rows, getComparator(order, orderBy)).slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+            ),
+        [order, orderBy, page, rowsPerPage]
+    );
+
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
@@ -453,10 +403,10 @@ const TablaDocentes = ({ rows = [], centroEducativoId }) => {
                                       );
                                   })
                                 : null}
-                            {paddingHeight > 0 && (
+                             {emptyRows > 0 && (
                                 <TableRow
                                     style={{
-                                        height: paddingHeight,
+                                        height: (dense ? 33 : 53) * emptyRows,
                                     }}
                                 >
                                     <TableCell colSpan={6} />

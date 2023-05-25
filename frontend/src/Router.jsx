@@ -17,6 +17,7 @@ import { useContext, useState } from "react";
 import { MiCentroEducativo } from "./pages/MiCentroEducativo";
 import { CentroEducativo } from "./pages/CentroEducativo/main";
 import { Sincronizador } from "./pages/Sincronizador";
+import { Loader } from "./pages/Loader";
 const theme = createTheme({
     palette: {
         background: {
@@ -50,6 +51,7 @@ const Router = () => {
                 <Routes>
                     <Route index path="/" element={<Principal />} />
                     <Route path="sincronizador" element={<Sincronizador/>}/>
+                    <Route path="loader" element={<Loader/>}/>
                     <Route path="material-educativo" element={<Material />} />
                     <Route
                         path="material-educativo/:gradoId"

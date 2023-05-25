@@ -68,7 +68,7 @@ const Editor = () => {
     ];
     const guardarClase = () => {
         createClase(gradoId,materiaId,claseData.titulo,claseData);
-        navigate(-1);
+        navigate('/sincronizador',{state:{path:-2}});
     };
     const handleChangeEditor = (contenido) => {
         setClaseData({

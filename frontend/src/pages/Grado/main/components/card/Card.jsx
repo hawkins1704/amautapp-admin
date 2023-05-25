@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ButtonGroup } from "./components";
 
 const Card = ({ gradoId, materia,isOptionsOpen, data }) => {
+
     return (
         <div className={styles.container}>
             <div className={styles.buttonContainer}>

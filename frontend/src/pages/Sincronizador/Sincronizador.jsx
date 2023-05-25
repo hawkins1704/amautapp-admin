@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import { Container, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 const Sincronizador = () => {
     const navigate = useNavigate();
+    const location=useLocation();
+    const props=location.state;
     useEffect(() => {
+      
         setTimeout(() => {
-            navigate(-1);
+            if(!props){
+                navigate(-1);
+            }else{
+                navigate(props.path);
+            }
         }, 2000);
     }, []);
 

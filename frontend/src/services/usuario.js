@@ -7,12 +7,21 @@ import {
 } from "./centroEducativo";
 
 export const getAllDocentesSync = (centroEducativoId, setDocentes) => {
+    const id = "San Pedro";
+    if (centroEducativoId === id) {
+        console.log("son iguales");
+    }
+    console.log("CENTRO EDUCATIVO ID:", centroEducativoId);
+
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
+
     fetchedCentroEducativo
         .get("docentes")
         .map()
         .on((data, key) => {
+            console.log("DATA: ", data);
             setDocentes((prev) => {
+                // console.log("GETTING DOCENTES: ",data);
                 return filterDuplicated(
                     [...prev, data].filter((val) => val !== null)
                 );
@@ -41,7 +50,7 @@ export const createAlumno = (centroEducativoId, alumnoId, data) => {
 
 export const createDocente = (centroEducativoId, docenteId, data) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
-
+    console.log("DOCENTE:", data);
     return fetchedCentroEducativo.get("docentes").get(docenteId).put(data);
 };
 
@@ -58,16 +67,15 @@ export const removeDocente = (centroEducativoId, docenteId) => {
 };
 let query = null;
 export const logIn = (userType, email, password) => {
-    console.log("1. QUERY:", query);
-    if (query) {
-        gun.get("centros-educativos").off();
-        
-    }
     switch (userType) {
         // eslint-disable-next-line no-lone-blocks
         case "alumno":
             // eslint-disable-next-line no-lone-blocks
             {
+                console.log("1. QUERY:", query);
+                if (query) {
+                    gun.get("centros-educativos").get("alumnos").off();
+                }
                 return new Promise((resolve, reject) => {
                     query = gun
                         .get("centros-educativos")
@@ -80,7 +88,7 @@ export const logIn = (userType, email, password) => {
                                 data.password === password
                             ) {
                                 resolve(data);
-                            }else{
+                            } else {
                                 resolve(null);
                             }
                         });
@@ -90,6 +98,10 @@ export const logIn = (userType, email, password) => {
         case "docente":
             // eslint-disable-next-line no-lone-blocks
             {
+                console.log("1. QUERY:", query);
+                if (query) {
+                    query = gun.get("centros-educativos").off();
+                }
                 return new Promise((resolve, reject) => {
                     query = gun
                         .get("centros-educativos")
@@ -103,10 +115,11 @@ export const logIn = (userType, email, password) => {
                                 data.password === password
                             ) {
                                 resolve(data);
-                            }else{
+                            } else {
                                 resolve(null);
                             }
                         });
+                    
                 });
             }
             break;

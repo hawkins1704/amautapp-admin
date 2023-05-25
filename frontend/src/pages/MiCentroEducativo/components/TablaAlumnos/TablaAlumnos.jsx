@@ -18,10 +18,10 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
-import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { parseDate } from "../../../../utils";
+import { removeAlumno } from "../../../../services/usuario";
+import { useNavigate } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -63,6 +63,18 @@ const headCells = [
         numeric: false,
         disablePadding: false,
         label: "Apellido",
+    },
+    {
+        id: "email",
+        numeric: false,
+        disablePadding: false,
+        label: "Usuario",
+    },
+    {
+        id: "password",
+        numeric: false,
+        disablePadding: false,
+        label: "Contraseña",
     },
     {
         id: "grado",
@@ -175,7 +187,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-    const { numSelected } = props;
+    const { numSelected, eliminarAlumno } = props;
 
     return (
         <Toolbar
@@ -216,7 +228,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Eliminar alumnos seleccionados" onClick={eliminarAlumno}>
                     <IconButton>
                         <DeleteIcon />
                     </IconButton>
@@ -228,55 +240,38 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
+    eliminarAlumno: PropTypes.func.isRequired,
 };
 
-const TablaAlumnos = ({ rows = [] }) => {
-    const [order, setOrder] = React.useState(DEFAULT_ORDER);
-    const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
+const TablaAlumnos = ({ rows = [], centroEducativoId }) => {
+    const [order, setOrder] = React.useState("asc");
+    const [orderBy, setOrderBy] = React.useState("apellido");
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [visibleRows, setVisibleRows] = React.useState(null);
+    // const [visibleRows, setVisibleRows] = React.useState(null);
     const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
-    const [paddingHeight, setPaddingHeight] = React.useState(0);
+    const [dense, setDense] = React.useState(false);
+    const navigate = useNavigate();
+ 
 
-    React.useEffect(() => {
-        let rowsOnMount = stableSort(
-            rows,
-            getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY)
-        );
+    const eliminarAlumno = () => {
+        const eliminados = selected.map((e) => {
+            removeAlumno(centroEducativoId, e);
+        });
 
-        rowsOnMount = rowsOnMount.slice(
-            0 * DEFAULT_ROWS_PER_PAGE,
-            0 * DEFAULT_ROWS_PER_PAGE + DEFAULT_ROWS_PER_PAGE
-        );
+        navigate("/sincronizador");
+    };
 
-        setVisibleRows(rowsOnMount);
-    }, [rows]);
-
-    const handleRequestSort = React.useCallback(
-        (event, newOrderBy) => {
-            const isAsc = orderBy === newOrderBy && order === "asc";
-            const toggledOrder = isAsc ? "desc" : "asc";
-            setOrder(toggledOrder);
-            setOrderBy(newOrderBy);
-
-            const sortedRows = stableSort(
-                rows,
-                getComparator(toggledOrder, newOrderBy)
-            );
-            const updatedRows = sortedRows.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-            );
-
-            setVisibleRows(updatedRows);
-        },
-        [order, orderBy, page, rowsPerPage]
-    );
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === "asc";
+        setOrder(isAsc ? "desc" : "asc");
+        setOrderBy(property);
+    };
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.nombre);
+            const newSelected = rows.map((n) => n.email);
+
             setSelected(newSelected);
             return;
         }
@@ -303,57 +298,37 @@ const TablaAlumnos = ({ rows = [] }) => {
         setSelected(newSelected);
     };
 
-    const handleChangePage = React.useCallback(
-        (event, newPage) => {
-            setPage(newPage);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-            const sortedRows = stableSort(rows, getComparator(order, orderBy));
-            const updatedRows = sortedRows.slice(
-                newPage * rowsPerPage,
-                newPage * rowsPerPage + rowsPerPage
-            );
-
-            setVisibleRows(updatedRows);
-
-            // Avoid a layout jump when reaching the last page with empty rows.
-            const numEmptyRows =
-                newPage > 0
-                    ? Math.max(0, (1 + newPage) * rowsPerPage - rows.length)
-                    : 0;
-
-            const newPaddingHeight = 53 * numEmptyRows;
-            setPaddingHeight(newPaddingHeight);
-        },
-        [order, orderBy, rowsPerPage]
-    );
-
-    const handleChangeRowsPerPage = React.useCallback(
-        (event) => {
-            const updatedRowsPerPage = parseInt(event.target.value, 10);
-            setRowsPerPage(updatedRowsPerPage);
-
-            setPage(0);
-
-            const sortedRows = stableSort(rows, getComparator(order, orderBy));
-            const updatedRows = sortedRows.slice(
-                0 * updatedRowsPerPage,
-                0 * updatedRowsPerPage + updatedRowsPerPage
-            );
-
-            setVisibleRows(updatedRows);
-
-            // There is no layout jump to handle on the first page.
-            setPaddingHeight(0);
-        },
-        [order, orderBy]
-    );
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    console.log(rows);
+    // console.log("tablaAlumnos->selected: ", selected);
+
+    const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+const visibleRows = React.useMemo(
+    () =>
+        stableSort(rows, getComparator(order, orderBy)).slice(
+            page * rowsPerPage,
+            page * rowsPerPage + rowsPerPage
+        ),
+    [order, orderBy, page, rowsPerPage]
+);
+
     return (
         <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} />
+                <EnhancedTableToolbar
+                    numSelected={selected.length}
+                    eliminarAlumno={eliminarAlumno}
+                />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 200 }}
@@ -372,7 +347,7 @@ const TablaAlumnos = ({ rows = [] }) => {
                             {visibleRows
                                 ? visibleRows.map((row, index) => {
                                       const isItemSelected = isSelected(
-                                          row.nombre
+                                          row.email
                                       );
                                       const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -391,7 +366,7 @@ const TablaAlumnos = ({ rows = [] }) => {
                                                       onClick={(event) =>
                                                           handleClick(
                                                               event,
-                                                              row.nombre
+                                                              row.email
                                                           )
                                                       }
                                                       color="primary"
@@ -420,6 +395,18 @@ const TablaAlumnos = ({ rows = [] }) => {
                                                   align="left"
                                                   padding="normal"
                                               >
+                                                  {row.email}
+                                              </StyledTableCell>
+                                              <StyledTableCell
+                                                  align="left"
+                                                  padding="normal"
+                                              >
+                                                  {row.password}
+                                              </StyledTableCell>
+                                              <StyledTableCell
+                                                  align="left"
+                                                  padding="normal"
+                                              >
                                                   {row.grado}°
                                               </StyledTableCell>
                                               <StyledTableCell
@@ -440,10 +427,10 @@ const TablaAlumnos = ({ rows = [] }) => {
                                       );
                                   })
                                 : null}
-                            {paddingHeight > 0 && (
+                            {emptyRows > 0 && (
                                 <TableRow
                                     style={{
-                                        height: paddingHeight,
+                                        height: (dense ? 33 : 53) * emptyRows,
                                     }}
                                 >
                                     <TableCell colSpan={6} />

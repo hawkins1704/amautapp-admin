@@ -6,7 +6,7 @@ import { Card, ButtonGroup } from "./components";
 import { getAllCentrosEducativosFake } from "../../../services/fakeData";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import { AgregarCentro } from "../Agregar-Centro";
-import { getAllCentrosEducativosSync } from "../../../services/centroEducativo";
+import { getAllCentrosEducativosOnce, getAllCentrosEducativosSync } from "../../../services/centroEducativo";
 
 
 const CentrosEducativos = () => {
@@ -26,7 +26,7 @@ const CentrosEducativos = () => {
     /*--------------------------- */
     useEffect(() => {
         const getInitialData = async () => {
-                getAllCentrosEducativosSync(setCentrosEducativos);
+                getAllCentrosEducativosOnce(setCentrosEducativos);
         };
         getInitialData();
     }, []);
