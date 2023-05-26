@@ -75,8 +75,6 @@ const Login = () => {
                 break;
         }
     };
-    // console.log("USER:",user);
-    // console.log("USUARIO INGRESADO:",formData);
     /*Modal--------------- */
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);

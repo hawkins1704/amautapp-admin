@@ -65,61 +65,79 @@ export const removeDocente = (centroEducativoId, docenteId) => {
     const fetchedCentroEducativo = getCentroEducativo(centroEducativoId);
     return fetchedCentroEducativo.get("docentes").get(docenteId).put(null);
 };
-let query = null;
-export const logIn = (userType, email, password) => {
+let userArray = [];
+let query=null;
+export const logIn = async (userType, email, password) => {
+    console.log("ARREGLO ENTRANDO EN LOGIN: ", userArray);
     switch (userType) {
         // eslint-disable-next-line no-lone-blocks
         case "alumno":
             // eslint-disable-next-line no-lone-blocks
             {
-                console.log("1. QUERY:", query);
-                if (query) {
-                    gun.get("centros-educativos").get("alumnos").off();
-                }
+                query=gun.get("centros-educativos")
+                    .map()
+                    .get("alumnos")
+                    .map()
+                    .once((data, key) => {
+                        console.log("DATA: ", data);
+                        userArray = [...userArray, data];
+                        console.log("user array: ", userArray);
+                        userArray = filterDuplicated(
+                            userArray.filter((val) => val !== null)
+                        );
+                    });
                 return new Promise((resolve, reject) => {
-                    query = gun
-                        .get("centros-educativos")
-                        .map()
-                        .get("alumnos")
-                        .map()
-                        .once((data, key) => {
-                            if (
-                                data.email === email &&
-                                data.password === password
-                            ) {
-                                resolve(data);
-                            } else {
-                                resolve(null);
-                            }
-                        });
+                    setTimeout(() => {
+                        const fetchedUser = userArray.find(
+                            (user) =>
+                                user.email === email &&
+                                user.password === password
+                        );
+                        console.log("USUARIO ENCONTRADO: ", fetchedUser);
+                        if (fetchedUser) {
+                            // Usuario válido
+                            console.log("Inicio de sesión exitoso");
+                            resolve(fetchedUser);
+                        } else {
+                            // Usuario inválido
+                            resolve(null);
+                        }
+                    }, 2000);
                 });
             }
             break;
         case "docente":
             // eslint-disable-next-line no-lone-blocks
             {
-                console.log("1. QUERY:", query);
-                if (query) {
-                    query = gun.get("centros-educativos").off();
-                }
+                query= gun.get("centros-educativos")
+                    .map()
+                    .get("docentes")
+                    .map()
+                    .once((data, key) => {
+                        console.log("DATA: ", data);
+                        userArray = [...userArray, data];
+                        console.log("user array: ", userArray);
+                        userArray = filterDuplicated(
+                            userArray.filter((val) => val !== null)
+                        );
+                    });
                 return new Promise((resolve, reject) => {
-                    query = gun
-                        .get("centros-educativos")
-                        .map()
-                        .get("docentes")
-                        .map()
-                        .once((data, key) => {
-                            console.log("Docente: ", data);
-                            if (
-                                data.email === email &&
-                                data.password === password
-                            ) {
-                                resolve(data);
-                            } else {
-                                resolve(null);
-                            }
-                        });
-                    
+                    setTimeout(() => {
+                        const fetchedUser = userArray.find(
+                            (user) =>
+                                user.email === email &&
+                                user.password === password
+                        );
+                        console.log("USUARIO ENCONTRADO: ", fetchedUser);
+                        if (fetchedUser) {
+                            // Usuario válido
+                            console.log("Inicio de sesión exitoso");
+                            resolve(fetchedUser);
+                        } else {
+                            // Usuario inválido
+                            resolve(null);
+                        }
+                    }, 2000);
                 });
             }
             break;
