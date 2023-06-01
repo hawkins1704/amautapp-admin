@@ -10,6 +10,8 @@ import { MyContext } from "../../providers/Context";
 import { useNavigate } from "react-router-dom";
 import { AlertModal } from "./components/modal";
 import { logIn } from "../../services/usuario";
+import ReplayIcon from "@mui/icons-material/Replay";
+
 const Login = () => {
     const { user, updateUser } = useContext(MyContext);
     const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Login = () => {
             userType: type,
         });
     };
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         var result;
         switch (formData.userType) {
@@ -47,11 +49,13 @@ const Login = () => {
                 }
                 break;
             case "docente":
-                result= await logIn("docente", formData.email, formData.password);
-                console.log("Resultado de login de docente: ",result);
-                if (
-                   result!==null
-                ) {
+                result = await logIn(
+                    "docente",
+                    formData.email,
+                    formData.password
+                );
+                console.log("Resultado de login de docente: ", result);
+                if (result !== null) {
                     console.log("LOGIN EXITOSO");
                     updateUser(result);
                     navigate("/");
@@ -60,10 +64,12 @@ const Login = () => {
                 }
                 break;
             case "alumno":
-                result= await logIn("alumno", formData.email, formData.password);
-                if (
-                   result!==null
-                ) {
+                result = await logIn(
+                    "alumno",
+                    formData.email,
+                    formData.password
+                );
+                if (result !== null) {
                     console.log("LOGIN EXITOSO");
                     updateUser(result);
                     navigate("/");
@@ -126,6 +132,14 @@ const Login = () => {
                             sx={{ width: "100%" }}
                         >
                             Iniciar Sesión
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            startIcon={<ReplayIcon />}
+                            onClick={() => window.location.reload()}
+                            sx={{ width: "100%" }}
+                        >
+                            Reiniciar plataforma
                         </Button>
                     </form>
                 </div>

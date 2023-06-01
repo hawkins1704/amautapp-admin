@@ -14,6 +14,7 @@ import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
+import ReplayIcon from '@mui/icons-material/Replay';
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -336,6 +337,35 @@ const Layout = ({
                 </List>
                 <Divider />
                 <List>
+                <ListItem
+                        component={Link}
+                        to={"/login"}
+                        disablePadding
+                        sx={{ display: "block" }}
+                        onClick={() => window.location.reload()}
+                    >
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? "initial" : "center",
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : "auto",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <ReplayIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={"Reiniciar plataforma"}
+                                sx={{ opacity: open ? 1 : 0, color: "black" }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
                     <ListItem
                         component={Link}
                         to={"/login"}
