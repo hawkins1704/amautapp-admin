@@ -3,10 +3,11 @@ import { Layout } from "../../components";
 import { Container, Grid, Typography } from "@mui/material";
 import { Card } from "./components";
 
-import { getAllGradosOnce } from "../../services/grado";
+import { getAllGradosOnce, getAllGradosSync } from "../../services/grado";
 import { sortArrayASC } from "../../utils";
 import { getAllGradosFake } from "../../services/fakeData";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Material = () => {
     const breadcrumbs = [
@@ -18,10 +19,28 @@ const Material = () => {
     const [grados, setGrados] = useState([]);
 
     useEffect(() => {
-        getAllGradosOnce(setGrados);
+        getAllGradosSync(setGrados);
     }, []);
+     /*Para poder cargar la lista de elementos de tabla completa */
+     const navigate = useNavigate();
+     const location = useLocation();
+    const props=location.state??false;
+     /*--------------------------------------------------------- */
+    useEffect(() => {
+       
+        const redirectToOtherComponent = async () => {
+            // await new Promise((resolve) => setTimeout(resolve, 50)); en prueba
+            navigate("/loader");
+            await new Promise((resolve) => setTimeout(resolve, 2000)); //Depende de la data
+            navigate(location.pathname,{state:{hasRedirected:true}});
+        };
+        if (!props.hasRedirected) {
+           
+            redirectToOtherComponent();
+        }
+    }, [navigate,location]);
 
-    // console.log("GRADOS RECIBIDOS: ", grados);
+    console.log("GRADOS RECIBIDOS: ", grados);
 
     return (
         <Layout title={"Material Educativo"} breadcrumbs={breadcrumbs}>
@@ -67,7 +86,7 @@ const Material = () => {
                     </Typography>
                     <Grid container spacing={3}>
                         {sortArrayASC(grados)
-                            .slice(6, 12)
+                            .slice(6, 11)
                             .map((e) => (
                                 <Grid item md={4} xs={12}>
                                     <Card

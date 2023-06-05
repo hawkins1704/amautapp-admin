@@ -1,14 +1,24 @@
 import { gun } from "../providers/Gun";
+import { filterDuplicated } from "../utils";
 const grados = gun.get("grados");
 export const getAllGradosSync = (setGrados) => {
     grados.map().on((data) => {
-        console.log("GRADOS OBTENIDOS: ",grados);
-        setGrados((prev) => [...prev, data]);
+        console.log("GRADOS OBTENIDOS: ",data);
+        setGrados((prev) => {
+            return filterDuplicated(
+                [...prev, data].filter((val) => val !== null)
+            );
+        });
     });
 };
 export const getAllGradosOnce = (setGrados) => {
     grados.map().once((data) => {
-        setGrados((prev) => [...prev, data]);
+        console.log("GRADOS OBTENIDOS: ",grados);
+        setGrados((prev) => {
+            return filterDuplicated(
+                [...prev, data].filter((val) => val !== null)
+            );
+        });
     });
 };
 export const getGrado = (gradoId) => {

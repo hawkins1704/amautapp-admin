@@ -10,7 +10,9 @@ export const getAllMateriasSync = (gradoId, setMaterias) => {
         .map()
         .on((data, key) => {
             setMaterias((prev) => {
-                return filterDuplicated( [...prev, data].filter((val) => val !== null));
+                return filterDuplicated(
+                    [...prev, data].filter((val) => val !== null)
+                );
             });
         });
 };
@@ -20,7 +22,9 @@ export const getAllMateriasOnce = (gradoId, setMaterias) => {
         .get("materias")
         .map()
         .once((data) => {
-            setMaterias((prev) => [...prev, data]).filter((val) => val !== null);
+            setMaterias((prev) => [...prev, data]).filter(
+                (val) => val !== null
+            );
         });
 };
 export const getMateria = (gradoId, materiaId) => {
@@ -40,7 +44,6 @@ export const updateMateria = (gradoId, materiaId, data) => {
     return fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(data);
 };
 export const removeMateria = (gradoId, materiaId) => {
-
     const fetchedGrado = getGrado(gradoId);
     fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(null);
 };

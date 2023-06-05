@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 
-const Card = ({ nombre, subtitle, color, icon, nombreInicial }) => {
+const Card = ({ nombre="", subtitle, color, icon, nombreInicial }) => {
     if (nombreInicial) {
         return (
             <Box
@@ -11,26 +11,24 @@ const Card = ({ nombre, subtitle, color, icon, nombreInicial }) => {
                 component={Link}
                 to={nombreInicial}
             >
-                
-                    <img
-                        src="/media/img/Material/sun.png"
-                        alt=""
-                        srcset=""
-                        className={styles.imageInicial}
-                    />
-                    <img
-                        src="/media/img/Material/cloud.png"
-                        alt=""
-                        srcset=""
-                        className={styles.imageInicial}
-                    />
-                    <img
-                        src="/media/img/Material/rainbow.png"
-                        alt=""
-                        srcset=""
-                        className={styles.imageInicial}
-                    />
-                
+                <img
+                    src="/media/img/Material/sun.png"
+                    alt=""
+                    srcset=""
+                    className={styles.imageInicial}
+                />
+                <img
+                    src="/media/img/Material/cloud.png"
+                    alt=""
+                    srcset=""
+                    className={styles.imageInicial}
+                />
+                <img
+                    src="/media/img/Material/rainbow.png"
+                    alt=""
+                    srcset=""
+                    className={styles.imageInicial}
+                />
 
                 <Typography
                     variant={"h5"}
@@ -44,7 +42,12 @@ const Card = ({ nombre, subtitle, color, icon, nombreInicial }) => {
     } else {
         const contenido = nombre.split("-");
         return (
-            <Box className={styles.container} component={Link} to={nombre} style={{background:color}}>
+            <Box
+                className={styles.container}
+                component={Link}
+                to={nombre}
+                style={{ background: color }}
+            >
                 <div className={styles.image}>{icon}</div>
                 <Typography variant={"h2"} component={"h3"}>
                     {contenido[1]}°

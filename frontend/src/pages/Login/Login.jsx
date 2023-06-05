@@ -4,13 +4,14 @@ import {
     ToggleButton,
     ToggleButtonGroup,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { MyContext } from "../../providers/Context";
 import { useNavigate } from "react-router-dom";
 import { AlertModal } from "./components/modal";
 import { logIn } from "../../services/usuario";
 import ReplayIcon from "@mui/icons-material/Replay";
+import { createGrado, removeGrado } from "../../services/grado";
 
 const Login = () => {
     const { user, updateUser } = useContext(MyContext);
@@ -86,6 +87,13 @@ const Login = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     /*-------------------- */
+    useEffect(() => {
+        // createGrado('primaria-4',{
+        //     key: 4,
+        //     nombre: "primaria-4",
+        // })
+    }, [])
+    
     return (
         <div className={styles.mainContainer}>
             <div container className={styles.contentContainer}>
