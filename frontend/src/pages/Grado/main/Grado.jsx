@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Container, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { ButtonGroup, Card } from "./components";
@@ -42,6 +42,24 @@ const Grado = () => {
             getAllMateriasSync(gradoId, setMaterias);
     }, []);
     console.log("MATERIAS RECIBIDAS: ", materias);
+     /*Para poder cargar la lista de elementos de tabla completa */
+     const navigate = useNavigate();
+     const location = useLocation();
+    const props=location.state??false;
+     /*--------------------------------------------------------- */
+    useEffect(() => {
+       
+        const redirectToOtherComponent = async () => {
+            // await new Promise((resolve) => setTimeout(resolve, 50)); en prueba
+            navigate("/loader");
+            await new Promise((resolve) => setTimeout(resolve, 2000)); //Depende de la data
+            navigate(location.pathname,{state:{hasRedirected:true}});
+        };
+        if (!props.hasRedirected) {
+           
+            redirectToOtherComponent();
+        }
+    }, [navigate,location]);
     return (
         <Layout
             title={title}

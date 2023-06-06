@@ -22,17 +22,14 @@ const Sincronizador = () => {
         <Layout title={""}>
             <Container maxWidth="xl" sx={{ my: 6 }} >
                 <div className={styles.container}>
-                    <Typography variant={"h4"} component={"h1"} className={styles.title}>
-                        Sincronizando...
-                    </Typography>
+                   
                     <div className={styles.center}>
-                        <div className={styles.wave}></div>
-                        <div className={styles.wave}></div>
-                        <div className={styles.wave}></div>
-                        <div className={styles.wave}></div>
-                        <div className={styles.wave}></div>
-                        <div className={styles.wave}></div>
-                        <div className={styles.wave}></div>
+                        <div className={styles.loader}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
                 </div>
             </Container>
