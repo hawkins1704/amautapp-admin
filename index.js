@@ -18,7 +18,7 @@ const server = app.listen(port, () => {
     console.log(`Listening at port http://localhost:${port}`);
 });
 const gun = Gun({
-    file: path.join(__dirname, "db/data"),
+    file: "db/data",
     web: server,
 });
 // var cont=0;
