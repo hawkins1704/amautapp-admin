@@ -80,7 +80,7 @@ const Material = () => {
                             ))}
                     </Grid>
                 </Container>
-                <Container maxWidth={"xl"} sx={{ my: 6 }}>
+                {/* <Container maxWidth={"xl"} sx={{ my: 6 }}>
                     <Typography variant={"h5"} component={"h2"} sx={{ my: 3 }}>
                         Secundaria
                     </Typography>
@@ -98,7 +98,7 @@ const Material = () => {
                                 </Grid>
                             ))}
                     </Grid>
-                </Container>
+                </Container> */}
             </Container>
         </Layout>
     );

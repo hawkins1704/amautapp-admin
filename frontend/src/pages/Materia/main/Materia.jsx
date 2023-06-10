@@ -10,9 +10,18 @@ import {
 import styles from "./styles.module.css";
 import { ButtonGroup, Table } from "./components";
 import { getAllClasesFake } from "../../../services/fakeData";
-import { getAllClasesSync } from "../../../services/clase";
+import {
+    getAllClasesSync,
+    getAllClasesSyncInicial,
+} from "../../../services/clase";
 const Materia = () => {
-   
+    useEffect(() => {
+        const getInitialData = async () => {
+            getAllClasesSync(gradoId, materiaId, setClases);
+        };
+        getInitialData();
+    }, []);
+
     const params = useParams();
     const materiaId = params.materiaId;
     const gradoId = params.gradoId;
@@ -44,32 +53,26 @@ const Materia = () => {
             {title}
         </Typography>,
     ];
-     /*Para poder cargar la lista de elementos de tabla completa */
-     const navigate = useNavigate();
-     const location = useLocation();
-    const props=location.state??false;
-     /*--------------------------------------------------------- */
+    /*Para poder cargar la lista de elementos de tabla completa */
+    const navigate = useNavigate();
+    const location = useLocation();
+    const props = location.state ?? false;
+    /*--------------------------------------------------------- */
     useEffect(() => {
-       
         const redirectToOtherComponent = async () => {
             // await new Promise((resolve) => setTimeout(resolve, 50)); en prueba
             navigate("/loader");
             await new Promise((resolve) => setTimeout(resolve, 2000)); //Depende de la data
-            navigate(location.pathname,{state:{hasRedirected:true}});
+            navigate(location.pathname, { state: { hasRedirected: true } });
         };
         if (!props.hasRedirected) {
-           
             redirectToOtherComponent();
         }
-    }, [navigate,location]);
+    }, [navigate, location]);
 
-    useEffect(() => {
-        const getInitialData = async () => {
-            getAllClasesSync(gradoId, materiaId, setClases);
-        };
-        getInitialData();
-    }, []);
     console.log("CLASES RECIBIDAS: ", clases);
+    console.log("GRADO ID: ", gradoId);
+    console.log("MATERIAID: ", materiaId);
     return (
         <Layout
             title={title}

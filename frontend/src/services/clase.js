@@ -2,12 +2,14 @@ import { capitalize, filterDuplicated } from "../utils";
 import { getGrado } from "./grado";
 import { getMateria } from "./materia";
 import { gun } from "../providers/Gun";
+
 export const getAllClasesSync = (gradoId, materiaId, setClases) => {
     const fetchedMateria = getMateria(gradoId, materiaId);
     fetchedMateria
         .get("clases")
         .map()
         .on((data, key) => {
+            console.log("DATA: ",data);
             setClases((prev) => {
                 return filterDuplicated(
                     [...prev, data].filter((val) => val !== null)

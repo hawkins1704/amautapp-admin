@@ -7,6 +7,7 @@ import { MyProvider } from "./providers/Context";
 import { BrowserRouter } from "react-router-dom";
 
 // console.log("NODE_ENV: ", process.env.REACT_APP_ENVIRONMENT);
+console.log("Windows location origin:",window.location.origin);
 function App() {
     return (
         <MyProvider>

@@ -88,9 +88,33 @@ const Login = () => {
     const handleClose = () => setOpen(false);
     /*-------------------- */
     useEffect(() => {
+        // createGrado('primaria-1',{
+        //     key: 1,
+        //     nombre: "primaria-1",
+        // })
+        // createGrado('primaria-2',{
+        //     key: 2,
+        //     nombre: "primaria-2",
+        // })
+        // createGrado('primaria-3',{
+        //     key: 3,
+        //     nombre: "primaria-3",
+        // })
         // createGrado('primaria-4',{
         //     key: 4,
         //     nombre: "primaria-4",
+        // })
+        // createGrado('primaria-5',{
+        //     key: 5,
+        //     nombre: "primaria-5",
+        // })
+        // createGrado('primaria-6',{
+        //     key: 6,
+        //     nombre: "primaria-6",
+        // })
+        // createGrado('inicial',{
+        //     key: 7,
+        //     nombre: "inicial",
         // })
     }, [])
     
