@@ -1,5 +1,5 @@
 export const sortArrayASC=(arr)=>{
-    return arr.sort((a,b)=>a.key-b.key);
+    return arr.sort((a,b)=>a.pos-b.pos);
 }
 
 export const filterDuplicated=(array)=>{

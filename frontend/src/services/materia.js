@@ -4,8 +4,8 @@ import { getGrado } from "./grado";
 import { filterDuplicated } from "../utils";
 
 export const getAllMateriasSync = (gradoId, setMaterias) => {
-    const fetchedGrado = getGrado(gradoId);
-    fetchedGrado
+    // const fetchedGrado = getGrado(gradoId);
+    gun.get("grados").get(gradoId)
         .get("materias")
         .map()
         .on((data, key) => {
@@ -17,8 +17,8 @@ export const getAllMateriasSync = (gradoId, setMaterias) => {
         });
 };
 export const getAllMateriasOnce = (gradoId, setMaterias) => {
-    const fetchedGrado = getGrado(gradoId);
-    fetchedGrado
+    // const fetchedGrado = getGrado(gradoId);
+    gun.get("grados").get(gradoId)
         .get("materias")
         .map()
         .once((data) => {
@@ -29,21 +29,25 @@ export const getAllMateriasOnce = (gradoId, setMaterias) => {
 };
 export const getMateria = (gradoId, materiaId) => {
     //Si está creada la obtiene, si no la crea
-    const fetchedGrado = getGrado(gradoId);
-    return fetchedGrado.get("materias").get(materiaId.toLowerCase());
+    // const fetchedGrado = getGrado(gradoId);
+    gun.get("grados").get(gradoId)
+    .get("materias").get(materiaId.toLowerCase());
 };
 export const createMateria = (gradoId, materiaId, data) => {
-    // console.log("materia service - create materia - materiaId: ",materiaId);
+    console.log("materia service - create materia - materiaId: ",materiaId);
     // console.log("materia service - materiaId (toLowerCase): ",materiaId.toLowerCase());
-    const fetchedGrado = getGrado(gradoId);
-    return fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(data);
+    // const fetchedGrado = getGrado(gradoId);
+    gun.get("grados").get(gradoId)
+    .get("materias").get(materiaId.toLowerCase()).put(data);
 };
 
 export const updateMateria = (gradoId, materiaId, data) => {
-    const fetchedGrado = getGrado(gradoId);
-    return fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(data);
+    // const fetchedGrado = getGrado(gradoId);
+    gun.get("grados").get(gradoId)
+    .get("materias").get(materiaId.toLowerCase()).put(data);
 };
 export const removeMateria = (gradoId, materiaId) => {
-    const fetchedGrado = getGrado(gradoId);
-    fetchedGrado.get("materias").get(materiaId.toLowerCase()).put(null);
+    // const fetchedGrado = getGrado(gradoId);
+    gun.get("grados").get(gradoId)
+    .get(materiaId.toLowerCase()).put(null);
 };

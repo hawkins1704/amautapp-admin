@@ -5,7 +5,7 @@ export const gun = Gun({
     peers: [
         // `${window.location.origin}/gun`,
         `${window.location.origin}/gun`,
-        // "https://amautapp-relay-production.up.railway.app/gun",
+       // "https://amautapp-relay-production.up.railway.app/gun",
     ], // Put the relay node that you want here
     localStorage: false,
 });

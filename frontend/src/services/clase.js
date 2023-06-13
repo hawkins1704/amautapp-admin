@@ -4,8 +4,9 @@ import { getMateria } from "./materia";
 import { gun } from "../providers/Gun";
 
 export const getAllClasesSync = (gradoId, materiaId, setClases) => {
-    const fetchedMateria = getMateria(gradoId, materiaId);
-    fetchedMateria
+    // const fetchedMateria = getMateria(gradoId, materiaId);
+    gun.get("grados").get(gradoId)
+    .get("materias").get(materiaId.toLowerCase())
         .get("clases")
         .map()
         .on((data, key) => {
@@ -20,11 +21,13 @@ export const getAllClasesSync = (gradoId, materiaId, setClases) => {
 
 export const createClase = (gradoId, materiaId, claseId, data) => {
     console.log("clase service: ",materiaId);
-    const fetchedMateria=getMateria(gradoId,materiaId);
-    return fetchedMateria.get("clases").get(claseId).put(data);
+    // const fetchedMateria=getMateria(gradoId,materiaId);
+    gun.get("grados").get(gradoId)
+    .get("materias").get(materiaId.toLowerCase()).get("clases").get(claseId).put(data);
 };
 
 export const removeClase = (gradoId, materiaId, claseId) => {
-    const fetchedMateria = getMateria(gradoId, materiaId);
-    fetchedMateria.get("clases").get(claseId).put(null);
+    // const fetchedMateria = getMateria(gradoId, materiaId);
+    gun.get("grados").get(gradoId)
+    .get("materias").get(materiaId.toLowerCase()).get("clases").get(claseId).put(null);
 };

@@ -24,7 +24,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./styles.module.css";
 import { Header } from "../../components/header";
@@ -107,7 +107,7 @@ const Layout = ({
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const { user, updateUser } = React.useContext(MyContext);
-
+    const navigate=useNavigate();
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -342,7 +342,10 @@ const Layout = ({
                         to={"/login"}
                         disablePadding
                         sx={{ display: "block" }}
-                        onClick={() => window.location.reload()}
+                        onClick={() => {
+                            navigate('/');
+                            window.location.reload()
+                        }}
                     >
                         <ListItemButton
                             sx={{

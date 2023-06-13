@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { ButtonGroup } from "./components";
+import { capitalize } from "../../../../../utils";
 
 const Card = ({ gradoId, materia,isOptionsOpen, data }) => {
 
@@ -23,7 +24,7 @@ const Card = ({ gradoId, materia,isOptionsOpen, data }) => {
             >
                 <Box component={Link} to={`${materia.nombre.toLowerCase()}`}>
                     <Typography variant={"h5"} component={"h4"}>
-                        {materia.nombre}
+                        {capitalize(materia.nombre)}
                     </Typography>
                 </Box>
             </div>

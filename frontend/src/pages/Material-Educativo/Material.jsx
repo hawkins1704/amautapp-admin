@@ -71,7 +71,7 @@ const Material = () => {
                             .map((e) => (
                                 <Grid item md={4} xs={12}>
                                     <Card
-                                        key={e.key}
+                                        key={e.pos}
                                         nombre={e.nombre}
                                         color="#c4ebec"
                                         icon={<MenuBookRoundedIcon />}
